@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/submit-email.js": {
+      "maxDuration": 10
+    }
+  }
+}
