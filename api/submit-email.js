@@ -15,7 +15,7 @@ export default async function handler(req, res) {
     try {
         // Get GitHub token from environment variables
         const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-        const GITHUB_OWNER = process.env.GITHUB_OWNER || 'your-username';
+        const GITHUB_OWNER = process.env.GITHUB_OWNER || 'athrvakhrbde';
         const GITHUB_REPO = process.env.GITHUB_REPO || '0Degree';
         
         if (!GITHUB_TOKEN) {
