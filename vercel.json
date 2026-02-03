@@ -10,6 +10,10 @@
       "destination": "/join.html"
     },
     {
+      "source": "/why",
+      "destination": "/why.html"
+    },
+    {
       "source": "/thesis",
       "destination": "/thesis.html"
     },
