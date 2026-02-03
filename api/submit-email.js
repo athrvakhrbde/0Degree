@@ -32,9 +32,10 @@ export default async function handler(req, res) {
             {
                 method: 'POST',
                 headers: {
-                    'Authorization': `token ${GITHUB_TOKEN}`,
+                    'Authorization': `Bearer ${GITHUB_TOKEN}`,
                     'Accept': 'application/vnd.github.v3+json',
                     'Content-Type': 'application/json',
+                    'User-Agent': '0Degree-Email-Collector',
                 },
                 body: JSON.stringify({
                     title: issueTitle,
@@ -47,6 +48,33 @@ export default async function handler(req, res) {
         if (!issueResponse.ok) {
             const errorText = await issueResponse.text();
             console.error('GitHub API error:', errorText);
+            // Try without label if label doesn't exist
+            if (issueResponse.status === 422) {
+                const retryResponse = await fetch(
+                    `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/issues`,
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${GITHUB_TOKEN}`,
+                            'Accept': 'application/vnd.github.v3+json',
+                            'Content-Type': 'application/json',
+                            'User-Agent': '0Degree-Email-Collector',
+                        },
+                        body: JSON.stringify({
+                            title: issueTitle,
+                            body: issueBody,
+                        }),
+                    }
+                );
+                if (retryResponse.ok) {
+                    const retryData = await retryResponse.json();
+                    return res.status(200).json({ 
+                        success: true, 
+                        message: 'Email saved successfully',
+                        issueNumber: retryData.number 
+                    });
+                }
+            }
             return res.status(500).json({ error: 'Failed to save email' });
         }
 
