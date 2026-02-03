@@ -22,6 +22,10 @@
       "destination": "/careers.html"
     },
     {
+      "source": "/lp",
+      "destination": "/lp.html"
+    },
+    {
       "source": "/",
       "destination": "/index.html"
     }
