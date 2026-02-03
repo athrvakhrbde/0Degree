@@ -3,5 +3,19 @@
     "api/submit-email.js": {
       "maxDuration": 10
     }
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/join",
+      "destination": "/join.html"
+    },
+    {
+      "source": "/thesis",
+      "destination": "/thesis.html"
+    },
+    {
+      "source": "/",
+      "destination": "/index.html"
+    }
+  ]
 }
