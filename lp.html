@@ -57,6 +57,91 @@
     
     <!-- Stylesheet -->
     <link rel="stylesheet" href="styles.css" media="all">
+    <style>
+        .slide-section {
+            margin-bottom: 80px;
+            padding-bottom: 60px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .slide-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .slide-title {
+            font-size: clamp(24px, 2.5vw, 32px);
+            font-weight: 600;
+            color: var(--text-black);
+            margin-bottom: 32px;
+            letter-spacing: -1px;
+        }
+        
+        .slide-subtitle {
+            font-size: clamp(18px, 1.8vw, 22px);
+            font-weight: 500;
+            color: #00ffce;
+            margin-bottom: 24px;
+        }
+        
+        .slide-content {
+            font-size: clamp(16px, 1.4vw, 18px);
+            color: var(--text-gray);
+            line-height: 1.75;
+        }
+        
+        .slide-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        
+        .slide-list li {
+            margin-bottom: 12px;
+            padding-left: 24px;
+            position: relative;
+        }
+        
+        .slide-list li:before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: var(--text-gray);
+        }
+        
+        .highlight-box {
+            background: rgba(0, 255, 206, 0.05);
+            border-left: 3px solid #00ffce;
+            padding: 20px 24px;
+            margin: 24px 0;
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 24px 0;
+        }
+        
+        .column-title {
+            font-weight: 500;
+            color: var(--text-black);
+            margin-bottom: 16px;
+            font-size: clamp(16px, 1.4vw, 18px);
+        }
+        
+        @media screen and (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            
+            .slide-section {
+                margin-bottom: 60px;
+                padding-bottom: 40px;
+            }
+        }
+    </style>
 </head>
 <body>
     <nav class="nav" role="navigation" aria-label="Main navigation">
@@ -81,51 +166,174 @@
                     <div class="hero-left">
                         <h1 class="hero-title">0Degree</h1>
                         <div class="hero-body-content">
-                            <p class="hero-body-text" style="font-size: clamp(18px, 1.6vw, 22px); font-weight: 500; color: var(--text-black); margin-bottom: 32px;">Structured First Steps for India's High-Agency In-Between Generation</p>
+                            <p class="hero-body-text" style="font-size: clamp(18px, 1.6vw, 22px); font-weight: 500; color: var(--text-black); margin-bottom: 16px;">Structured First Steps for India's High-Agency In-Between Generation</p>
+                            <p class="hero-body-text" style="font-size: clamp(16px, 1.4vw, 18px); font-weight: 500; color: #00ffce; margin-bottom: 64px;">Pilot Cohort: 17 Fellows<br>Capital Raise: ₹1 Crore</p>
 
-                            <p class="hero-body-text" style="font-size: clamp(16px, 1.4vw, 18px); font-weight: 500; color: #00ffce; margin-bottom: 48px;">Pilot Cohort: 17 Fellows<br>Capital Raise: ₹1 Crore</p>
+                            <!-- Slide 2 -->
+                            <div class="slide-section">
+                                <h2 class="slide-title">The Structural Problem</h2>
+                                <div class="slide-content">
+                                    <p class="hero-body-text">India assumes linear progress:</p>
+                                    <p class="hero-body-text" style="font-weight: 500; color: var(--text-black); margin: 16px 0;">School → College → Degree → Job</p>
+                                    <p class="hero-body-text">When this works, it works well. When it breaks, there is no institutional support.</p>
+                                    <p class="hero-body-text">Dropping out in India is high-risk:</p>
+                                    <ul class="slide-list">
+                                        <li>Financial pressure</li>
+                                        <li>Parental expectations</li>
+                                        <li>Social stigma</li>
+                                        <li>No safety nets</li>
+                                        <li>No structured re-entry</li>
+                                    </ul>
+                                    <p class="hero-body-text">We do not encourage dropping out. But millions are already navigating uncertainty without support.</p>
+                                </div>
+                            </div>
 
-                            <p class="hero-body-text">India assumes linear progress.</p>
+                            <!-- Slide 3 -->
+                            <div class="slide-section">
+                                <h2 class="slide-title">The Missing Institution</h2>
+                                <div class="slide-content">
+                                    <div class="two-column">
+                                        <div>
+                                            <p class="column-title">India has:</p>
+                                            <ul class="slide-list">
+                                                <li>Colleges</li>
+                                                <li>Incubators</li>
+                                                <li>NGOs</li>
+                                                <li>Skill centers</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <p class="column-title">It does not have:</p>
+                                            <ul class="slide-list">
+                                                <li>A structured system for high-agency individuals between paths.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="highlight-box">
+                                        <p class="hero-body-text" style="margin: 0; font-weight: 500; color: var(--text-black);">0Degree exists to provide:</p>
+                                        <p class="hero-body-text" style="margin: 12px 0 0 0;">Structure. Capital. Ecosystem. Accountability.</p>
+                                        <p class="hero-body-text" style="margin: 12px 0 0 0;">Not inspiration. Not rebellion. Not charity.</p>
+                                    </div>
+                                </div>
+                            </div>
 
-                            <p class="hero-body-text">School → College → Degree → Job</p>
+                            <!-- Slide 4 -->
+                            <div class="slide-section">
+                                <h2 class="slide-title">Who We Back</h2>
+                                <div class="slide-content">
+                                    <p class="hero-body-text" style="font-weight: 500; color: var(--text-black); margin-bottom: 20px;">17 Fellows. Each must demonstrate:</p>
+                                    <ul class="slide-list">
+                                        <li>Proven self-initiated action</li>
+                                        <li>Ownership under constraint</li>
+                                        <li>Execution track record</li>
+                                        <li>High agency</li>
+                                    </ul>
+                                    <p class="hero-body-text" style="margin-top: 32px; font-weight: 500; color: var(--text-black); margin-bottom: 20px;">We do not optimize for:</p>
+                                    <ul class="slide-list">
+                                        <li>College brand</li>
+                                        <li>English fluency</li>
+                                        <li>Resume polish</li>
+                                        <li>Social capital</li>
+                                    </ul>
+                                    <p class="hero-body-text" style="margin-top: 24px;">We back movers in constrained environments.</p>
+                                </div>
+                            </div>
 
-                            <p class="hero-body-text">When this works, it works well. When it breaks, there is no institutional support.</p>
+                            <!-- Slide 5 -->
+                            <div class="slide-section">
+                                <h2 class="slide-title">Fellowship Structure</h2>
+                                <div class="slide-content">
+                                    <p class="hero-body-text"><strong>Duration:</strong> 6–9 Months</p>
+                                    <p class="hero-body-text" style="margin-top: 24px; font-weight: 500; color: var(--text-black);">Phases:</p>
+                                    <ul class="slide-list">
+                                        <li>Field Immersion (Ground Reality Exposure)</li>
+                                        <li>Structured Experimentation</li>
+                                        <li>Capital Deployment</li>
+                                        <li>Reflection + Public Artifact</li>
+                                        <li>Decision Framework</li>
+                                    </ul>
+                                    <p class="hero-body-text" style="margin-top: 24px;">Each fellow builds one substantial real-world initiative. This is not theoretical exploration. It is execution-backed clarity.</p>
+                                </div>
+                            </div>
 
-                            <p class="hero-body-text">Dropping out in India is high risk. Financial pressure, parental expectations, social stigma, no safety nets, and no structured re-entry make it a deeply consequential decision.</p>
+                            <!-- Slide 6 -->
+                            <div class="slide-section">
+                                <h2 class="slide-title">Capital Deployment</h2>
+                                <div class="slide-content">
+                                    <p class="hero-body-text" style="font-weight: 500; color: var(--text-black); margin-bottom: 20px;">Each Fellow Receives Up To ₹5 Lakhs</p>
+                                    <p class="hero-body-text">Capital is deployed in tranches tied to milestones.</p>
+                                    <p class="hero-body-text" style="margin-top: 24px; font-weight: 500; color: var(--text-black); margin-bottom: 20px;">Use cases:</p>
+                                    <ul class="slide-list">
+                                        <li>Building a small enterprise</li>
+                                        <li>Running a structured pilot</li>
+                                        <li>Research + implementation in local systems</li>
+                                        <li>Community infrastructure experiments</li>
+                                        <li>Apprenticeship + field research hybrid models</li>
+                                    </ul>
+                                    <p class="hero-body-text" style="margin-top: 24px;">This is not stipend-heavy. This is action-heavy capital. We fund serious attempts.</p>
+                                </div>
+                            </div>
 
-                            <p class="hero-body-text">We do not encourage dropping out. But millions are already navigating uncertainty without support.</p>
+                            <!-- Slide 7 -->
+                            <div class="slide-section">
+                                <h2 class="slide-title">Financial Model</h2>
+                                <div class="slide-content">
+                                    <p class="hero-body-text" style="font-weight: 500; color: var(--text-black); margin-bottom: 20px;">17 Fellows × ₹5L = ₹85L Direct Deployment</p>
+                                    <p class="hero-body-text" style="margin-top: 24px; font-weight: 500; color: var(--text-black); margin-bottom: 20px;">Operational Layer:</p>
+                                    <ul class="slide-list">
+                                        <li>Program leadership</li>
+                                        <li>Selection process</li>
+                                        <li>Field partnerships</li>
+                                        <li>Legal + governance</li>
+                                        <li>Documentation</li>
+                                        <li>Contingency</li>
+                                    </ul>
+                                    <p class="hero-body-text" style="margin-top: 24px;"><strong>Estimated operations: ₹15L</strong></p>
+                                    <p class="hero-body-text" style="margin-top: 24px; font-size: clamp(18px, 1.6vw, 22px); font-weight: 500; color: #00ffce;">Total Raise Target: ₹1 Crore</p>
+                                    <p class="hero-body-text" style="margin-top: 16px;">Lean structure. High signal. No institutional bloat.</p>
+                                </div>
+                            </div>
 
-                            <p class="hero-body-text">India has colleges, incubators, NGOs, and skill centers. It does not have a structured system for high-agency individuals who are between paths.</p>
+                            <!-- Slide 8 -->
+                            <div class="slide-section">
+                                <h2 class="slide-title">Risk Management</h2>
+                                <div class="slide-content">
+                                    <ul class="slide-list">
+                                        <li>Capital released in stages.</li>
+                                        <li>Milestone-based deployment.</li>
+                                        <li>Monthly accountability.</li>
+                                        <li>Public documentation.</li>
+                                    </ul>
+                                    <p class="hero-body-text" style="margin-top: 24px;">Failure is acceptable. Irresponsibility is not. Capital discipline is central to the model.</p>
+                                </div>
+                            </div>
 
-                            <p class="hero-body-text">0Degree exists to provide structure, capital, ecosystem, and accountability. Not inspiration. Not rebellion. Not charity.</p>
+                            <!-- Slide 9 -->
+                            <div class="slide-section">
+                                <h2 class="slide-title">What Success Looks Like</h2>
+                                <div class="slide-content">
+                                    <p class="hero-body-text">Success is not unicorn outcomes.</p>
+                                    <p class="hero-body-text" style="margin-top: 24px; font-weight: 500; color: var(--text-black); margin-bottom: 20px;">Success means:</p>
+                                    <ul class="slide-list">
+                                        <li>Responsible capital deployment</li>
+                                        <li>Durable enterprises</li>
+                                        <li>Informed return to education</li>
+                                        <li>Long-term local operators</li>
+                                        <li>Alumni network compounding over time</li>
+                                    </ul>
+                                    <p class="hero-body-text" style="margin-top: 24px;">The outcome is long-term agency, not short-term optics.</p>
+                                </div>
+                            </div>
 
-                            <p class="hero-body-text">We are backing 17 fellows. Each must demonstrate proven self-initiated action, ownership under constraint, execution track record, and high agency.</p>
-
-                            <p class="hero-body-text">We do not optimize for college brand, English fluency, resume polish, or social capital. We back movers in constrained environments.</p>
-
-                            <p class="hero-body-text">The fellowship runs for 6 to 9 months. Fellows go through field immersion, structured experimentation, capital deployment, reflection with a public artifact, and a formal decision framework.</p>
-
-                            <p class="hero-body-text">Each fellow builds one substantial real-world initiative. This is not theoretical exploration. It is execution-backed clarity.</p>
-
-                            <p class="hero-body-text">Each fellow receives up to ₹5 Lakhs. Capital is deployed in tranches tied to milestones.</p>
-
-                            <p class="hero-body-text">Use cases include building a small enterprise, running a structured pilot, research and implementation in local systems, community infrastructure experiments, or apprenticeship and field research hybrid models.</p>
-
-                            <p class="hero-body-text">This is not stipend-heavy. This is action-heavy capital. We fund serious attempts.</p>
-
-                            <p class="hero-body-text">17 fellows at ₹5 Lakhs each equals ₹85 Lakhs in direct deployment. Operational costs including program leadership, selection, partnerships, governance, documentation, and contingency are estimated at ₹15 Lakhs.</p>
-
-                            <p class="hero-body-text">Total raise target is ₹1 Crore. Lean structure. High signal. No institutional bloat.</p>
-
-                            <p class="hero-body-text">Capital is released in stages with milestone-based deployment, monthly accountability, and public documentation. Failure is acceptable. Irresponsibility is not. Capital discipline is central to the model.</p>
-
-                            <p class="hero-body-text">Success is not unicorn outcomes. Success means responsible capital deployment, durable enterprises, informed return to education, long-term local operators, and an alumni network that compounds over time.</p>
-
-                            <p class="hero-body-text">The outcome is long-term agency, not short-term optics.</p>
-
-                            <p class="hero-body-text">India does not need more dropout mythology. It needs structured, responsible risk-taking in a high-pressure environment.</p>
-
-                            <p class="hero-body-text" style="font-size: clamp(18px, 1.6vw, 22px); font-weight: 500; color: var(--text-black); margin-top: 48px;">0Degree is raising ₹1 Crore to fund 17 high-agency individuals navigating uncertainty with seriousness. We are building infrastructure for responsible first steps.</p>
+                            <!-- Slide 10 -->
+                            <div class="slide-section">
+                                <h2 class="slide-title">The Ask</h2>
+                                <div class="slide-content">
+                                    <p class="hero-body-text">India does not need more dropout mythology. It needs structured, responsible risk-taking in a high-pressure environment.</p>
+                                    <p class="hero-body-text" style="margin-top: 32px; font-size: clamp(18px, 1.6vw, 22px); font-weight: 500; color: var(--text-black);">0Degree is raising ₹1 Crore to fund 17 high-agency individuals navigating uncertainty with seriousness.</p>
+                                    <p class="hero-body-text" style="margin-top: 16px; font-size: clamp(18px, 1.6vw, 22px); font-weight: 500; color: var(--text-black);">We are building infrastructure for responsible first steps.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
