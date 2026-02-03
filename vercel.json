@@ -6,6 +6,16 @@
   },
   "rewrites": [
     {
+      "source": "/",
+      "destination": "/lp.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "lp.0degreeinc.com"
+        }
+      ]
+    },
+    {
       "source": "/(.*)",
       "destination": "/lp.html",
       "has": [
