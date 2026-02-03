@@ -73,35 +73,46 @@
         .job-item {
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding: 32px 0;
-            transition: opacity 0.3s ease;
+            position: relative;
         }
         
         .job-item:last-child {
             border-bottom: none;
         }
         
-        .job-item:hover {
-            opacity: 0.8;
-        }
-        
-        .job-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-            margin-bottom: 8px;
-            flex-wrap: wrap;
-        }
-        
         .job-title {
             font-size: clamp(20px, 2vw, 24px);
             font-weight: 500;
             color: var(--text-black);
-            margin: 0;
+            margin: 0 0 8px 0;
             line-height: 1.3;
             letter-spacing: -0.5px;
+        }
+        
+        .job-meta {
+            margin-bottom: 16px;
+        }
+        
+        .job-meta-item {
+            font-size: clamp(13px, 1.1vw, 14px);
+            color: var(--text-gray);
+            font-weight: 400;
+        }
+        
+        .job-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 24px;
+        }
+        
+        .job-description {
+            font-size: clamp(14px, 1.2vw, 16px);
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin: 0;
             flex: 1;
-            min-width: 0;
+            max-width: 100%;
         }
         
         .job-link {
@@ -112,32 +123,11 @@
             white-space: nowrap;
             transition: opacity 0.3s ease;
             flex-shrink: 0;
+            margin-top: 0;
         }
         
         .job-link:hover {
             opacity: 0.7;
-        }
-        
-        .job-meta {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 12px;
-            align-items: center;
-        }
-        
-        .job-meta-item {
-            font-size: clamp(13px, 1.1vw, 14px);
-            color: var(--text-gray);
-            font-weight: 400;
-        }
-        
-        .job-description {
-            font-size: clamp(14px, 1.2vw, 16px);
-            color: var(--text-gray);
-            line-height: 1.6;
-            margin: 0;
-            max-width: 100%;
         }
         
         .jobs-empty {
@@ -148,38 +138,28 @@
         }
         
         @media screen and (max-width: 768px) {
-            .job-header {
-                flex-direction: row;
-                align-items: center;
-            }
-            
-            .job-title {
-                flex: 1;
-                min-width: 0;
-            }
-            
-            .job-link {
-                flex-shrink: 0;
-            }
-            
             .job-item {
                 padding: 24px 0;
             }
             
-            .job-meta {
-                gap: 8px;
-            }
-        }
-        
-        @media screen and (max-width: 480px) {
-            .job-header {
+            .job-content {
                 flex-direction: column;
-                align-items: flex-start;
-                gap: 12px;
+                gap: 16px;
             }
             
             .job-link {
                 align-self: flex-end;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            .job-content {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .job-link {
+                align-self: flex-start;
             }
         }
     </style>
@@ -276,16 +256,16 @@
             jobsEmpty.style.display = 'none';
             jobList.innerHTML = jobs.map(job => `
                 <li class="job-item">
-                    <div class="job-header">
-                        <h2 class="job-title">${job.title}</h2>
-                        ${job.link ? `<a href="${job.link}" class="job-link" target="_blank" rel="noopener noreferrer">Apply →</a>` : ''}
-                    </div>
+                    <h2 class="job-title">${job.title}</h2>
                     <div class="job-meta">
                         ${job.location && job.type ? `<span class="job-meta-item">${job.location} ${job.type}</span>` : ''}
                         ${job.location && !job.type ? `<span class="job-meta-item">${job.location}</span>` : ''}
                         ${!job.location && job.type ? `<span class="job-meta-item">${job.type}</span>` : ''}
                     </div>
-                    ${job.description ? `<p class="job-description">${job.description}</p>` : ''}
+                    <div class="job-content">
+                        ${job.description ? `<p class="job-description">${job.description}</p>` : ''}
+                        ${job.link ? `<a href="${job.link}" class="job-link" target="_blank" rel="noopener noreferrer">Apply →</a>` : ''}
+                    </div>
                 </li>
             `).join('');
         }
