@@ -282,6 +282,9 @@ main {
     font-weight: 400;
     transition: color 0.3s ease;
     position: relative;
+    cursor: pointer;
+    pointer-events: auto;
+    display: inline-block;
 }
 
 .nav-link:hover {
