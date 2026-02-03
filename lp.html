@@ -59,29 +59,45 @@
     <link rel="stylesheet" href="styles.css" media="all">
     <style>
         .slide-section {
-            margin-bottom: 80px;
-            padding-bottom: 60px;
+            margin-bottom: 100px;
+            padding-bottom: 80px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .slide-section:last-child {
             border-bottom: none;
             margin-bottom: 0;
+            padding-bottom: 0;
         }
         
         .slide-title {
-            font-size: clamp(24px, 2.5vw, 32px);
+            font-size: clamp(28px, 3vw, 40px);
             font-weight: 600;
             color: var(--text-black);
-            margin-bottom: 32px;
-            letter-spacing: -1px;
+            margin-bottom: 40px;
+            letter-spacing: -1.5px;
+            line-height: 1.2;
         }
         
         .slide-subtitle {
-            font-size: clamp(18px, 1.8vw, 22px);
+            font-size: clamp(20px, 2vw, 26px);
             font-weight: 500;
             color: #00ffce;
-            margin-bottom: 24px;
+            margin-bottom: 32px;
+            letter-spacing: -0.5px;
+        }
+        
+        .section-heading {
+            font-size: clamp(18px, 1.8vw, 22px);
+            font-weight: 600;
+            color: var(--text-black);
+            margin-top: 32px;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+        
+        .section-heading:first-child {
+            margin-top: 0;
         }
         
         .slide-content {
@@ -90,16 +106,25 @@
             line-height: 1.75;
         }
         
+        .slide-content p {
+            margin-bottom: 20px;
+        }
+        
+        .slide-content p:last-child {
+            margin-bottom: 0;
+        }
+        
         .slide-list {
             list-style: none;
             padding: 0;
-            margin: 20px 0;
+            margin: 24px 0;
         }
         
         .slide-list li {
-            margin-bottom: 12px;
-            padding-left: 24px;
+            margin-bottom: 14px;
+            padding-left: 28px;
             position: relative;
+            line-height: 1.6;
         }
         
         .slide-list li:before {
@@ -107,38 +132,81 @@
             position: absolute;
             left: 0;
             color: var(--text-gray);
+            font-weight: 400;
         }
         
         .highlight-box {
-            background: rgba(0, 255, 206, 0.05);
-            border-left: 3px solid #00ffce;
-            padding: 20px 24px;
-            margin: 24px 0;
+            background: rgba(0, 255, 206, 0.08);
+            border-left: 4px solid #00ffce;
+            padding: 28px 32px;
+            margin: 32px 0;
+            border-radius: 4px;
+        }
+        
+        .highlight-box p {
+            margin-bottom: 12px;
+        }
+        
+        .highlight-box p:last-child {
+            margin-bottom: 0;
         }
         
         .two-column {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin: 24px 0;
+            gap: 48px;
+            margin: 32px 0;
         }
         
         .column-title {
+            font-weight: 600;
+            color: var(--text-black);
+            margin-bottom: 20px;
+            font-size: clamp(17px, 1.5vw, 19px);
+            letter-spacing: -0.3px;
+        }
+        
+        .emphasis-text {
+            font-size: clamp(18px, 1.6vw, 20px);
             font-weight: 500;
             color: var(--text-black);
-            margin-bottom: 16px;
-            font-size: clamp(16px, 1.4vw, 18px);
+            margin: 24px 0;
+            line-height: 1.5;
+        }
+        
+        .large-number {
+            font-size: clamp(20px, 2vw, 24px);
+            font-weight: 600;
+            color: #00ffce;
+            display: inline-block;
+        }
+        
+        .flow-diagram {
+            font-size: clamp(18px, 1.6vw, 22px);
+            font-weight: 500;
+            color: var(--text-black);
+            margin: 20px 0;
+            letter-spacing: 0.5px;
         }
         
         @media screen and (max-width: 768px) {
             .two-column {
                 grid-template-columns: 1fr;
-                gap: 24px;
+                gap: 32px;
             }
             
             .slide-section {
-                margin-bottom: 60px;
-                padding-bottom: 40px;
+                margin-bottom: 80px;
+                padding-bottom: 60px;
+            }
+            
+            .slide-title {
+                margin-bottom: 32px;
+            }
+            
+            .highlight-box {
+                padding: 24px;
+                margin: 24px 0;
             }
         }
     </style>
@@ -174,9 +242,9 @@
                                 <h2 class="slide-title">The Structural Problem</h2>
                                 <div class="slide-content">
                                     <p class="hero-body-text">India assumes linear progress:</p>
-                                    <p class="hero-body-text" style="font-weight: 500; color: var(--text-black); margin: 16px 0;">School → College → Degree → Job</p>
+                                    <p class="flow-diagram">School → College → Degree → Job</p>
                                     <p class="hero-body-text">When this works, it works well. When it breaks, there is no institutional support.</p>
-                                    <p class="hero-body-text">Dropping out in India is high-risk:</p>
+                                    <h3 class="section-heading">Dropping out in India is high-risk:</h3>
                                     <ul class="slide-list">
                                         <li>Financial pressure</li>
                                         <li>Parental expectations</li>
@@ -221,14 +289,14 @@
                             <div class="slide-section">
                                 <h2 class="slide-title">Who We Back</h2>
                                 <div class="slide-content">
-                                    <p class="hero-body-text" style="font-weight: 500; color: var(--text-black); margin-bottom: 20px;">17 Fellows. Each must demonstrate:</p>
+                                    <p class="emphasis-text"><span class="large-number">17 Fellows.</span> Each must demonstrate:</p>
                                     <ul class="slide-list">
                                         <li>Proven self-initiated action</li>
                                         <li>Ownership under constraint</li>
                                         <li>Execution track record</li>
                                         <li>High agency</li>
                                     </ul>
-                                    <p class="hero-body-text" style="margin-top: 32px; font-weight: 500; color: var(--text-black); margin-bottom: 20px;">We do not optimize for:</p>
+                                    <h3 class="section-heading">We do not optimize for:</h3>
                                     <ul class="slide-list">
                                         <li>College brand</li>
                                         <li>English fluency</li>
@@ -243,8 +311,8 @@
                             <div class="slide-section">
                                 <h2 class="slide-title">Fellowship Structure</h2>
                                 <div class="slide-content">
-                                    <p class="hero-body-text"><strong>Duration:</strong> 6–9 Months</p>
-                                    <p class="hero-body-text" style="margin-top: 24px; font-weight: 500; color: var(--text-black);">Phases:</p>
+                                    <p class="emphasis-text"><strong>Duration:</strong> 6–9 Months</p>
+                                    <h3 class="section-heading">Phases:</h3>
                                     <ul class="slide-list">
                                         <li>Field Immersion (Ground Reality Exposure)</li>
                                         <li>Structured Experimentation</li>
@@ -260,9 +328,9 @@
                             <div class="slide-section">
                                 <h2 class="slide-title">Capital Deployment</h2>
                                 <div class="slide-content">
-                                    <p class="hero-body-text" style="font-weight: 500; color: var(--text-black); margin-bottom: 20px;">Each Fellow Receives Up To ₹5 Lakhs</p>
+                                    <p class="emphasis-text">Each Fellow Receives Up To <span class="large-number">₹5 Lakhs</span></p>
                                     <p class="hero-body-text">Capital is deployed in tranches tied to milestones.</p>
-                                    <p class="hero-body-text" style="margin-top: 24px; font-weight: 500; color: var(--text-black); margin-bottom: 20px;">Use cases:</p>
+                                    <h3 class="section-heading">Use cases:</h3>
                                     <ul class="slide-list">
                                         <li>Building a small enterprise</li>
                                         <li>Running a structured pilot</li>
@@ -278,8 +346,8 @@
                             <div class="slide-section">
                                 <h2 class="slide-title">Financial Model</h2>
                                 <div class="slide-content">
-                                    <p class="hero-body-text" style="font-weight: 500; color: var(--text-black); margin-bottom: 20px;">17 Fellows × ₹5L = ₹85L Direct Deployment</p>
-                                    <p class="hero-body-text" style="margin-top: 24px; font-weight: 500; color: var(--text-black); margin-bottom: 20px;">Operational Layer:</p>
+                                    <p class="emphasis-text"><span class="large-number">17 Fellows</span> × <span class="large-number">₹5L</span> = <span class="large-number">₹85L</span> Direct Deployment</p>
+                                    <h3 class="section-heading">Operational Layer:</h3>
                                     <ul class="slide-list">
                                         <li>Program leadership</li>
                                         <li>Selection process</li>
@@ -288,9 +356,9 @@
                                         <li>Documentation</li>
                                         <li>Contingency</li>
                                     </ul>
-                                    <p class="hero-body-text" style="margin-top: 24px;"><strong>Estimated operations: ₹15L</strong></p>
-                                    <p class="hero-body-text" style="margin-top: 24px; font-size: clamp(18px, 1.6vw, 22px); font-weight: 500; color: #00ffce;">Total Raise Target: ₹1 Crore</p>
-                                    <p class="hero-body-text" style="margin-top: 16px;">Lean structure. High signal. No institutional bloat.</p>
+                                    <p class="emphasis-text" style="margin-top: 24px;">Estimated operations: <span class="large-number">₹15L</span></p>
+                                    <p class="slide-subtitle" style="margin-top: 32px; margin-bottom: 16px;">Total Raise Target: <span class="large-number">₹1 Crore</span></p>
+                                    <p class="hero-body-text">Lean structure. High signal. No institutional bloat.</p>
                                 </div>
                             </div>
 
@@ -313,7 +381,7 @@
                                 <h2 class="slide-title">What Success Looks Like</h2>
                                 <div class="slide-content">
                                     <p class="hero-body-text">Success is not unicorn outcomes.</p>
-                                    <p class="hero-body-text" style="margin-top: 24px; font-weight: 500; color: var(--text-black); margin-bottom: 20px;">Success means:</p>
+                                    <h3 class="section-heading">Success means:</h3>
                                     <ul class="slide-list">
                                         <li>Responsible capital deployment</li>
                                         <li>Durable enterprises</li>
