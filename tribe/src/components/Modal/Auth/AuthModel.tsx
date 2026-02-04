@@ -41,13 +41,13 @@ const AuthModel: React.FC = () => {
     <>
       <Modal isOpen={modelState.open} onClose={handleClose}>
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader textAlign="center">
+        <ModalContent bg="#000000" border="1px solid" borderColor="rgba(255, 255, 255, 0.2)">
+          <ModalHeader textAlign="center" color="#ffffff">
             {modelState.view === "login" && "Login"}
             {modelState.view === "signup" && "Sign Up"}
             {modelState.view === "resetPassword" && "Reset Password"}
           </ModalHeader>
-          <ModalCloseButton />
+          <ModalCloseButton color="rgba(255, 255, 255, 0.7)" _hover={{ color: "#ffffff" }} />
           <ModalBody
             display="flex"
             flexDirection="column"
@@ -64,7 +64,7 @@ const AuthModel: React.FC = () => {
               {modelState.view === "login" || modelState.view === "signup" ? (
                 <>
                   <OAuthButtons />
-                  <Text color="gray.500" fontWeight={700}>
+                  <Text color="rgba(255, 255, 255, 0.5)" fontWeight={700} my={2}>
                     OR
                   </Text>
                   <AuthInput />

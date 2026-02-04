@@ -8,7 +8,8 @@ import { auth, firestore } from "../../../firebase/clientApp";
 const OAuthButtons: React.FC = () => {
   const [signInWithGoogle, userCred, loading, error] =
     useSignInWithGoogle(auth);
-  const hoverBg = useColorModeValue("gray.50", "#2A4365");
+  // Using dark theme colors matching main site
+  const hoverBg = "rgba(255, 255, 255, 0.05)";
   const createUserDocument = async (user: User) => {
     const userDocRef = doc(firestore, "users", user.uid);
 

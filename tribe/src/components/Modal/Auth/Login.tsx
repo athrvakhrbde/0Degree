@@ -15,10 +15,11 @@ const Login: React.FC<LoginProps> = () => {
     email: "",
     password: "",
   });
-  const searchBorder = useColorModeValue("blue.500", "#4A5568");
-  const inputBg = useColorModeValue("gray.50", "#4A5568");
-  const focusedInputBg = useColorModeValue("white", "#2D3748");
-  const placeholderColor = useColorModeValue("gray.500", "#CBD5E0");
+  // Using dark theme colors matching main site
+  const searchBorder = "rgba(255, 255, 255, 0.2)";
+  const inputBg = "rgba(255, 255, 255, 0.02)";
+  const focusedInputBg = "rgba(255, 255, 255, 0.03)";
+  const placeholderColor = "rgba(255, 255, 255, 0.5)";
 
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
@@ -50,13 +51,13 @@ const Login: React.FC<LoginProps> = () => {
         _hover={{
           bg: focusedInputBg,
           border: "1px solid",
-          borderColor: searchBorder,
+          borderColor: "brand.500",
         }}
         _focus={{
           outline: "none",
           bg: focusedInputBg,
           border: "1px solid",
-          borderColor: searchBorder,
+          borderColor: "brand.500",
         }}
         bg={inputBg}
       />
@@ -72,13 +73,13 @@ const Login: React.FC<LoginProps> = () => {
         _hover={{
           bg: focusedInputBg,
           border: "1px solid",
-          borderColor: searchBorder,
+          borderColor: "brand.500",
         }}
         _focus={{
           outline: "none",
           bg: focusedInputBg,
           border: "1px solid",
-          borderColor: searchBorder,
+          borderColor: "brand.500",
         }}
         bg={inputBg}
       />
@@ -92,6 +93,9 @@ const Login: React.FC<LoginProps> = () => {
         mb={2}
         type="submit"
         isLoading={loading}
+        bg="brand.500"
+        color="#000000"
+        _hover={{ bg: "brand.400" }}
       >
         Log In
       </Button>
@@ -101,7 +105,7 @@ const Login: React.FC<LoginProps> = () => {
         </Text>
         <Text
           fontSize="9pt"
-          color="blue.500"
+          color="brand.500"
           cursor="pointer"
           onClick={() =>
             setAuthModelState((prev) => ({
@@ -116,7 +120,7 @@ const Login: React.FC<LoginProps> = () => {
       <Flex fontSize="9pt" justifyContent="center">
         <Text mr={1}>New Here?</Text>
         <Text
-          color="blue.500"
+          color="brand.500"
           fontWeight={700}
           cursor="pointer"
           onClick={() =>

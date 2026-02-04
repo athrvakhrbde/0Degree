@@ -17,10 +17,11 @@ const SignUp: React.FC = () => {
     conformPassword: "",
   });
   const [error, setError] = useState("");
-  const searchBorder = useColorModeValue("blue.500", "#4A5568");
-  const inputBg = useColorModeValue("gray.50", "#4A5568");
-  const focusedInputBg = useColorModeValue("white", "#2D3748");
-  const placeholderColor = useColorModeValue("gray.500", "#CBD5E0");
+  // Using dark theme colors matching main site
+  const searchBorder = "rgba(255, 255, 255, 0.2)";
+  const inputBg = "rgba(255, 255, 255, 0.02)";
+  const focusedInputBg = "rgba(255, 255, 255, 0.03)";
+  const placeholderColor = "rgba(255, 255, 255, 0.5)";
 
   //console.log(signUpForm);
 
@@ -96,7 +97,7 @@ const SignUp: React.FC = () => {
         _hover={{
           bg: focusedInputBg,
           border: "1px solid",
-          borderColor: "blue.500",
+          borderColor: "brand.500",
         }}
         _focus={{
           outline: "none",
@@ -119,7 +120,7 @@ const SignUp: React.FC = () => {
         _hover={{
           bg: focusedInputBg,
           border: "1px solid",
-          borderColor: "blue.500",
+          borderColor: "brand.500",
         }}
         _focus={{
           outline: "none",
@@ -145,13 +146,16 @@ const SignUp: React.FC = () => {
         mb={2}
         type="submit"
         isLoading={loading}
+        bg="brand.500"
+        color="#000000"
+        _hover={{ bg: "brand.400" }}
       >
         Sign Up
       </Button>
       <Flex fontSize="9pt" justifyContent="center">
         <Text mr={1}>Already a member?</Text>
         <Text
-          color="blue.500"
+          color="brand.500"
           fontWeight={700}
           cursor="pointer"
           onClick={() =>
