@@ -11,18 +11,19 @@ const PageContent: React.FC<PageContentProps> = ({ children }) => {
   const uid = router.query;
 
   return (
-    <Flex justify="center" p="16px 0px" bg="transparent">
+    <Flex justify="center" p={{ base: "24px 0px", md: "40px 0px" }} bg="transparent">
       <Flex
-        width="95%"
+        width="100%"
         justify="center"
-        maxWidth={uid.uid ? "1160px" : "860px"}
+        maxWidth="1400px"
+        padding={{ base: "0 20px", md: "0 clamp(10px, 1vw, 15px)" }}
         bg="transparent"
       >
         {/* Left */}
         <Flex
           direction="column"
           width={{ base: "100%", md: "65%" }}
-          mr={{ base: 0, md: 6 }}
+          mr={{ base: 0, md: "60px" }}
         >
           {children && children[0 as keyof typeof children]}
         </Flex>
@@ -32,6 +33,7 @@ const PageContent: React.FC<PageContentProps> = ({ children }) => {
           direction="column"
           display={{ base: "none", md: "flex" }}
           flexGrow={1}
+          maxWidth="400px"
         >
           {children && children[1 as keyof typeof children]}
         </Flex>

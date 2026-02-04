@@ -22,44 +22,53 @@ const PersonalHome: React.FC = () => {
   return (
     <Flex
       direction="column"
-      bg={bg}
-      borderRadius={4}
+      bg="transparent"
+      borderRadius={0}
       cursor="pointer"
-      border="1px solid"
-      borderColor={borderColor}
+      border="none"
+      borderColor="transparent"
       position="sticky"
+      top="80px"
     >
       <CreateCommunityModel open={open} handleClose={() => setOpen(false)} />
-      <Flex
-        align="flex-end"
-        color="white"
-        p="6px 10px"
-        bg="brand.500"
-        height="34px"
-        borderRadius="4px 4px 0px 0px"
-        fontWeight={600}
-        bgImage="url(/images/sgf6r5easbh31.jpg)"
-        backgroundSize="cover"
-      ></Flex>
-      <Flex direction="column" p="12px">
-        <Flex align="center" mb={2}>
-          <Image src="/images/0degree-logo.svg" height="40px" width="40px" mr={2} alt="0Degree" />
-          <Text fontWeight={600}>Home</Text>
-        </Flex>
-        <Stack spacing={3}>
-          <Text fontSize="9pt" color="rgba(255, 255, 255, 0.7)">
+      <Flex direction="column" p={0}>
+        <Text fontSize={{ base: "20px", md: "24px" }} fontWeight={500} letterSpacing="-0.5px" color="#ffffff" mb={{ base: "16px", md: "24px" }}>
+          Home
+        </Text>
+        <Stack spacing={{ base: "16px", md: "20px" }}>
+          <Text fontSize={{ base: "14px", md: "16px" }} fontWeight={300} lineHeight="1.6" color="rgba(255, 255, 255, 0.7)">
             Your personal Tribe feed, built for you.
           </Text>
-          <Button height="30px" variant="solid" bg="brand.500" color="#000000" _hover={{ bg: "brand.400" }}>
+          <Button 
+            height={{ base: "44px", md: "48px" }} 
+            variant="solid" 
+            bg="transparent" 
+            color="#00ffce" 
+            border="1px solid"
+            borderColor="#00ffce"
+            borderRadius={0}
+            fontWeight={400}
+            fontSize={{ base: "13px", md: "14px" }}
+            letterSpacing="1px"
+            textTransform="uppercase"
+            _hover={{ bg: "#00ffce", color: "#000000", transform: "translateY(-2px)" }}
+            transition="all 0.3s ease"
+          >
             Create Post
           </Button>
           <Button
             disabled={!user}
             variant="outline"
-            height="30px"
+            height={{ base: "44px", md: "48px" }}
             borderColor="rgba(255, 255, 255, 0.2)"
             color="rgba(255, 255, 255, 0.9)"
-            _hover={{ borderColor: "brand.500", color: "brand.500" }}
+            borderRadius={0}
+            fontWeight={400}
+            fontSize={{ base: "13px", md: "14px" }}
+            letterSpacing="1px"
+            textTransform="uppercase"
+            _hover={{ borderColor: "#00ffce", color: "#00ffce" }}
+            _disabled={{ opacity: 0.3, cursor: "not-allowed" }}
             onClick={() => {
               setOpen(true);
             }}

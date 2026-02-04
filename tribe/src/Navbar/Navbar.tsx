@@ -84,8 +84,8 @@ const Navbar: React.FC = () => {
       backdropFilter="blur(10px)"
       borderBottom="1px solid"
       borderColor="rgba(255, 255, 255, 0.2)"
-      height="64px"
-      padding="16px 0"
+      height={{ base: "56px", md: "64px" }}
+      padding={{ base: "12px 0", md: "16px 0" }}
       position="fixed"
       top={0}
       left={0}

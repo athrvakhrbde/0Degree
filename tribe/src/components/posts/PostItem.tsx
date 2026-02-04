@@ -135,32 +135,38 @@ const PostItem: React.FC<PostItemProps> = ({
 
   return (
     <Flex
-      border="1px solid"
-      bg={bg}
-      borderColor={singlePostPage ? singlePageBorderColor : borderColor}
-      borderRadius={singlePostPage ? "4px 4px 0px 0px" : "4px"}
-      _hover={{ borderColor: singlePostPage ? "none" : borderColor }}
+      border="none"
+      bg="transparent"
+      borderColor="transparent"
+      borderRadius={0}
+      _hover={{ opacity: singlePostPage ? 1 : 0.9 }}
       cursor={singlePostPage ? "unset" : "pointer"}
       onClick={() => onSelectPost && onSelectPost(post)}
+      mb={{ base: "32px", md: "48px" }}
+      transition="opacity 0.3s ease"
     >
       <Flex
         direction="column"
         align="center"
-        bg={singlePostPage ? "none" : voteLineBorderColor}
-        p={2}
-        width="40px"
-        borderRadius={singlePostPage ? "0" : "3px 0px 0px 3px"}
+        bg="transparent"
+        p={0}
+        width="auto"
+        minWidth="48px"
+        mr={{ base: "16px", md: "24px" }}
+        borderRadius={0}
       >
         <Icon
           as={
             userVoteValue === 1 ? IoArrowUpCircleSharp : IoArrowUpCircleOutline
           }
-          color={userVoteValue === 1 ? "brand.100" : voteIconBg}
-          fontSize={22}
+          color={userVoteValue === 1 ? "brand.500" : "rgba(255, 255, 255, 0.4)"}
+          fontSize={{ base: "20px", md: "24px" }}
           onClick={(event) => onVote(event, post, 1, post.communityId)}
           cursor="pointer"
+          _hover={{ color: "brand.500", transform: "scale(1.1)" }}
+          transition="all 0.2s ease"
         />
-        <Text fontSize="9pt" color={voteIconBg}>
+        <Text fontSize={{ base: "14px", md: "16px" }} fontWeight={500} color="rgba(255, 255, 255, 0.9)" my={1}>
           {post.voteStatus}
         </Text>
         <Icon
@@ -169,10 +175,12 @@ const PostItem: React.FC<PostItemProps> = ({
               ? IoArrowDownCircleSharp
               : IoArrowDownCircleOutline
           }
-          color={userVoteValue === -1 ? "#4379ff" : voteIconBg}
-          fontSize={22}
+          color={userVoteValue === -1 ? "rgba(255, 255, 255, 0.6)" : "rgba(255, 255, 255, 0.4)"}
+          fontSize={{ base: "20px", md: "24px" }}
           onClick={(event) => onVote(event, post, -1, post.communityId)}
           cursor="pointer"
+          _hover={{ color: "rgba(255, 255, 255, 0.6)", transform: "scale(1.1)" }}
+          transition="all 0.2s ease"
         />
       </Flex>
       <Flex direction="column" width="100%">
@@ -182,8 +190,8 @@ const PostItem: React.FC<PostItemProps> = ({
             <Text mr={2}>{error}</Text>
           </Alert>
         )}
-        <Stack spacing={1} p="10px">
-          <Stack direction="row" spacing={0.5} align="center" fontSize="9pt">
+        <Stack spacing={{ base: "12px", md: "16px" }} p={0}>
+          <Stack direction="row" spacing="8px" align="center" fontSize={{ base: "12px", md: "14px" }}>
             {/* check */}
             {homePage && (
               <>
@@ -191,99 +199,106 @@ const PostItem: React.FC<PostItemProps> = ({
                   <Image
                     src={post.communityImageURL}
                     borderRadius="full"
-                    boxSize="18px"
-                    mr={2}
+                    boxSize={{ base: "20px", md: "24px" }}
+                    mr={1}
                   />
                 ) : (
-                  <Image src="/images/0degree-logo.svg" height="18px" width="18px" alt="Community" mr={2} />
+                  <Image src="/images/0degree-logo.svg" height={{ base: "20px", md: "24px" }} width={{ base: "20px", md: "24px" }} alt="Community" mr={1} />
                 )}
                 <Link href={`/r/${post.communityId}`}>
                   <Text
-                    fontWeight={700}
-                    _hover={{ textDecoration: "underline" }}
+                    fontWeight={400}
+                    _hover={{ color: "brand.500" }}
                     onClick={(event) => event.stopPropagation}
                     color="rgba(255, 255, 255, 0.7)"
+                    transition="color 0.3s ease"
                   >{`t/${post.communityId}`}</Text>
                 </Link>
-                <Icon as={BsDot} color="gray.500" fontSize={8} />
+                <Icon as={BsDot} color="rgba(255, 255, 255, 0.3)" fontSize="8px" />
               </>
             )}
-            <Text>
+            <Text color="rgba(255, 255, 255, 0.5)" fontWeight={300}>
               Posted by u/{decryptedData.creatorDisplayName}{" "}
               {moment(new Date(post.createdAt?.seconds * 1000)).fromNow()}
             </Text>
           </Stack>
-          <Text fontSize="12pt" fontWeight={600}>
+          <Text fontSize={{ base: "18px", md: "24px" }} fontWeight={500} lineHeight="1.3" letterSpacing="-0.5px" color="#ffffff">
             {decryptedData.title}
           </Text>
-          <Text fontSize="10pt">{decryptedData.body}</Text>
+          {decryptedData.body && (
+            <Text fontSize={{ base: "14px", md: "16px" }} fontWeight={400} lineHeight="1.6" color="rgba(255, 255, 255, 0.7)">
+              {decryptedData.body}
+            </Text>
+          )}
           {post.imageURL && (
-            <Flex justify="center" align="center" p={2}>
+            <Flex justify="center" align="center" p={0} mt={{ base: "16px", md: "24px" }}>
               {loadingImage && (
-                <Skeleton height="200px" width="100%" borderRadius={4} />
+                <Skeleton height="200px" width="100%" borderRadius={0} />
               )}
               <Image
                 src={decryptedData.imageURL}
-                maxHeight="460px"
+                maxHeight="600px"
+                width="100%"
                 alt="Post Image"
                 display={loadingImage ? "none" : "unset"}
                 onLoad={() => setLoadingImage(false)}
+                borderRadius={0}
               />
             </Flex>
           )}
         </Stack>
-        <Flex ml={1} mb={0.5} color="gray.500" fontWeight={600}>
+        <Flex mt={{ base: "16px", md: "24px" }} gap={{ base: "16px", md: "24px" }} color="rgba(255, 255, 255, 0.5)" fontWeight={400}>
           <Flex
             align="center"
-            p="8px 10px"
-            borderRadius={4}
-            _hover={{ bg: IconHoverBg }}
+            p={0}
+            _hover={{ color: "brand.500" }}
             cursor="pointer"
+            transition="color 0.3s ease"
           >
-            <Icon as={BsChat} mr={2} color={IconBg} />
-            <Text fontSize="9pt" color={IconBg}>
+            <Icon as={BsChat} mr={1} fontSize={{ base: "16px", md: "18px" }} />
+            <Text fontSize={{ base: "13px", md: "14px" }} fontWeight={400}>
               {post.numberOfComments}
             </Text>
           </Flex>
           <Flex
             align="center"
-            p="8px 10px"
-            borderRadius={4}
-            _hover={{ bg: IconHoverBg }}
+            p={0}
+            _hover={{ color: "brand.500" }}
             cursor="pointer"
+            transition="color 0.3s ease"
           >
-            <Icon as={IoArrowRedoOutline} mr={2} color={IconBg} />
-            <Text fontSize="9pt" color={IconBg}>
+            <Icon as={IoArrowRedoOutline} mr={1} fontSize={{ base: "16px", md: "18px" }} />
+            <Text fontSize={{ base: "13px", md: "14px" }} fontWeight={400}>
               Share
             </Text>
           </Flex>
           <Flex
             align="center"
-            p="8px 10px"
-            borderRadius={4}
-            _hover={{ bg: IconHoverBg }}
+            p={0}
+            _hover={{ color: "brand.500" }}
             cursor="pointer"
+            transition="color 0.3s ease"
           >
-            <Icon as={IoBookmarkOutline} mr={2} color={IconBg} />
-            <Text fontSize="9pt" color={IconBg}>
+            <Icon as={IoBookmarkOutline} mr={1} fontSize={{ base: "16px", md: "18px" }} />
+            <Text fontSize={{ base: "13px", md: "14px" }} fontWeight={400}>
               Save
             </Text>
           </Flex>
           {userIsCreator && (
             <Flex
               align="center"
-              p="8px 10px"
-              borderRadius={4}
-              _hover={{ bg: IconHoverBg }}
+              p={0}
+              _hover={{ color: "rgba(255, 255, 255, 0.8)" }}
               cursor="pointer"
               onClick={handleDelete}
+              transition="color 0.3s ease"
             >
               {loadingDelete ? (
                 <Spinner size="sm" />
               ) : (
                 <>
-                  <Icon as={AiOutlineDelete} mr={2} color={IconBg} />
-                  <Text fontSize="9pt" color={IconBg}>
+                  <Icon as={AiOutlineDelete} mr={1} fontSize={{ base: "16px", md: "18px" }} />
+                  <Text fontSize={{ base: "13px", md: "14px" }} fontWeight={400}>
                     Delete
                   </Text>
                 </>

@@ -113,45 +113,59 @@ const Recommendation: React.FC = () => {
                   <Flex
                     position="relative"
                     align="center"
-                    fontSize="10pt"
-                    borderBottom="1px solid"
-                    borderColor={borderColor}
-                    p="10px 12px"
-                    fontWeight={600}
+                    fontSize={{ base: "13px", md: "14px" }}
+                    borderBottom="none"
+                    borderColor="transparent"
+                    p={{ base: "12px 0", md: "16px 0" }}
+                    fontWeight={400}
+                    color="rgba(255, 255, 255, 0.9)"
+                    _hover={{ opacity: 0.8 }}
+                    transition="opacity 0.3s ease"
                   >
                     <Flex width="80%" align="center">
-                      <Flex width="15%">
-                        <Text mr={2}>{index + 1}</Text>
+                      <Flex width="auto" minWidth="24px">
+                        <Text mr={{ base: 3, md: 4 }} color="rgba(255, 255, 255, 0.5)" fontWeight={300} fontSize={{ base: "14px", md: "16px" }}>
+                          {index + 1}
+                        </Text>
                       </Flex>
-                      <Flex align="center" width="80%">
+                      <Flex align="center" flex={1}>
                         {item.imageURL ? (
                           <Image
                             borderRadius="full"
-                            boxSize="28px"
+                            boxSize={{ base: "28px", md: "32px" }}
                             src={item.imageURL}
-                            mr={2}
+                            mr={3}
                           />
                         ) : (
-                          <Image src="/images/0degree-logo.svg" height="30px" width="30px" mr={2} alt="Community" />
+                          <Image src="/images/0degree-logo.svg" height={{ base: "28px", md: "32px" }} width={{ base: "28px", md: "32px" }} mr={3} alt="Community" />
                         )}
-                        <span
-                          style={{
-                            whiteSpace: "nowrap",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                          }}
-                        >{`t/${item.id}`}</span>
+                        <Text
+                          whiteSpace="nowrap"
+                          overflow="hidden"
+                          textOverflow="ellipsis"
+                          fontWeight={400}
+                          fontSize={{ base: "14px", md: "16px" }}
+                          _hover={{ color: "brand.500" }}
+                          transition="color 0.3s ease"
+                        >
+                          {`t/${item.id}`}
+                        </Text>
                       </Flex>
                     </Flex>
-                    <Box position="absolute" right="10px">
+                    <Box position="absolute" right="0">
                       <Button
-                        height="22px"
-                        fontSize="8pt"
+                        height={{ base: "32px", md: "36px" }}
+                        fontSize={{ base: "11px", md: "12px" }}
                         variant={isJoined ? "outline" : "solid"}
-                        bg={isJoined ? "transparent" : "brand.500"}
-                        color={isJoined ? "rgba(255, 255, 255, 0.7)" : "#000000"}
-                        borderColor={isJoined ? "rgba(255, 255, 255, 0.2)" : "brand.500"}
-                        _hover={isJoined ? { borderColor: "brand.500", color: "brand.500" } : { bg: "brand.400" }}
+                        bg={isJoined ? "transparent" : "transparent"}
+                        color={isJoined ? "rgba(255, 255, 255, 0.7)" : "#00ffce"}
+                        borderColor={isJoined ? "rgba(255, 255, 255, 0.2)" : "#00ffce"}
+                        borderRadius={0}
+                        fontWeight={400}
+                        letterSpacing="0.5px"
+                        px={{ base: "12px", md: "16px" }}
+                        _hover={isJoined ? { borderColor: "#00ffce", color: "#00ffce" } : { bg: "#00ffce", color: "#000000" }}
+                        transition="all 0.3s ease"
                       >
                         {isJoined ? "Joined" : "Join"}
                       </Button>
@@ -160,14 +174,20 @@ const Recommendation: React.FC = () => {
                 </Link>
               );
             })}
-            <Box p="10px 20px">
+            <Box p={0} mt={{ base: "16px", md: "20px" }}>
               <Button
-                height="30px"
+                height={{ base: "44px", md: "48px" }}
                 width="100%"
                 variant="outline"
                 borderColor="rgba(255, 255, 255, 0.2)"
                 color="rgba(255, 255, 255, 0.9)"
-                _hover={{ borderColor: "brand.500", color: "brand.500" }}
+                borderRadius={0}
+                fontWeight={400}
+                fontSize={{ base: "13px", md: "14px" }}
+                letterSpacing="1px"
+                textTransform="uppercase"
+                _hover={{ borderColor: "#00ffce", color: "#00ffce" }}
+                transition="all 0.3s ease"
                 onClick={() =>
                   isViewAll ? setIsViewAll(false) : setIsViewAll(true)
                 }

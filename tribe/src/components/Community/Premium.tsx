@@ -17,21 +17,39 @@ const Premium: React.FC = () => {
   return (
     <Flex
       direction="column"
-      bg={bg}
-      borderRadius={4}
+      bg="transparent"
+      borderRadius={0}
       cursor="pointer"
-      p="12px"
-      border="1px solid"
-      borderColor={borderColor}
+      p={0}
+      border="none"
+      borderColor="transparent"
+      mb={{ base: "32px", md: "48px" }}
     >
-      <Flex mb={2}>
-        <Icon as={GiCheckedShield} fontSize={26} color="brand.500" mt={2} />
-        <Stack spacing={1} fontSize="9pt" pl={2}>
-          <Text fontWeight={600} color="#ffffff">0Degree Premium</Text>
-          <Text color="rgba(255, 255, 255, 0.7)">The best Tribe experience, with exclusive features</Text>
+      <Flex mb={{ base: "16px", md: "20px" }} align="flex-start">
+        <Icon as={GiCheckedShield} fontSize={{ base: "24px", md: "28px" }} color="brand.500" mt={1} />
+        <Stack spacing={1} fontSize={{ base: "13px", md: "14px" }} pl={3} flex={1}>
+          <Text fontWeight={500} fontSize={{ base: "18px", md: "20px" }} letterSpacing="-0.3px" color="#ffffff" mb={1}>
+            0Degree Premium
+          </Text>
+          <Text fontWeight={300} lineHeight="1.6" color="rgba(255, 255, 255, 0.7)">
+            The best Tribe experience, with exclusive features
+          </Text>
         </Stack>
       </Flex>
-      <Button height="30px" bg="brand.500" color="#000000" _hover={{ bg: "brand.400" }}>
+      <Button 
+        height={{ base: "44px", md: "48px" }} 
+        bg="transparent" 
+        color="#00ffce" 
+        border="1px solid"
+        borderColor="#00ffce"
+        borderRadius={0}
+        fontWeight={400}
+        fontSize={{ base: "13px", md: "14px" }}
+        letterSpacing="1px"
+        textTransform="uppercase"
+        _hover={{ bg: "#00ffce", color: "#000000", transform: "translateY(-2px)" }}
+        transition="all 0.3s ease"
+      >
         Try Now
       </Button>
     </Flex>

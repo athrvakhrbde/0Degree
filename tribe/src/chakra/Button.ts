@@ -2,11 +2,11 @@ import type { ComponentStyleConfig } from "@chakra-ui/theme";
 
 export const Button: ComponentStyleConfig = {
   baseStyle: {
-    borderRadius: "4px",
+    borderRadius: "0",
     fontSize: "14px",
-    fontWeight: 500,
-    letterSpacing: "1px",
-    textTransform: "uppercase",
+    fontWeight: 400,
+    letterSpacing: "0.5px",
+    textTransform: "none",
     _focus: {
       boxShadow: "none",
     },
@@ -15,54 +15,58 @@ export const Button: ComponentStyleConfig = {
   sizes: {
     sm: {
       fontSize: "12px",
-      padding: "6px 16px",
+      padding: "10px 16px",
+      height: "36px",
     },
     md: {
       fontSize: "14px",
-      padding: "8px 20px",
+      padding: "12px 20px",
+      height: "44px",
     },
     lg: {
       fontSize: "16px",
       padding: "16px 40px",
+      height: "56px",
     },
   },
   variants: {
     solid: {
-      color: "#000000",
-      bg: "brand.500",
-      border: "2px solid",
-      borderColor: "brand.500",
+      color: "#00ffce",
+      bg: "transparent",
+      border: "1px solid",
+      borderColor: "#00ffce",
       _hover: {
-        bg: "brand.400",
-        borderColor: "brand.400",
+        bg: "#00ffce",
+        color: "#000000",
+        borderColor: "#00ffce",
         transform: "translateY(-2px)",
-        boxShadow: "0 10px 30px rgba(0, 255, 206, 0.3)",
       },
     },
     outline: {
-      color: "brand.500",
-      border: "2px solid",
-      borderColor: "brand.500",
+      color: "rgba(255, 255, 255, 0.9)",
+      border: "1px solid",
+      borderColor: "rgba(255, 255, 255, 0.2)",
       bg: "transparent",
       _hover: {
-        bg: "brand.500",
-        color: "#000000",
-        borderColor: "brand.500",
+        borderColor: "#00ffce",
+        color: "#00ffce",
       },
     },
     ghost: {
-      color: "brand.500",
+      color: "rgba(255, 255, 255, 0.7)",
       bg: "transparent",
       _hover: {
-        bg: "rgba(0, 255, 206, 0.1)",
+        bg: "rgba(255, 255, 255, 0.05)",
+        color: "#00ffce",
       },
     },
     oauth: {
-      height: "34px",
+      height: "44px",
       border: "1px solid",
       borderColor: "rgba(255, 255, 255, 0.2)",
       bg: "rgba(255, 255, 255, 0.02)",
       color: "#ffffff",
+      borderRadius: "0",
       _hover: {
         bg: "rgba(255, 255, 255, 0.05)",
         borderColor: "rgba(255, 255, 255, 0.3)",

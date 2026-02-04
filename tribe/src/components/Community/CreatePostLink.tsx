@@ -47,47 +47,59 @@ const CreatePostLink: React.FC = () => {
 
   return (
     <Flex
-      justify="space-evenly"
+      justify="flex-start"
       align="center"
-      bg={bg}
-      height="56px"
-      borderRadius={4}
-      border="1px solid"
-      borderColor={borderColor}
-      p={2}
-      mb={4}
+      bg="transparent"
+      height="auto"
+      borderRadius={0}
+      border="none"
+      p={0}
+      mb={{ base: "24px", md: "40px" }}
+      gap="16px"
     >
-      <Image src="/images/0degree-logo.svg" height="36px" width="36px" mr={4} alt="0Degree" />
       <Input
         placeholder="Create Post"
-        fontSize="10pt"
-        _placeholder={{ color: "rgba(255, 255, 255, 0.5)" }}
+        fontSize={{ base: "14px", md: "16px" }}
+        fontWeight={300}
+        letterSpacing="0.2px"
+        _placeholder={{ color: "rgba(255, 255, 255, 0.35)", fontWeight: 300 }}
         _hover={{
-          bg: bg,
-          border: "1px solid",
-          borderColor: "brand.500",
+          bg: "rgba(255, 255, 255, 0.02)",
+          borderColor: "rgba(255, 255, 255, 0.3)",
         }}
         _focus={{
           outline: "none",
-          bg: bg,
-          border: "1px solid",
-          borderColor: "brand.500",
+          bg: "rgba(255, 255, 255, 0.02)",
+          borderColor: "rgba(255, 255, 255, 0.4)",
+          boxShadow: "none",
         }}
-        bg={searchBg}
-        borderColor={searchBorder}
-        height="36px"
-        borderRadius={4}
-        mr={4}
+        bg="rgba(255, 255, 255, 0.02)"
+        border="1px solid"
+        borderColor="rgba(255, 255, 255, 0.1)"
+        borderRadius={0}
+        height={{ base: "48px", md: "56px" }}
+        padding="14px 18px"
+        flex={1}
         onClick={onClick}
       />
-      <Icon
-        as={IoImageOutline}
-        fontSize={24}
-        mr={4}
-        color="rgba(255, 255, 255, 0.6)"
-        cursor="pointer"
-      />
-      <Icon as={BsLink45Deg} fontSize={24} color="gray.400" cursor="pointer" />
+      <Flex gap="12px" align="center">
+        <Icon
+          as={IoImageOutline}
+          fontSize={{ base: "20px", md: "24px" }}
+          color="rgba(255, 255, 255, 0.5)"
+          cursor="pointer"
+          _hover={{ color: "brand.500" }}
+          transition="color 0.3s ease"
+        />
+        <Icon 
+          as={BsLink45Deg} 
+          fontSize={{ base: "20px", md: "24px" }} 
+          color="rgba(255, 255, 255, 0.5)" 
+          cursor="pointer"
+          _hover={{ color: "brand.500" }}
+          transition="color 0.3s ease"
+        />
+      </Flex>
     </Flex>
   );
 };
