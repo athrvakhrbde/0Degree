@@ -83,9 +83,11 @@ const Login: React.FC<LoginProps> = () => {
         }}
         bg={inputBg}
       />
-      <Text textAlign="center" color="red" fontSize="10pt">
-        {FIREBASE_ERRORS[error?.message as keyof typeof FIREBASE_ERRORS]}
-      </Text>
+      {error && (
+        <Text textAlign="center" color="red" fontSize="10pt" mb={2}>
+          {FIREBASE_ERRORS[error?.message as keyof typeof FIREBASE_ERRORS] || error?.message || "An error occurred. Please check Firebase configuration."}
+        </Text>
+      )}
       <Button
         width="100%"
         height="36px"

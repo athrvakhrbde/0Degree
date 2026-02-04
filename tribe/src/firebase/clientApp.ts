@@ -63,8 +63,12 @@ if (isConfigValid) {
     }
   } else {
     // Client-side - should have env vars
-    if (process.env.NODE_ENV === 'development') {
+    if (typeof window !== 'undefined') {
       console.error('Firebase configuration is missing. Please set environment variables in Vercel.');
+      // Show user-friendly error
+      if (process.env.NODE_ENV === 'production') {
+        console.error('Firebase env vars missing. Authentication will not work.');
+      }
     }
     const fallbackConfig = {
       apiKey: 'demo-key',
