@@ -31,42 +31,71 @@ const TextInput: React.FC<TextInputProps> = ({
   const searchBorder = "rgba(255, 255, 255, 0.2)";
 
   return (
-    <Stack spacing={3} width="100%">
+    <Stack spacing={4} width="100%">
       <Input
         name="title"
         value={textInputs.title}
         onChange={onChange}
-        fontSize="10pt"
-        borderRadius={4}
+        fontSize={{ base: "15px", sm: "16px", md: "17px" }}
+        fontWeight={400}
+        letterSpacing="0.2px"
+        borderRadius={0}
         placeholder="Title"
-        _placeholder={{ color: "gray.500" }}
+        bg="rgba(255, 255, 255, 0.02)"
+        border="1px solid"
+        borderColor="rgba(255, 255, 255, 0.1)"
+        height={{ base: "52px", sm: "56px", md: "60px" }}
+        padding={{ base: "0 20px", sm: "0 24px", md: "0 28px" }}
+        _placeholder={{ 
+          color: "rgba(255, 255, 255, 0.4)", 
+          fontWeight: 300 
+        }}
+        _hover={{
+          bg: "rgba(255, 255, 255, 0.03)",
+          borderColor: "rgba(255, 255, 255, 0.2)",
+        }}
         _focus={{
           outline: "none",
-          bg: searchBg,
-          border: "1px solid",
-          borderColor: searchBorder,
+          bg: "rgba(255, 255, 255, 0.03)",
+          borderColor: "brand.500",
+          boxShadow: "none",
         }}
       />
       <Textarea
         name="body"
-        fontSize="10pt"
+        fontSize={{ base: "15px", sm: "16px", md: "17px" }}
+        fontWeight={300}
+        letterSpacing="0.2px"
         value={textInputs.body}
         onChange={onChange}
-        borderRadius={4}
-        height="100px"
+        borderRadius={0}
+        minHeight="140px"
+        padding={{ base: "16px 20px", sm: "18px 24px", md: "20px 28px" }}
         placeholder="Text (optional)"
-        _placeholder={{ color: "gray.500" }}
+        bg="rgba(255, 255, 255, 0.02)"
+        border="1px solid"
+        borderColor="rgba(255, 255, 255, 0.1)"
+        _placeholder={{ 
+          color: "rgba(255, 255, 255, 0.4)", 
+          fontWeight: 300 
+        }}
+        _hover={{
+          bg: "rgba(255, 255, 255, 0.03)",
+          borderColor: "rgba(255, 255, 255, 0.2)",
+        }}
         _focus={{
           outline: "none",
-          bg: searchBg,
-          border: "1px solid",
-          borderColor: searchBorder,
+          bg: "rgba(255, 255, 255, 0.03)",
+          borderColor: "brand.500",
+          boxShadow: "none",
         }}
       />
-      <Flex justify="flex-end">
+      <Flex justify="flex-end" pt={2}>
         <Button
-          height="34px"
-          padding="0px 30px"
+          height={{ base: "44px", sm: "48px", md: "52px" }}
+          padding={{ base: "0 32px", sm: "0 40px", md: "0 48px" }}
+          fontSize={{ base: "14px", sm: "15px", md: "16px" }}
+          fontWeight={400}
           disabled={!textInputs.title}
           isLoading={loading}
           onClick={handleCreatePost}

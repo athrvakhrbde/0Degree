@@ -41,40 +41,49 @@ const CreatePostLink: React.FC = () => {
     <Flex
       justify="flex-start"
       align="center"
-      bg="transparent"
-      height="auto"
+      bg="rgba(255, 255, 255, 0.02)"
+      border="1px solid"
+      borderColor="rgba(255, 255, 255, 0.1)"
       borderRadius={0}
-      border="none"
       p={0}
-      mb={{ base: "20px", sm: "24px", md: "32px", lg: "40px" }}
-      gap={{ base: "12px", sm: "14px", md: "16px" }}
+      mb={{ base: "24px", sm: "32px", md: "40px" }}
+      transition="all 0.3s ease"
+      _hover={{
+        borderColor: "rgba(255, 255, 255, 0.2)",
+        bg: "rgba(255, 255, 255, 0.03)",
+      }}
+      cursor="pointer"
+      onClick={onClick}
     >
       <Input
         placeholder="Create Post"
-        fontSize={{ base: "14px", sm: "15px", md: "16px" }}
+        fontSize={{ base: "15px", sm: "16px", md: "17px" }}
         fontWeight={300}
-        letterSpacing="0.2px"
-        _placeholder={{ color: "rgba(255, 255, 255, 0.35)", fontWeight: 300 }}
+        letterSpacing="0.3px"
+        _placeholder={{ 
+          color: "rgba(255, 255, 255, 0.4)", 
+          fontWeight: 300,
+          fontSize: "inherit"
+        }}
         _hover={{
-          bg: "rgba(255, 255, 255, 0.02)",
-          borderColor: "rgba(255, 255, 255, 0.3)",
+          bg: "transparent",
+          borderColor: "transparent",
         }}
         _focus={{
           outline: "none",
-          bg: "rgba(255, 255, 255, 0.02)",
-          borderColor: "brand.500",
+          bg: "transparent",
+          borderColor: "transparent",
           boxShadow: "none",
         }}
-        bg="rgba(255, 255, 255, 0.02)"
-        border="1px solid"
-        borderColor="rgba(255, 255, 255, 0.1)"
+        bg="transparent"
+        border="none"
         borderRadius={0}
-        height={{ base: "48px", sm: "52px", md: "56px" }}
-        minH={{ base: "48px", sm: "52px", md: "56px" }}
-        padding={{ base: "14px 20px", sm: "15px 22px", md: "16px 24px" }}
+        height={{ base: "56px", sm: "60px", md: "64px" }}
+        minH={{ base: "56px", sm: "60px", md: "64px" }}
+        padding={{ base: "0 24px", sm: "0 28px", md: "0 32px" }}
         width="100%"
         cursor="pointer"
-        onClick={onClick}
+        readOnly
       />
     </Flex>
   );

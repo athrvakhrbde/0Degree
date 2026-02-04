@@ -28,8 +28,15 @@ const SubmitPostPage: React.FC = () => {
       </Head>
       <PageContent>
         <>
-          <Box p="14px 0px" borderRadius="1px solid" borderColor="white">
-            <Text>Create a Post</Text>
+          <Box mb={{ base: "24px", sm: "32px", md: "40px" }}>
+            <Text 
+              fontSize={{ base: "24px", sm: "28px", md: "32px" }}
+              fontWeight={800}
+              color="#ffffff"
+              letterSpacing="-0.5px"
+            >
+              Create a Post
+            </Text>
           </Box>
           {user && (
             <NewPostForm
