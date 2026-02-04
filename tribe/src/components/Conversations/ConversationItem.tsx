@@ -20,7 +20,6 @@ import moment from "moment";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { BsFillChatDotsFill } from "react-icons/bs";
-import { Image } from "@chakra-ui/react";
 import { ImUsers } from "react-icons/im";
 
 import { Community } from "../../atoms/CommunitiesAtom";
