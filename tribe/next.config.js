@@ -33,7 +33,7 @@ const nextConfig = {
           },
           {
             key: 'Permissions-Policy',
-            value: 'geolocation=(), microphone=(), camera=(), interest-cohort=(), browsing-topics=()'
+            value: 'geolocation=(), microphone=(), camera=(), browsing-topics=()'
           },
           {
             key: 'Cross-Origin-Embedder-Policy',
