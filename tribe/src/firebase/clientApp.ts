@@ -16,6 +16,8 @@ const firebaseConfig = {
 // Validate Firebase config
 const isConfigValid = 
   firebaseConfig.apiKey && 
+  firebaseConfig.apiKey !== 'demo-key' && // Not fallback
+  firebaseConfig.apiKey !== 'build-time-placeholder' && // Not build placeholder
   firebaseConfig.authDomain && 
   firebaseConfig.projectId &&
   firebaseConfig.storageBucket &&
@@ -64,10 +66,22 @@ if (isConfigValid) {
   } else {
     // Client-side - should have env vars
     if (typeof window !== 'undefined') {
-      console.error('Firebase configuration is missing. Please set environment variables in Vercel.');
+      const missingVars = [];
+      if (!firebaseConfig.apiKey || firebaseConfig.apiKey === 'demo-key') missingVars.push('NEXT_PUBLIC_FIREBASE_API_KEY');
+      if (!firebaseConfig.authDomain || firebaseConfig.authDomain === 'demo.firebaseapp.com') missingVars.push('NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN');
+      if (!firebaseConfig.projectId || firebaseConfig.projectId === 'demo') missingVars.push('NEXT_PUBLIC_FIREBASE_PROJECT_ID');
+      
+      console.error('❌ Firebase configuration is missing or invalid.');
+      console.error('Missing environment variables:', missingVars.join(', '));
+      console.error('Please set environment variables in Vercel:');
+      console.error('1. Go to Vercel Dashboard → Tribe Project → Settings → Environment Variables');
+      console.error('2. Add all NEXT_PUBLIC_FIREBASE_* variables');
+      console.error('3. Make sure "Production" checkbox is checked for each variable');
+      console.error('4. Redeploy the project');
+      
       // Show user-friendly error
       if (process.env.NODE_ENV === 'production') {
-        console.error('Firebase env vars missing. Authentication will not work.');
+        console.error('⚠️ Firebase env vars missing. Authentication will not work.');
       }
     }
     const fallbackConfig = {
