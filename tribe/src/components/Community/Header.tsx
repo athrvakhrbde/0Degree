@@ -17,7 +17,8 @@ type HeaderProps = {
 };
 
 const Header: React.FC<HeaderProps> = ({ communityData }) => {
-  const bg = useColorModeValue("white", "#1A202C");
+  // Using dark theme colors matching main site
+  const bg = "rgba(255, 255, 255, 0.02)";
   const { communityStateValue, onJoinOrCommunity, loading } =
     useCommunityData();
   const isJoined = !!communityStateValue.mySnippets.find(
@@ -26,7 +27,7 @@ const Header: React.FC<HeaderProps> = ({ communityData }) => {
 
   return (
     <Flex direction="column" width="100%" height="146px">
-      <Box height="50%" bg="blue.400" />
+      <Box height="50%" bg="brand.500" />
       <Flex justifyContent="center" bg={bg} height="50%">
         <Flex width="95%" maxWidth="860px">
           {communityStateValue.currentCommunity?.imageURL ? (
@@ -37,7 +38,7 @@ const Header: React.FC<HeaderProps> = ({ communityData }) => {
               alt="profile Image"
               position="relative"
               top={-3}
-              color="blue.500"
+              color="brand.500"
               border="4px solid white"
             />
           ) : (
@@ -46,7 +47,7 @@ const Header: React.FC<HeaderProps> = ({ communityData }) => {
               fontSize={64}
               position="relative"
               top={-3}
-              color="blue.500"
+              color="brand.500"
               border="4px solid white"
               borderRadius="50%"
             />

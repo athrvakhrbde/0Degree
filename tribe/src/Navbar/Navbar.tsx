@@ -31,8 +31,7 @@ const Navbar: React.FC = () => {
   const [redditUserImage, setRedditUserImage] = useState("");
   const [userCreates, setUserCreate] = useState<boolean>(false);
   const { onSelectMenuItem } = useDirectory();
-  const { colorMode } = useColorMode();
-  const bg = useColorModeValue("white", "blackAlpha.800");
+  // Removed colorMode and bg - using fixed dark theme
 
   const getUserData = async () => {
     if (user) {
@@ -79,32 +78,49 @@ const Navbar: React.FC = () => {
 
   return (
     <Flex
-      bg={bg}
-      height="44px"
-      padding="6px 12px"
+      bg="rgba(0, 0, 0, 0.8)"
+      backdropFilter="blur(10px)"
+      borderBottom="1px solid"
+      borderColor="rgba(255, 255, 255, 0.2)"
+      height="64px"
+      padding="16px 0"
+      position="fixed"
+      top={0}
+      left={0}
+      right={0}
+      width="100%"
+      zIndex={1000}
       justify={{ md: "space-between" }}
+      align="center"
     >
       <Flex
+        maxWidth="1400px"
+        width="100%"
+        margin="0 auto"
+        padding="0 clamp(10px, 1vw, 15px)"
+        justify={{ md: "space-between" }}
         align="center"
-        width={{ base: "40px", md: "auto" }}
-        mr={{ base: 0, md: 2 }}
-        cursor="pointer"
-        onClick={() => onSelectMenuItem(defaultMenuItem)}
       >
-        <Image src="/images/redditFace.svg" height="30px" />
-        <Image
-          src={
-            colorMode === "light"
-              ? "/images/redditText.svg"
-              : "/images/Reddit-Word-Dark.svg"
-          }
-          height="46px"
-          display={{ base: "none", md: "unset" }}
-        />
+        <Flex
+          align="center"
+          width={{ base: "40px", md: "auto" }}
+          mr={{ base: 0, md: 2 }}
+          cursor="pointer"
+          onClick={() => onSelectMenuItem(defaultMenuItem)}
+        >
+          <Image src="/images/redditFace.svg" height="32px" />
+          <Image
+            src="/images/Reddit-Word-Dark.svg"
+            height="32px"
+            display={{ base: "none", md: "unset" }}
+          />
+        </Flex>
+        <Flex align="center" gap={{ base: "16px", md: "32px" }}>
+          {user && <Directory />}
+          <SearchInput user={user} />
+          <RightContent user={user} />
+        </Flex>
       </Flex>
-      {user && <Directory />}
-      <SearchInput user={user} />
-      <RightContent user={user} />
     </Flex>
   );
 };

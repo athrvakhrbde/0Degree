@@ -67,14 +67,14 @@ const PostItem: React.FC<PostItemProps> = ({
   const singlePostPage = !onSelectPost;
   const router = useRouter();
 
-  // Thames
-  const bg = useColorModeValue("white", "#1A202C");
-  const borderColor = useColorModeValue("gray.300", "#2D3748");
-  const singlePageBorderColor = useColorModeValue("white", "#2D3748");
-  const voteLineBorderColor = useColorModeValue("gray.100", "#171923");
-  const IconHoverBg = useColorModeValue("gray.200", "#2A4365");
-  const IconBg = useColorModeValue("none", "#A0AEC0");
-  const voteIconBg = useColorModeValue("gray.400", "#CBD5E0");
+  // Using dark theme colors matching main site
+  const bg = "rgba(255, 255, 255, 0.02)";
+  const borderColor = "rgba(255, 255, 255, 0.2)";
+  const singlePageBorderColor = "rgba(255, 255, 255, 0.2)";
+  const voteLineBorderColor = "rgba(255, 255, 255, 0.1)";
+  const IconHoverBg = "rgba(255, 255, 255, 0.05)";
+  const IconBg = "rgba(255, 255, 255, 0.1)";
+  const voteIconBg = "rgba(255, 255, 255, 0.4)";
 
   const handleDelete = async (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -193,7 +193,7 @@ const PostItem: React.FC<PostItemProps> = ({
                     mr={2}
                   />
                 ) : (
-                  <Icon as={FaReddit} fontSize="18px" color="blue.500" />
+                  <Icon as={FaReddit} fontSize="18px" color="brand.500" />
                 )}
                 <Link href={`r/${post.communityId}`}>
                   <Text

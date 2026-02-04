@@ -10,8 +10,9 @@ import React from "react";
 import { GiCheckedShield } from "react-icons/gi";
 
 const Premium: React.FC = () => {
-  const bg = useColorModeValue("white", "#1A202C");
-  const borderColor = useColorModeValue("gray.300", "#2D3748");
+  // Using dark theme colors matching main site
+  const bg = "rgba(255, 255, 255, 0.02)";
+  const borderColor = "rgba(255, 255, 255, 0.2)";
 
   return (
     <Flex
@@ -24,13 +25,13 @@ const Premium: React.FC = () => {
       borderColor={borderColor}
     >
       <Flex mb={2}>
-        <Icon as={GiCheckedShield} fontSize={26} color="brand.100" mt={2} />
+        <Icon as={GiCheckedShield} fontSize={26} color="brand.500" mt={2} />
         <Stack spacing={1} fontSize="9pt" pl={2}>
           <Text fontWeight={600}>Reddit Premium</Text>
           <Text>The best Reddit experience, with monthly Coins</Text>
         </Stack>
       </Flex>
-      <Button height="30px" bg="brand.100">
+      <Button height="30px" bg="brand.500">
         Try Now
       </Button>
     </Flex>

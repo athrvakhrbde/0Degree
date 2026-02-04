@@ -26,8 +26,9 @@ const TextInput: React.FC<TextInputProps> = ({
   handleCreatePost,
   loading,
 }) => {
-  const searchBg = useColorModeValue("white", "#2D3748");
-  const searchBorder = useColorModeValue("black", "#A0AEC0");
+  // Using dark theme colors matching main site
+  const searchBg = "rgba(255, 255, 255, 0.02)";
+  const searchBorder = "rgba(255, 255, 255, 0.2)";
 
   return (
     <Stack spacing={3} width="100%">

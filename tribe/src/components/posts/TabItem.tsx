@@ -10,8 +10,9 @@ type TabItemProps = {
 };
 
 const TabItem: React.FC<TabItemProps> = ({ item, selected, setSelectTab }) => {
-  const hoverBg = useColorModeValue("gray.50", "#2D3748");
-  const borderColor = useColorModeValue("gray.200", "#2D3748");
+  // Using dark theme colors matching main site
+  const hoverBg = "rgba(255, 255, 255, 0.05)";
+  const borderColor = "rgba(255, 255, 255, 0.2)";
 
   return (
     <Flex
@@ -21,9 +22,9 @@ const TabItem: React.FC<TabItemProps> = ({ item, selected, setSelectTab }) => {
       p="14px 0px"
       cursor="pointer"
       _hover={{ bg: hoverBg }}
-      color={selected ? "blue.500" : "gray.500"}
+      color={selected ? "brand.500" : "rgba(255, 255, 255, 0.7)"}
       borderWidth={selected ? "0px 1px 2px 0px" : "0px 1px 1px 0px"}
-      borderBottomColor={selected ? "blue.500" : borderColor}
+      borderBottomColor={selected ? "brand.500" : borderColor}
       onClick={() => setSelectTab(item.title)}
     >
       <Flex align="center" height="20px" mr={2}>

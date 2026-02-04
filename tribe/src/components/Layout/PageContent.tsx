@@ -11,11 +11,12 @@ const PageContent: React.FC<PageContentProps> = ({ children }) => {
   const uid = router.query;
 
   return (
-    <Flex justify="center" p="16px 0px">
+    <Flex justify="center" p="16px 0px" bg="transparent">
       <Flex
         width="95%"
         justify="center"
         maxWidth={uid.uid ? "1160px" : "860px"}
+        bg="transparent"
       >
         {/* Left */}
         <Flex
