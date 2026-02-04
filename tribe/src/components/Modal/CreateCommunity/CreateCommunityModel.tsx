@@ -84,16 +84,15 @@ const CreateCommunityModel: React.FC<CreateCommunityModelProps> = ({
         const communityDoc = await transaction.get(communityDocRef);
         if (communityDoc.exists()) {
           throw new Error(
-            `Sorry, t/${CommunitiesName} is taken. Try Another`
+            `Sorry, 0/${CommunitiesName} is taken. Try Another`
           );
-          return;
         }
 
         await transaction.set(communityDocRef, {
           creatorId: user?.uid,
           createdAt: serverTimestamp(),
           numberOfMembers: 1,
-          privacyTYpe: communityType,
+          privacyType: communityType,
         });
 
         //update
@@ -118,10 +117,12 @@ const CreateCommunityModel: React.FC<CreateCommunityModelProps> = ({
       toggleMenuOpen();
       setCommunityType("");
       setCommunities("");
-      router.push(`r/${CommunitiesName}`);
+      router.push(`0/${CommunitiesName}`);
     } catch (error: any) {
-      console.log("HandleCreateCommunity Error", error);
-      setError(error.message);
+      if (process.env.NODE_ENV === 'development') {
+        console.error("HandleCreateCommunity Error", error);
+      }
+      setError(error.message || "Failed to create community. Please try again.");
     }
 
     setLoading(false);
@@ -172,7 +173,7 @@ const CreateCommunityModel: React.FC<CreateCommunityModelProps> = ({
                 width="20px"
                 color="gray.400"
               >
-                r/
+                0/
               </Text>
               <Input
                 position="relative"

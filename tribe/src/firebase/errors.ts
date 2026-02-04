@@ -85,7 +85,6 @@ export const FIREBASE_ERRORS: Record<string, string> = {
   "Firebase: Error (auth/user-cancelled).": "User cancelled",
   "Firebase: Error (auth/user-mismatch).": "User mismatch",
   "Firebase: Error (auth/user-signed-out).": "User signed out",
-  "Firebase: Error (auth/weak-password).": "Password should be at least 6 characters",
 };
 
 /**

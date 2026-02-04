@@ -132,7 +132,7 @@ function ProfileSide({}: Props) {
         </Flex>
       </Flex>
       <Text fontWeight="bold" fontSize="8pt" textAlign="center">
-        t/{user?.email?.split("@")[0]}
+        0/{user?.email?.split("@")[0]}
       </Text>
       <Button
         width={80}

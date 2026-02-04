@@ -56,7 +56,9 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
         } as Community,
       }));
     } catch (error) {
-      console.log("onUploader Image", error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error("OnUploadImage Error", error);
+      }
     }
     setUploadingImage(false);
   };
@@ -109,7 +111,7 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
               </>
             )}
           </Flex>
-          <Link href={`/r/${communityData.id}/submit`}>
+          <Link href={`/0/${communityData.id}/submit`}>
             <Button mt={3} height="30px">
               Create Post
             </Button>

@@ -4,6 +4,7 @@ import { useSendPasswordResetEmail } from "react-firebase-hooks/auth";
 import { useSetRecoilState } from "recoil";
 import { authModelState } from "../../../atoms/authModalAtom";
 import { auth } from "../../../firebase/clientApp";
+import { validateEmail } from "../../../utils/validation";
 import { BsDot } from "react-icons/bs";
 import { Image } from "@chakra-ui/react";
 
@@ -22,6 +23,14 @@ const ResetPassword: React.FC = () => {
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    
+    if (!email.trim()) {
+      return;
+    }
+    
+    if (!validateEmail(email)) {
+      return;
+    }
 
     await sendPasswordResetEmail(email);
     setSuccess(true);

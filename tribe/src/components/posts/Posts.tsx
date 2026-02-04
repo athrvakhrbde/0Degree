@@ -43,9 +43,10 @@ const Posts: React.FC<PostsProps> = ({ communityData }) => {
         posts: posts as Post[],
       }));
 
-      //console.log(posts);
     } catch (error: any) {
-      console.log("get post error", error.message);
+      if (process.env.NODE_ENV === 'development') {
+        console.error("GetPost Error", error);
+      }
     }
     setLoading(false);
   };

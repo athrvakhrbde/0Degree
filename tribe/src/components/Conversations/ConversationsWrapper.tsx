@@ -52,33 +52,49 @@ function ConversationsWrapper({}: Props) {
 
   const bg = useColorModeValue("whiteAlpha.500", "whiteAlpha.100");
 
-  const getChatUser = async (userId: any) => {
-    if (userId) {
-      try {
-        const chatUserQuery = onSnapshot(
-          query(
-            collection(firestore, `users/${userId}/communitySnippets`),
-            orderBy("updateTimeStamp", "desc")
-          ),
-          (snapshot) => {
-            const chat = snapshot.docs.map((doc: any) => ({
-              id: doc.id,
-              ...doc.data(),
-            }));
-            setChatUser(chat);
-          }
-        );
-
-        chatUserQuery;
-      } catch (error: any) {
-        console.log(error.message);
-      }
-    } else return;
-  };
-
   useEffect(() => {
-    getChatUser(user?.uid);
-  }, [user, firestore]);
+    if (!user?.uid) {
+      setChatUser([]);
+      setLoading(false);
+      return;
+    }
+
+    let unsubscribe: (() => void) | undefined;
+
+    try {
+      unsubscribe = onSnapshot(
+        query(
+          collection(firestore, `users/${user.uid}/communitySnippets`),
+          orderBy("updateTimeStamp", "desc")
+        ),
+        (snapshot) => {
+          const chat = snapshot.docs.map((doc: any) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setChatUser(chat);
+          setLoading(false);
+        },
+        (error) => {
+          if (process.env.NODE_ENV === 'development') {
+            console.error("ConversationsWrapper snapshot error:", error);
+          }
+          setLoading(false);
+        }
+      );
+    } catch (error: any) {
+      if (process.env.NODE_ENV === 'development') {
+        console.error("ConversationsWrapper error:", error);
+      }
+      setLoading(false);
+    }
+
+    return () => {
+      if (unsubscribe) {
+        unsubscribe();
+      }
+    };
+  }, [user?.uid]);
 
   useEffect(() => {
     setTimeout(() => {

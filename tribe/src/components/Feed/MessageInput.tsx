@@ -65,8 +65,12 @@ function MessageInput({ conversationId, user }: Props) {
   };
 
   const fetchAllUser = (CommunitiesName: string) => {
+    if (!CommunitiesName || !user) {
+      return () => {};
+    }
+
     try {
-      const fetchQuery = onSnapshot(
+      const unsubscribe = onSnapshot(
         query(
           collection(
             firestore,
@@ -85,12 +89,20 @@ function MessageInput({ conversationId, user }: Props) {
           });
 
           setLastSeenMessages(uniqueChars);
+        },
+        (error) => {
+          if (process.env.NODE_ENV === 'development') {
+            console.error("MessageInput snapshot error:", error);
+          }
         }
       );
 
-      fetchQuery;
+      return unsubscribe;
     } catch (error: any) {
-      console.log(error.message);
+      if (process.env.NODE_ENV === 'development') {
+        console.error("MessageInput error:", error);
+      }
+      return () => {};
     }
   };
 
@@ -144,7 +156,9 @@ function MessageInput({ conversationId, user }: Props) {
       }
       setLastSeenMessages([]);
     } catch (error: any) {
-      console.log(error.message);
+      if (process.env.NODE_ENV === 'development') {
+        console.error("OnSendMessage Error", error);
+      }
     }
   };
 
@@ -161,7 +175,9 @@ function MessageInput({ conversationId, user }: Props) {
         updateTimeStamp: serverTimestamp() as Timestamp,
       });
     } catch (error: any) {
-      console.log(error.message);
+      if (process.env.NODE_ENV === 'development') {
+        console.error("UpdateConversation Error", error);
+      }
     }
   };
 
@@ -170,8 +186,17 @@ function MessageInput({ conversationId, user }: Props) {
   }, [user]);
 
   useEffect(() => {
-    fetchAllUser(conversationId);
-  }, [firestore, conversationId]);
+    if (!conversationId || !user) {
+      return;
+    }
+
+    const unsubscribe = fetchAllUser(conversationId);
+    return () => {
+      if (unsubscribe) {
+        unsubscribe();
+      }
+    };
+  }, [conversationId, user]);
 
   return (
     <Box px={4} py={6} width="100">

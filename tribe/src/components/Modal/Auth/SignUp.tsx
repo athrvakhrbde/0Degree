@@ -1,6 +1,6 @@
 import { Button, Flex, Input, Text, useColorModeValue } from "@chakra-ui/react";
 import { User } from "firebase/auth";
-import { addDoc, collection } from "firebase/firestore";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useSetRecoilState } from "recoil";
@@ -75,10 +75,22 @@ const SignUp: React.FC = () => {
   };
 
   const createUserDocument = async (user: User) => {
-    await addDoc(
-      collection(firestore, "users"),
-      JSON.parse(JSON.stringify(user))
-    );
+    try {
+      const userDocRef = doc(firestore, "users", user.uid);
+      await setDoc(userDocRef, {
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName || user.email?.split("@")[0] || "",
+        photoURL: user.photoURL || "",
+        emailVerified: user.emailVerified,
+        createdAt: serverTimestamp(),
+      });
+    } catch (error: any) {
+      if (process.env.NODE_ENV === 'development') {
+        console.error("CreateUserDocument Error", error);
+      }
+      // Don't throw - user is already created, document creation failure is non-critical
+    }
   };
 
   useEffect(() => {

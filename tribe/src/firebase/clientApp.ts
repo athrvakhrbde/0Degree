@@ -1,5 +1,5 @@
 import { initializeApp, getApp, getApps } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, setPersistence, browserLocalPersistence, browserSessionPersistence } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
@@ -99,5 +99,30 @@ if (isConfigValid) {
 const firestore = getFirestore(app);
 const auth = getAuth(app);
 const storage = getStorage(app);
+
+// Configure auth persistence for better cross-browser compatibility
+// This helps with Arc browser and other Chromium-based browsers
+if (typeof window !== 'undefined') {
+  try {
+    // Try local persistence first (default, works in most browsers)
+    setPersistence(auth, browserLocalPersistence).catch((error) => {
+      // If local persistence fails (e.g., in private browsing), fall back to session
+      if (error.code === 'auth/unsupported-persistence-type') {
+        setPersistence(auth, browserSessionPersistence).catch((fallbackError) => {
+          if (process.env.NODE_ENV === 'development') {
+            console.warn('Firebase Auth persistence configuration failed:', fallbackError);
+          }
+        });
+      } else if (process.env.NODE_ENV === 'development') {
+        console.warn('Firebase Auth persistence warning:', error);
+      }
+    });
+  } catch (error) {
+    // Silently fail - auth will still work, just without persistence
+    if (process.env.NODE_ENV === 'development') {
+      console.warn('Could not set Firebase Auth persistence:', error);
+    }
+  }
+}
 
 export { app, auth, firestore, storage };

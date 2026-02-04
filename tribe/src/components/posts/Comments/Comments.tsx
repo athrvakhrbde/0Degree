@@ -81,6 +81,14 @@ const Comments: React.FC<CommentsProps> = ({
   };
 
   const onCreateComments = async () => {
+    if (!commentText.trim()) {
+      return;
+    }
+    
+    if (!selectedPost?.id) {
+      return;
+    }
+    
     try {
       setCreateLoading(true);
 
@@ -128,7 +136,9 @@ const Comments: React.FC<CommentsProps> = ({
         } as Post,
       }));
     } catch (error) {
-      console.log("📝", error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error("CreateComment Error", error);
+      }
     }
     setCreateLoading(false);
   };
@@ -159,7 +169,9 @@ const Comments: React.FC<CommentsProps> = ({
 
       setComments((prev) => prev.filter((item) => item.id !== comment.id));
     } catch (error) {
-      console.log("CommentDelete Error", error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error("CommentDelete Error", error);
+      }
     }
     setLoadingDeleteId("");
   };
@@ -180,7 +192,9 @@ const Comments: React.FC<CommentsProps> = ({
 
       setComments(comments as Comment[]);
     } catch (error) {
-      console.log("GetPostComments Error", error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error("GetPostComments Error", error);
+      }
     }
     setFetchLoading(false);
   };
@@ -199,7 +213,9 @@ const Comments: React.FC<CommentsProps> = ({
 
       setEncryptedData(data);
     } catch (error) {
-      console.log(error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error("EncryptComment Error", error);
+      }
     }
   }, [commentText]);
 

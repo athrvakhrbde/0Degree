@@ -1,25 +1,13 @@
-import { Flex, Icon, Text, useColorModeValue } from "@chakra-ui/react";
-import { keyframes } from "@emotion/react";
-import { motion } from "framer-motion";
+import { Flex, Icon, useColorModeValue } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
-import { BsArrowUpRightCircle, BsChatDots } from "react-icons/bs";
+import { BsArrowUpRightCircle } from "react-icons/bs";
 import { GrAdd } from "react-icons/gr";
 import {
   IoFilterCircleOutline,
   IoNotificationsOutline,
   IoVideocamOutline,
 } from "react-icons/io5";
-
-const animationKeyframes = keyframes`
-  0% { transform: scale(1) rotate(0); border-radius: 20%; }
-  25% { transform: scale(2) rotate(0); border-radius: 20%; }
-  50% { transform: scale(2) rotate(270deg); border-radius: 50%; }
-  75% { transform: scale(1) rotate(270deg); border-radius: 50%; }
-  100% { transform: scale(1) rotate(0); border-radius: 20%; }
-`;
-
-const animation = `${animationKeyframes} 2s ease-in-out infinite`;
 
 const Icons: React.FC = () => {
   const router = useRouter();
@@ -65,29 +53,6 @@ const Icons: React.FC = () => {
         </Flex>
       </Flex>
       <>
-        <Flex
-          mr={1.5}
-          ml={1.5}
-          padding={1}
-          cursor="pointer"
-          borderRadius={4}
-          _hover={{ bg: hoverBg }}
-          onClick={() => router.push("/chat")}
-          position="relative"
-          bgGradient="linear(to-l, #7928CA, #FF0080)"
-        >
-          <Text
-            position="absolute"
-            top={-1}
-            left={4}
-            fontSize={10}
-            as={motion.div}
-            animation={animation}
-          >
-            New
-          </Text>
-          <Icon as={BsChatDots} fontSize={20} />
-        </Flex>
         <Flex
           mr={1.5}
           ml={1.5}

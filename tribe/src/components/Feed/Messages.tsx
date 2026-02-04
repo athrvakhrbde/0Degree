@@ -33,9 +33,17 @@ function Messages({ conversationId, user }: Props) {
   const [messageDetails, setMessageDetails] = useState<MessageBody[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
-  useEffect(
-    () =>
-      onSnapshot(
+  useEffect(() => {
+    if (!conversationId || !user) {
+      setMessageDetails([]);
+      setLoading(false);
+      return;
+    }
+
+    let unsubscribe: (() => void) | undefined;
+
+    try {
+      unsubscribe = onSnapshot(
         query(
           collection(firestore, `communities/${conversationId}/conversation`),
           orderBy("sendedAt", "desc")
@@ -46,18 +54,28 @@ function Messages({ conversationId, user }: Props) {
             ...doc.data(),
           }));
           setMessageDetails(chat);
+          setLoading(true);
+        },
+        (error) => {
+          if (process.env.NODE_ENV === 'development') {
+            console.error("Messages snapshot error:", error);
+          }
+          setLoading(false);
         }
-      ),
-    [firestore, conversationId]
-  );
-
-  useEffect(() => {
-    setTimeout(() => {
-      if (user) {
-        setLoading(true);
+      );
+    } catch (error: any) {
+      if (process.env.NODE_ENV === 'development') {
+        console.error("Messages error:", error);
       }
-    }, 2000);
-  });
+      setLoading(false);
+    }
+
+    return () => {
+      if (unsubscribe) {
+        unsubscribe();
+      }
+    };
+  }, [conversationId, user]);
 
   return (
     <Flex direction="column" justify="flex-end" overflow="hidden">

@@ -58,10 +58,12 @@ function MessageItems({ message, userId }: Props) {
             ...prev,
             [arrName[index]]: data,
           }));
-        } else return;
+        }
       }
     } catch (error) {
-      console.log(error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error("DecryptMessage Error", error);
+      }
     }
   }, [message]);
 
@@ -113,7 +115,6 @@ function MessageItems({ message, userId }: Props) {
                   message.senderId === userId ? "flex-end" : "flex-start"
                 }
               >
-                !
                 {message.senderId !== userId && (
                   <Text fontWeight={500} textAlign="left" fontSize={12}>
                     {decryptedData.senderName}

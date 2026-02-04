@@ -25,7 +25,7 @@ const CreatePostLink: React.FC = () => {
     const { communityId } = router.query;
 
     if (communityId) {
-      router.push(`/r/${communityId}/submit`);
+      router.push(`/0/${communityId}/submit`);
       return;
     }
 
@@ -33,7 +33,7 @@ const CreatePostLink: React.FC = () => {
 
     /*
     if (community) {
-      router.push(`/r/${router.query.community}/submit`);
+      router.push(`/0/${router.query.community}/submit`);
       return;
     }
     */

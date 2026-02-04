@@ -61,8 +61,6 @@ const Home: NextPage = () => {
           ...prev,
           posts: posts as Post[],
         }));
-      } else {
-        buildUserHomeFeed();
       }
     } catch (error) {
       logger.error("Building Home Error", error);

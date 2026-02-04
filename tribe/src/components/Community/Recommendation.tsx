@@ -53,7 +53,9 @@ const Recommendation: React.FC = () => {
         setCommunities(communities);
       }
     } catch (error) {
-      console.log("getCommunityRecommendation", error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error("GetCommunityRecommendation Error", error);
+      }
     }
     setLoading(false);
   };
@@ -109,7 +111,7 @@ const Recommendation: React.FC = () => {
                 (snippet) => snippet.communityId === item.id
               );
               return (
-                <Link key={item.id} href={`/r/${item.id}`}>
+                <Link key={item.id} href={`/0/${item.id}`}>
                   <Flex
                     position="relative"
                     align="center"
@@ -148,7 +150,7 @@ const Recommendation: React.FC = () => {
                           _hover={{ color: "brand.500" }}
                           transition="color 0.3s ease"
                         >
-                          {`t/${item.id}`}
+                          {`0/${item.id}`}
                         </Text>
                       </Flex>
                     </Flex>

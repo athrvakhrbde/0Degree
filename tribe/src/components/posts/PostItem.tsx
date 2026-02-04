@@ -4,7 +4,6 @@ import {
   Flex,
   Icon,
   Image,
-  Skeleton,
   Spinner,
   Stack,
   Text,
@@ -55,14 +54,12 @@ const PostItem: React.FC<PostItemProps> = ({
   onSelectPost,
   homePage,
 }) => {
-  const [loadingImage, setLoadingImage] = useState(true);
   const [loadingDelete, setLoadingDelete] = useState(false);
   const [error, setError] = useState(false);
   const [decryptedData, setDecryptedData] = useState({
     title: "",
     body: "",
     creatorDisplayName: "",
-    imageURL: "",
   });
   const singlePostPage = !onSelectPost;
   const router = useRouter();
@@ -91,7 +88,7 @@ const PostItem: React.FC<PostItemProps> = ({
       // Post deleted successfully
 
       if (singlePostPage) {
-        router.push(`/r/${post.communityId}`);
+        router.push(`/0/${post.communityId}`);
       }
     } catch (error: any) {
       setError(error.message);
@@ -104,11 +101,11 @@ const PostItem: React.FC<PostItemProps> = ({
     const arrName: string[] = [];
 
     if (post.body) {
-      arr.push(post.title, post.body, post.creatorDisplayName, post.imageURL);
-      arrName.push("title", "body", "creatorDisplayName", "imageURL");
+      arr.push(post.title, post.body, post.creatorDisplayName);
+      arrName.push("title", "body", "creatorDisplayName");
     } else {
-      arr.push(post.title, post.creatorDisplayName, post.imageURL);
-      arrName.push("title", "creatorDisplayName", "imageURL");
+      arr.push(post.title, post.creatorDisplayName);
+      arrName.push("title", "creatorDisplayName");
     }
 
     try {
@@ -215,7 +212,7 @@ const PostItem: React.FC<PostItemProps> = ({
                 ) : (
                   <Image src="/images/0degree-logo.svg" height={{ base: "18px", sm: "20px", md: "22px", lg: "24px" }} width={{ base: "18px", sm: "20px", md: "22px", lg: "24px" }} alt="Community" mr={1} />
                 )}
-                <Link href={`/r/${post.communityId}`}>
+                <Link href={`/0/${post.communityId}`}>
                   <Text
                     fontWeight={400}
                     _hover={{ color: "brand.500" }}
@@ -223,7 +220,7 @@ const PostItem: React.FC<PostItemProps> = ({
                     color="rgba(255, 255, 255, 0.7)"
                     transition="color 0.3s ease"
                     fontSize="inherit"
-                  >{`t/${post.communityId}`}</Text>
+                  >{`0/${post.communityId}`}</Text>
                 </Link>
                 <Icon as={BsDot} color="rgba(255, 255, 255, 0.3)" fontSize={{ base: "6px", sm: "8px" }} />
               </>
@@ -240,22 +237,6 @@ const PostItem: React.FC<PostItemProps> = ({
             <Text fontSize={{ base: "13px", sm: "14px", md: "15px", lg: "16px" }} fontWeight={400} lineHeight={{ base: "1.5", md: "1.6" }} color="rgba(255, 255, 255, 0.7)">
               {decryptedData.body}
             </Text>
-          )}
-          {post.imageURL && (
-            <Flex justify="center" align="center" p={0} mt={{ base: "12px", sm: "16px", md: "20px", lg: "24px" }}>
-              {loadingImage && (
-                <Skeleton height="200px" width="100%" borderRadius={0} />
-              )}
-              <Image
-                src={decryptedData.imageURL}
-                maxHeight="600px"
-                width="100%"
-                alt="Post Image"
-                display={loadingImage ? "none" : "unset"}
-                onLoad={() => setLoadingImage(false)}
-                borderRadius={0}
-              />
-            </Flex>
           )}
         </Stack>
         <Flex mt={{ base: "12px", sm: "16px", md: "20px", lg: "24px" }} gap={{ base: "12px", sm: "14px", md: "18px", lg: "24px" }} color="rgba(255, 255, 255, 0.5)" fontWeight={400} flexWrap="wrap">

@@ -63,10 +63,12 @@ const CommentItem: React.FC<CommentItemProps> = ({
             ...prev,
             [arrName[index]]: data,
           }));
-        } else return;
+        }
       }
     } catch (error) {
-      console.log(error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error("DecryptComment Error", error);
+      }
     }
   }, [comment]);
 

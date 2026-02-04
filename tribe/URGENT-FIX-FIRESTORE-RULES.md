@@ -3,15 +3,36 @@
 ## The Problem
 You're seeing `Missing or insufficient permissions` errors because Firestore security rules haven't been deployed yet.
 
-## ⚡ Quick Fix (2 minutes)
+## ⚡ QUICK FIX - Copy This (30 seconds)
 
-### Step 1: Open Firebase Console
-**Click this link:** https://console.firebase.google.com/project/tribe-0degree/firestore/rules
+### Option A: Temporary Permissive Rules (For Testing Now)
 
-### Step 2: Delete ALL existing rules
-Select all text in the editor and delete it.
+**1. Open:** https://console.firebase.google.com/project/tribe-0degree/firestore/rules
 
-### Step 3: Copy and paste these rules:
+**2. Delete everything and paste this:**
+
+```javascript
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}
+```
+
+**3. Click "Publish"** (top right)
+
+**4. Wait 30 seconds, then refresh your browser**
+
+---
+
+### Option B: Proper Production Rules (After Testing)
+
+**1. Open:** https://console.firebase.google.com/project/tribe-0degree/firestore/rules
+
+**2. Delete everything and paste this:
 
 ```javascript
 rules_version = '2';

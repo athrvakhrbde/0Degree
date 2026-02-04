@@ -40,8 +40,8 @@ const useDirectory = () => {
       setDirectoryState((prev) => ({
         ...prev,
         selectedMenuItem: {
-          displayText: `t/${currentCommunity.id}`,
-          link: `/r/${currentCommunity.id}`,
+          displayText: `0/${currentCommunity.id}`,
+          link: `/0/${currentCommunity.id}`,
           imageURL: currentCommunity.imageURL,
           icon: undefined,
           iconColor: "brand.500",

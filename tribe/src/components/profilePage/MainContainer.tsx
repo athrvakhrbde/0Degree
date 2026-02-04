@@ -60,7 +60,9 @@ function MainContainer({}: Props) {
         buildUserHomeFeed();
       }
     } catch (error) {
-      console.log("Building HHome Error", error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error("BuildingHomeFeed Error", error);
+      }
     }
   };
   const buildNoUserHomeFeed = async () => {
@@ -83,7 +85,9 @@ function MainContainer({}: Props) {
         posts: posts as Post[],
       }));
     } catch (error) {
-      console.log("BuildNoUserHome", error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error("BuildNoUserHomeFeed Error", error);
+      }
     }
     setLoading(false);
   };
@@ -116,7 +120,9 @@ function MainContainer({}: Props) {
         postVotes: batches.flat() as PostVote[],
       }));
     } catch (error) {
-      console.log("getUserPostVotes Error", error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error("GetUserPostVotes Error", error);
+      }
     }
   };
 

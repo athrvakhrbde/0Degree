@@ -19,11 +19,12 @@ import { motion } from "framer-motion";
 import moment from "moment";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { BsFillChatDotsFill } from "react-icons/bs";
 import { ImUsers } from "react-icons/im";
 
 import { Community } from "../../atoms/CommunitiesAtom";
-import { firestore } from "../../firebase/clientApp";
+import { auth, firestore } from "../../firebase/clientApp";
 import { MessageBody } from "../Feed/Messages";
 
 type Props = {
@@ -31,6 +32,7 @@ type Props = {
 };
 
 function ConversationItem({ user }: Props) {
+  const [authUser] = useAuthState(auth);
   const [userCommunities, SetUserCommunities] = useState<Community>();
   const [decryptMessage, setDecryptedMessage] = useState("");
   const [lastSeenMessages, setLastSeenMessages] = useState<MessageBody[]>([]);
@@ -54,18 +56,27 @@ function ConversationItem({ user }: Props) {
         const filterCommunities = chat.find((doc) => doc.id === userId);
         SetUserCommunities(filterCommunities);
       } catch (error: any) {
-        console.log(error.message);
+        if (process.env.NODE_ENV === 'development') {
+          console.error("GetChatUser Error", error);
+        }
       }
     } else return;
   };
 
-  useEffect(
-    () =>
-      onSnapshot(
+  useEffect(() => {
+    if (!userCommunities?.id || !authUser) {
+      setLastSeenMessages([]);
+      return;
+    }
+
+    let unsubscribe: (() => void) | undefined;
+
+    try {
+      unsubscribe = onSnapshot(
         query(
           collection(
             firestore,
-            `communities/${userCommunities?.id}/conversation`
+            `communities/${userCommunities.id}/conversation`
           ),
           orderBy("sendedAt", "desc")
         ),
@@ -75,14 +86,29 @@ function ConversationItem({ user }: Props) {
             ...doc.data(),
           }));
           setLastSeenMessages(chat);
+        },
+        (error) => {
+          if (process.env.NODE_ENV === 'development') {
+            console.error("ConversationItem snapshot error:", error);
+          }
         }
-      ),
-    [firestore, userCommunities?.id]
-  );
+      );
+    } catch (error: any) {
+      if (process.env.NODE_ENV === 'development') {
+        console.error("ConversationItem error:", error);
+      }
+    }
+
+    return () => {
+      if (unsubscribe) {
+        unsubscribe();
+      }
+    };
+  }, [userCommunities?.id, authUser]);
 
   useEffect(() => {
     getChatUser(user.id);
-  }, [user, firestore]);
+  }, [user]);
 
   useEffect(() => {
     const decryptArr = [];
@@ -99,7 +125,9 @@ function ConversationItem({ user }: Props) {
       }
       setDecryptedMessage(decryptArr[0]);
     } catch (error: any) {
-      console.log(error.message);
+      if (process.env.NODE_ENV === 'development') {
+        console.error("DecryptMessage Error", error);
+      }
     }
   }, [userCommunities?.id, lastSeenMessages]);
 
@@ -155,7 +183,7 @@ function ConversationItem({ user }: Props) {
               overflow="hidden"
               textOverflow="ellipsis"
             >
-              t/{userCommunities?.id}
+              0/{userCommunities?.id}
             </Text>
 
             <Box width="140%" display="flex" alignItems="center" gap={2}>
