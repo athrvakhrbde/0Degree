@@ -7,9 +7,7 @@ import {
   MenuDivider,
   MenuItem,
   MenuList,
-  Switch,
   Text,
-  useColorMode,
 } from "@chakra-ui/react";
 import { signOut, User } from "firebase/auth";
 import React from "react";
@@ -31,7 +29,6 @@ type UserMenuProps = {
 const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
   const router = useRouter();
   const setAuthModalState = useSetRecoilState(authModelState);
-  const { colorMode, toggleColorMode } = useColorMode();
 
   const handelNavigatePage = () => {
     if (user) {
@@ -84,23 +81,14 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
           <ChevronDownIcon />
         </Flex>
       </MenuButton>
-      <MenuList mt={2}>
-        <MenuItem fontSize="10pt" fontWeight="700" closeOnSelect={false}>
-          <Flex gap={2} align="center">
-            <Switch
-              isChecked={colorMode === "dark" ? true : false}
-              onChange={toggleColorMode}
-            />
-            <Text>Dark Mode</Text>
-          </Flex>
-        </MenuItem>
+      <MenuList mt={2} bg="#1A202C" borderColor="rgba(255, 255, 255, 0.2)">
         {user ? (
           <>
             <MenuDivider />
             <MenuItem
               fontSize="10px"
               fontWeight={700}
-              _hover={{ bg: "blue.500", color: "white" }}
+              _hover={{ bg: "brand.500", color: "black" }}
             >
               <Flex align="center" onClick={handelNavigatePage}>
                 <Icon fontSize={20} mr={2} as={CgProfile} />

@@ -38,8 +38,9 @@ function ProfileSide({}: Props) {
   const [tribeUser, setTribeUser] = useState<TribeUserDocument>();
   const { toggleMenuOpen } = useDirectory();
   const setAuthModelState = useSetRecoilState(authModelState);
-  const bg = useColorModeValue("white", "#1A202C");
-  const borderColor = useColorModeValue("gray.300", "#2D3748");
+  // Using dark theme colors matching main site
+  const bg = "rgba(255, 255, 255, 0.02)";
+  const borderColor = "rgba(255, 255, 255, 0.2)";
 
   const fetchTribeUser = async (userId: any) => {
     if (!userId) return;
