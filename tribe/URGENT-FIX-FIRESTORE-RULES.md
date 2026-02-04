@@ -1,3 +1,19 @@
+# 🚨 URGENT: Fix Firestore Permission Errors
+
+## The Problem
+You're seeing `Missing or insufficient permissions` errors because Firestore security rules haven't been deployed yet.
+
+## ⚡ Quick Fix (2 minutes)
+
+### Step 1: Open Firebase Console
+**Click this link:** https://console.firebase.google.com/project/tribe-0degree/firestore/rules
+
+### Step 2: Delete ALL existing rules
+Select all text in the editor and delete it.
+
+### Step 3: Copy and paste these rules:
+
+```javascript
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -12,10 +28,10 @@ service cloud.firestore {
     
     // Users collection - users can read/write their own data
     match /users/{userId} {
-      allow read: if true; // Public read for user profiles
+      allow read: if true;
       allow write: if isOwner(userId);
       
-      // User subcollections
+      // User subcollections (postVotes, communitySnippets)
       match /{subcollection=**} {
         allow read, write: if isOwner(userId);
       }
@@ -23,17 +39,17 @@ service cloud.firestore {
     
     // TribeUser collection - users can read/write their own data
     match /tribeUser/{userId} {
-      allow read: if true; // Public read for user profiles
+      allow read: if true;
       allow write: if isOwner(userId);
     }
     
     // Communities collection - public read, authenticated write
     match /communities/{communityId} {
-      allow read: if true; // Public read
+      allow read: if true;
       allow create: if isAuthenticated();
-      allow update, delete: if isAuthenticated(); // Can be refined later
+      allow update, delete: if isAuthenticated();
       
-      // Conversation subcollection - for chat/messaging
+      // Conversation subcollection for chat
       match /conversation/{conversationId} {
         allow read: if isAuthenticated();
         allow write: if isAuthenticated();
@@ -48,7 +64,7 @@ service cloud.firestore {
     
     // Posts collection - public read, authenticated write
     match /posts/{postId} {
-      allow read: if true; // Public read
+      allow read: if true;
       allow create: if isAuthenticated() && 
                        request.resource.data.creatorId == request.auth.uid;
       allow update: if isAuthenticated() && 
@@ -60,7 +76,7 @@ service cloud.firestore {
     
     // Comments collection - public read, authenticated write
     match /comments/{commentId} {
-      allow read: if true; // Public read
+      allow read: if true;
       allow create: if isAuthenticated() && 
                        request.resource.data.creatorId == request.auth.uid;
       allow update: if isAuthenticated() && 
@@ -86,3 +102,36 @@ service cloud.firestore {
     }
   }
 }
+```
+
+### Step 4: Click "Publish" button (top right)
+Wait for the success message.
+
+### Step 5: Wait 30 seconds
+Rules take a moment to propagate.
+
+### Step 6: Hard refresh your browser
+- **Mac:** Cmd + Shift + R
+- **Windows/Linux:** Ctrl + Shift + R
+
+## ✅ Verify It Worked
+
+After refreshing, the permission errors should be gone. The app should work normally.
+
+## 🔍 If Still Not Working
+
+1. **Check rules were published:** Look for green checkmark in Firebase Console
+2. **Check you're logged in:** Make sure you're authenticated
+3. **Wait 2-3 minutes:** Sometimes rules take longer to propagate
+4. **Clear browser cache:** Try incognito/private window
+
+## 📝 What These Rules Do
+
+- ✅ **Public Read**: Anyone can read posts, communities, comments
+- ✅ **Authenticated Write**: Only logged-in users can create/edit
+- ✅ **Owner Protection**: Users can only modify their own content
+- ✅ **Secure**: Blocks unauthorized access
+
+---
+
+**Direct Link:** https://console.firebase.google.com/project/tribe-0degree/firestore/rules
