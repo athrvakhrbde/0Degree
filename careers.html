@@ -205,12 +205,25 @@
             padding-left: 4px;
         }
         
+        .job-company {
+            font-size: clamp(14px, 1.2vw, 15px);
+            font-weight: 500;
+            color: #00ffce;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
         .job-header-row {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             gap: 32px;
             margin-bottom: 12px;
+        }
+        
+        .job-title-wrapper {
+            flex: 1;
         }
         
         .job-title {
@@ -220,7 +233,6 @@
             margin: 0;
             line-height: 1.3;
             letter-spacing: -0.8px;
-            flex: 1;
         }
         
         .job-link {
@@ -408,6 +420,7 @@
         // Job listings data
         const allJobs = [
             {
+                company: "0Degree",
                 title: "Product Designer",
                 description: "We're looking for a product designer to help shape the future of alternative education. You'll work on designing experiences that support people navigating uncertainty and building new paths.",
                 location: "Remote",
@@ -415,6 +428,7 @@
                 link: "#"
             },
             {
+                company: "0Degree",
                 title: "Full Stack Engineer",
                 description: "Join our engineering team to build tools and platforms that help people find structure and opportunity. Experience with modern web technologies preferred.",
                 location: "Remote",
@@ -422,6 +436,7 @@
                 link: "#"
             },
             {
+                company: "0Degree",
                 title: "Community Manager",
                 description: "Help build and nurture our community of people exploring alternative paths. You'll facilitate connections, organize events, and support members in their journey.",
                 location: "Remote / Hybrid",
@@ -429,6 +444,7 @@
                 link: "#"
             },
             {
+                company: "0Degree",
                 title: "Content Writer",
                 description: "Create content that resonates with people navigating uncertainty. Write articles, guides, and resources that provide clarity and support.",
                 location: "Remote",
@@ -436,6 +452,7 @@
                 link: "#"
             },
             {
+                company: "0Degree",
                 title: "Operations Lead",
                 description: "Help us scale our operations and build systems that support our mission. You'll work on everything from process improvement to strategic planning.",
                 location: "Remote",
@@ -476,8 +493,11 @@
             jobList.style.display = 'block';
             jobList.innerHTML = jobs.map(job => `
                 <li class="job-item" onclick="${job.link && job.link !== '#' ? `window.open('${job.link}', '_blank')` : ''}">
+                    ${job.company ? `<div class="job-company">${job.company}</div>` : ''}
                     <div class="job-header-row">
-                        <h2 class="job-title">${job.title}</h2>
+                        <div class="job-title-wrapper">
+                            <h2 class="job-title">${job.title}</h2>
+                        </div>
                         ${job.link ? `<a href="${job.link}" class="job-link" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">Apply</a>` : ''}
                     </div>
                     <div class="job-meta">
