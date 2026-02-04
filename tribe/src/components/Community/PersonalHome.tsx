@@ -1,13 +1,12 @@
 import {
   Button,
   Flex,
-  Icon,
+  Image,
   Stack,
   Text,
-  useColorModeValue,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { FaReddit } from "react-icons/fa";
+import { FaUsers } from "react-icons/fa";
 
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase/clientApp";
@@ -44,12 +43,12 @@ const PersonalHome: React.FC = () => {
       ></Flex>
       <Flex direction="column" p="12px">
         <Flex align="center" mb={2}>
-          <Icon as={FaReddit} fontSize={50} color="brand.500" mr={2} />
+          <Image src="/images/0degree-logo.svg" height="40px" width="40px" mr={2} alt="0Degree" />
           <Text fontWeight={600}>Home</Text>
         </Flex>
         <Stack spacing={3}>
-          <Text fontSize="9pt">
-            Your personal Reddit frontpage, built for you.
+          <Text fontSize="9pt" color="rgba(255, 255, 255, 0.7)">
+            Your personal Tribe feed, built for you.
           </Text>
           <Button height="30px">Create Post</Button>
           <Button

@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { BsLink45Deg } from "react-icons/bs";
-import { FaReddit } from "react-icons/fa";
+import { Image } from "@chakra-ui/react";
 import { IoImageOutline } from "react-icons/io5";
 import { useSetRecoilState } from "recoil";
 
@@ -16,10 +16,11 @@ const CreatePostLink: React.FC = () => {
   const [user] = useAuthState(auth);
   const { toggleMenuOpen } = useDirectory();
   const setAuthModelState = useSetRecoilState(authModelState);
-  const bg = useColorModeValue("white", "#1A202C");
-  const borderColor = useColorModeValue("gray.300", "#2D3748");
-  const searchBg = useColorModeValue("gray.50", "#2D3748");
-  const searchBorder = useColorModeValue("gray.200", "#4A5568");
+  // Using dark theme colors matching main site
+  const bg = "rgba(255, 255, 255, 0.02)";
+  const borderColor = "rgba(255, 255, 255, 0.2)";
+  const searchBg = "rgba(255, 255, 255, 0.02)";
+  const searchBorder = "rgba(255, 255, 255, 0.2)";
 
   const onClick = () => {
     if (!user) {
@@ -56,7 +57,7 @@ const CreatePostLink: React.FC = () => {
       p={2}
       mb={4}
     >
-      <Icon as={FaReddit} fontSize={36} color="gray.300" mr={4} />
+      <Image src="/images/0degree-logo.svg" height="36px" width="36px" mr={4} alt="0Degree" />
       <Input
         placeholder="Create Post"
         fontSize="10pt"
@@ -64,13 +65,13 @@ const CreatePostLink: React.FC = () => {
         _hover={{
           bg: bg,
           border: "1px solid",
-          borderColor: "blue.500",
+          borderColor: "brand.500",
         }}
         _focus={{
           outline: "none",
           bg: bg,
           border: "1px solid",
-          borderColor: "blue.500",
+          borderColor: "brand.500",
         }}
         bg={searchBg}
         borderColor={searchBorder}

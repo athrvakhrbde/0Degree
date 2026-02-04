@@ -4,7 +4,8 @@ import { useSendPasswordResetEmail } from "react-firebase-hooks/auth";
 import { useSetRecoilState } from "recoil";
 import { authModelState } from "../../../atoms/authModalAtom";
 import { auth } from "../../../firebase/clientApp";
-import { BsDot, BsReddit } from "react-icons/bs";
+import { BsDot } from "react-icons/bs";
+import { Image } from "@chakra-ui/react";
 
 /*
 type ResetPasswordProps = {
@@ -28,7 +29,7 @@ const ResetPassword: React.FC = () => {
 
   return (
     <Flex direction="column" alignItems="center" width="100%">
-      <Icon as={BsReddit} color="brand.100" fontSize={40} mb={2} />
+      <Image src="/images/0degree-logo.svg" height="40px" width="40px" mb={2} alt="0Degree" />
       <Text fontWeight={700} mb={2}>
         Reset your password
       </Text>

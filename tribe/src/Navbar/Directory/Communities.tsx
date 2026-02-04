@@ -7,7 +7,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { FaReddit } from "react-icons/fa";
+// Removed FaReddit - using image URLs instead
 import { GrAdd } from "react-icons/gr";
 import { useRecoilValue } from "recoil";
 
@@ -36,10 +36,10 @@ const Communities: React.FC<CommunitiesProps> = () => {
           .map((snippet) => (
             <MenuListItem
               key={snippet.communityId}
-              icon={FaReddit}
-              displayText={`r/${snippet.communityId}`}
+              icon={undefined}
+              displayText={`t/${snippet.communityId}`}
               link={`/r/${snippet.communityId}`}
-              iconColor={"brand.100"}
+              iconColor={"brand.500"}
               imageURL={snippet.imageURL}
             />
           ))}
@@ -65,10 +65,10 @@ const Communities: React.FC<CommunitiesProps> = () => {
         {mySnippets.map((snippet) => (
           <MenuListItem
             key={snippet.communityId}
-            icon={FaReddit}
-            displayText={`r/${snippet.communityId}`}
+            icon={undefined}
+            displayText={`t/${snippet.communityId}`}
             link={`/r/${snippet.communityId}`}
-            iconColor={"blue.500"}
+            iconColor={"brand.500"}
             imageURL={snippet.imageURL}
           />
         ))}

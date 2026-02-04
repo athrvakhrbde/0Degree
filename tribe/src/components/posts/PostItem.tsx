@@ -17,7 +17,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { BsChat, BsDot } from "react-icons/bs";
-import { FaReddit } from "react-icons/fa";
+import { FaUsers } from "react-icons/fa";
 import {
   IoArrowDownCircleOutline,
   IoArrowDownCircleSharp,
@@ -88,7 +88,7 @@ const PostItem: React.FC<PostItemProps> = ({
         throw new Error("Failed to Delete Post");
       }
 
-      console.log("Post was Successfully Deleted");
+      // Post deleted successfully
 
       if (singlePostPage) {
         router.push(`/r/${post.communityId}`);
@@ -127,7 +127,9 @@ const PostItem: React.FC<PostItemProps> = ({
         } else return;
       }
     } catch (error) {
-      console.log(error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error("PostItem useEffect Error", error);
+      }
     }
   }, [post]);
 
@@ -193,14 +195,15 @@ const PostItem: React.FC<PostItemProps> = ({
                     mr={2}
                   />
                 ) : (
-                  <Icon as={FaReddit} fontSize="18px" color="brand.500" />
+                  <Image src="/images/0degree-logo.svg" height="18px" width="18px" alt="Community" mr={2} />
                 )}
-                <Link href={`r/${post.communityId}`}>
+                <Link href={`/r/${post.communityId}`}>
                   <Text
                     fontWeight={700}
                     _hover={{ textDecoration: "underline" }}
                     onClick={(event) => event.stopPropagation}
-                  >{`r/${post.communityId}`}</Text>
+                    color="rgba(255, 255, 255, 0.7)"
+                  >{`t/${post.communityId}`}</Text>
                 </Link>
                 <Icon as={BsDot} color="gray.500" fontSize={8} />
               </>

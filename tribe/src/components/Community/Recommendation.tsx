@@ -13,7 +13,7 @@ import {
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { FaReddit } from "react-icons/fa";
+import { Image } from "@chakra-ui/react";
 
 import { Community } from "../../atoms/CommunitiesAtom";
 import { firestore } from "../../firebase/clientApp";
@@ -132,12 +132,7 @@ const Recommendation: React.FC = () => {
                             mr={2}
                           />
                         ) : (
-                          <Icon
-                            as={FaReddit}
-                            fontSize={30}
-                            color="brand.100"
-                            mr={2}
-                          />
+                          <Image src="/images/0degree-logo.svg" height="30px" width="30px" mr={2} alt="Community" />
                         )}
                         <span
                           style={{
@@ -145,7 +140,7 @@ const Recommendation: React.FC = () => {
                             overflow: "hidden",
                             textOverflow: "ellipsis",
                           }}
-                        >{`r/${item.id}`}</span>
+                        >{`t/${item.id}`}</span>
                       </Flex>
                     </Flex>
                     <Box position="absolute" right="10px">

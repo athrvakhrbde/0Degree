@@ -6,7 +6,7 @@ import {
   DirectoryMenuItem,
   directoryMenuState,
 } from "../atoms/directoryMenuAtom";
-import { FaReddit } from "react-icons/fa";
+// Removed FaReddit import - using default icon
 
 const useDirectory = () => {
   const [directoryState, setDirectoryState] =
@@ -40,11 +40,11 @@ const useDirectory = () => {
       setDirectoryState((prev) => ({
         ...prev,
         selectedMenuItem: {
-          displayText: `r/${currentCommunity.id}`,
+          displayText: `t/${currentCommunity.id}`,
           link: `/r/${currentCommunity.id}`,
           imageURL: currentCommunity.imageURL,
-          icon: FaReddit,
-          iconColor: "blue.500",
+          icon: undefined,
+          iconColor: "brand.500",
         },
       }));
     }

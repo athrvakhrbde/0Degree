@@ -1,4 +1,4 @@
-export const redditProfileImage = [
+export const tribeProfileImage = [
   "https://drive.google.com/uc?export=download&id=1zvTdzFyHdXaEojPo9tzMMVGoc-Ns6kxY",
   "https://drive.google.com/uc?export=download&id=1Y6mrM3G1LIjt4_3UNuT5ygh85_nlqyZq",
   "https://drive.google.com/uc?export=download&id=1wPpfiRxGs1mwCU8PTy-v5DcFic2rKJBh",

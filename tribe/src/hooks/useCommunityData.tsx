@@ -57,9 +57,10 @@ const useCommunityData = () => {
         snippetsFetched: true,
       }));
 
-      //console.log(snippets, "🙌🚀🚀");
     } catch (error: any) {
-      console.log("Get My Snippet Error", error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error("Get My Snippet Error", error);
+      }
       setError(error.message);
     }
     setLoading(false);
@@ -78,7 +79,9 @@ const useCommunityData = () => {
         } as Community,
       }));
     } catch (error) {
-      console.log(error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error("GetCommunityData Error", error);
+      }
     }
   };
 
@@ -135,7 +138,9 @@ const useCommunityData = () => {
 
       updateCommunitySnippet(communityData, user?.uid!);
     } catch (error: any) {
-      console.log("JoinCommunity Error", error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error("JoinCommunity Error", error);
+      }
       setError(error.message);
     }
     setLoading(false);
@@ -165,7 +170,9 @@ const useCommunityData = () => {
 
       await batch.commit();
     } catch (error: any) {
-      console.log("JoinCommunity Error", error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error("JoinCommunity Error", error);
+      }
       setError(error.message);
     }
   };
@@ -191,7 +198,9 @@ const useCommunityData = () => {
         ),
       }));
     } catch (error: any) {
-      console.log("JoinCommunity Error", error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error("JoinCommunity Error", error);
+      }
       setError(error.message);
     }
     setLoading(false);

@@ -126,7 +126,10 @@ const usePosts = () => {
 
       await batch.commit();
     } catch (error) {
-      console.log("onVote Error", error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error("onVote Error", error);
+      }
+      throw error; // Re-throw to allow UI to handle
     }
   };
 

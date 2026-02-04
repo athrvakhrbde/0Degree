@@ -16,7 +16,7 @@ import moment from "moment";
 import Link from "next/link";
 import React, { useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { FaReddit } from "react-icons/fa";
+import { Image } from "@chakra-ui/react";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { RiCakeLine } from "react-icons/ri";
 import { useSetRecoilState } from "recoil";
@@ -137,11 +137,7 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
                       alt="community Image"
                     />
                   ) : (
-                    <Icon
-                      as={FaReddit}
-                      fontSize={40}
-                      color="brand.100"
-                      mr={2}
+                    <Image src="/images/0degree-logo.svg" height="40px" width="40px" mr={2} alt="Community" />
                     />
                   )}
                 </Flex>

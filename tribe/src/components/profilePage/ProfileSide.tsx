@@ -12,7 +12,7 @@ import { doc, getDoc, Timestamp } from "firebase/firestore";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { FaRedditAlien, FaUserCheck } from "react-icons/fa";
+import { FaUserCheck } from "react-icons/fa";
 import { GiCakeSlice, GiCheckedShield } from "react-icons/gi";
 import { IoRocketSharp, IoShirtOutline } from "react-icons/io5";
 import { MdVerified } from "react-icons/md";
@@ -22,12 +22,12 @@ import { authModelState } from "../../atoms/authModalAtom";
 import { auth, firestore } from "../../firebase/clientApp";
 import useDirectory from "../../hooks/useDirectory";
 
-interface RedditUserDocument {
+interface TribeUserDocument {
   userId?: string;
   userName: string;
   userEmail?: string;
   userImage: string;
-  redditImage: string;
+  tribeImage: string;
   timestamp: Timestamp;
 }
 
@@ -35,24 +35,26 @@ type Props = {};
 
 function ProfileSide({}: Props) {
   const [user] = useAuthState(auth);
-  const [redditUser, setRedditUser] = useState<RedditUserDocument>();
+  const [tribeUser, setTribeUser] = useState<TribeUserDocument>();
   const { toggleMenuOpen } = useDirectory();
   const setAuthModelState = useSetRecoilState(authModelState);
   const bg = useColorModeValue("white", "#1A202C");
   const borderColor = useColorModeValue("gray.300", "#2D3748");
 
-  const fetchRedditUser = async (userId: any) => {
+  const fetchTribeUser = async (userId: any) => {
     if (!userId) return;
 
     try {
-      const docRef = doc(firestore, "redditUser", userId);
+      const docRef = doc(firestore, "tribeUser", userId);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        setRedditUser(docSnap.data() as RedditUserDocument);
+        setTribeUser(docSnap.data() as TribeUserDocument);
       } else return;
     } catch (error: any) {
-      console.log(error.message);
+      if (process.env.NODE_ENV === 'development') {
+        console.error("FetchTribeUser Error", error);
+      }
     }
   };
 
@@ -66,7 +68,7 @@ function ProfileSide({}: Props) {
   };
 
   useEffect(() => {
-    fetchRedditUser(user?.uid);
+    fetchTribeUser(user?.uid);
   }, [user]);
 
   return (
@@ -93,9 +95,9 @@ function ProfileSide({}: Props) {
         url('https://source.unsplash.com/1600x900/?nature,photography,technolog')"
       ></Flex>
       <Flex justify="center">
-        {redditUser?.redditImage ? (
+        {tribeUser?.tribeImage ? (
           <Image
-            src={redditUser?.redditImage}
+            src={tribeUser?.tribeImage}
             rounded="md"
             height="80px"
             mt="-50px"
@@ -125,12 +127,11 @@ function ProfileSide({}: Props) {
           <Text fontWeight="bold" fontSize="18pt">
             {user?.displayName || user?.email?.split("@")[0]}
           </Text>
-          <Icon as={FaRedditAlien} fontSize="18pt" color="brand.100" />
           <Icon as={GiCheckedShield} fontSize="18pt" color="brand.100" />
         </Flex>
       </Flex>
       <Text fontWeight="bold" fontSize="8pt" textAlign="center">
-        r/{user?.email}
+        t/{user?.email?.split("@")[0]}
       </Text>
       <Button
         width={80}
@@ -201,7 +202,7 @@ function ProfileSide({}: Props) {
             <Text fontWeight="bold" fontSize="10pt" textAlign="start">
               Cake Day
             </Text>
-            {redditUser?.timestamp && (
+            {tribeUser?.timestamp && (
               <Text
                 fontWeight="medium"
                 fontSize="9pt"
@@ -215,7 +216,7 @@ function ProfileSide({}: Props) {
                   textAlign="center"
                   m="auto"
                 />
-                {moment(new Date(redditUser?.timestamp?.seconds * 1000)).format(
+                {moment(new Date(tribeUser?.timestamp?.seconds * 1000)).format(
                   "MMMM Do, YYYY"
                 )}
               </Text>

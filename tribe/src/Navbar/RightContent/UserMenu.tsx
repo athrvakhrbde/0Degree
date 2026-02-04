@@ -14,7 +14,7 @@ import {
 import { signOut, User } from "firebase/auth";
 import React from "react";
 import { CgProfile } from "react-icons/cg";
-import { FaRedditSquare } from "react-icons/fa";
+import { Image } from "@chakra-ui/react";
 import { MdOutlineLogin } from "react-icons/md";
 import { VscAccount } from "react-icons/vsc";
 
@@ -60,12 +60,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
           <Flex align="center">
             {user ? (
               <>
-                <Icon
-                  fontSize={24}
-                  mr={1}
-                  color="gray.300"
-                  as={FaRedditSquare}
-                />
+                <Image src="/images/0degree-logo.svg" height="24px" width="24px" mr={1} alt="0Degree" />
                 <Flex
                   display={{ base: "none", lg: "flex" }}
                   flexDirection="column"

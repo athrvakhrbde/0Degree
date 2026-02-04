@@ -30,12 +30,12 @@ import { firestore } from "../../../firebase/clientApp";
 import CommentInput from "./CommentInput";
 import CommentItem, { Comment } from "./CommentItem";
 
-interface RedditUserDocument {
+interface TribeUserDocument {
   userId?: string;
   userName: string;
   userEmail?: string;
   userImage: string;
-  redditImage: string;
+  tribeImage: string;
   timestamp: Timestamp;
 }
 
@@ -56,25 +56,27 @@ const Comments: React.FC<CommentsProps> = ({
   const [loadingDeleteId, setLoadingDeleteId] = useState("");
   const [fetchLoading, setFetchLoading] = useState(true);
   const [createLoading, setCreateLoading] = useState(false);
-  const [redditUser, setRedditUser] = useState<RedditUserDocument>();
+  const [tribeUser, setTribeUser] = useState<TribeUserDocument>();
   const setPostState = useSetRecoilState(postState);
   const bg = useColorModeValue("white", "#1A202C");
   const lineBorderColor = useColorModeValue("gray.100", "#171923");
 
   //console.log(comments);
 
-  const fetchRedditUser = async (userId: any) => {
+  const fetchTribeUser = async (userId: any) => {
     if (!userId) return;
 
     try {
-      const docRef = doc(firestore, "redditUser", userId);
+      const docRef = doc(firestore, "tribeUser", userId);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        setRedditUser(docSnap.data() as RedditUserDocument);
+        setTribeUser(docSnap.data() as TribeUserDocument);
       } else return;
     } catch (error: any) {
-      console.log(error.message);
+      if (process.env.NODE_ENV === 'development') {
+        console.error("FetchTribeUser Error", error);
+      }
     }
   };
 
@@ -97,7 +99,7 @@ const Comments: React.FC<CommentsProps> = ({
         id: commentDocRef.id,
         creatorId: user.uid,
         creatorDisplayText: dataName,
-        creatorPhotoURL: redditUser?.redditImage!,
+        creatorPhotoURL: tribeUser?.tribeImage!,
         communityId,
         postId: selectedPost?.id!,
         postTitle: selectedPost?.title!,
@@ -202,7 +204,7 @@ const Comments: React.FC<CommentsProps> = ({
   }, [commentText]);
 
   useEffect(() => {
-    fetchRedditUser(user?.uid);
+    fetchTribeUser(user?.uid);
   }, [user]);
 
   return (

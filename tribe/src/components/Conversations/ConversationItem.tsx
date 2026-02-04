@@ -20,7 +20,7 @@ import moment from "moment";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { BsFillChatDotsFill } from "react-icons/bs";
-import { FaReddit } from "react-icons/fa";
+import { Image } from "@chakra-ui/react";
 import { ImUsers } from "react-icons/im";
 
 import { Community } from "../../atoms/CommunitiesAtom";
@@ -143,7 +143,7 @@ function ConversationItem({ user }: Props) {
           </Flex>
         ) : (
           <Flex position="relative">
-            <Icon as={FaReddit} fontSize={40} color="brand.100" mr={2} />
+            <Image src="/images/0degree-logo.svg" height="40px" width="40px" mr={2} alt="Community" />
             <Icon as={BsFillChatDotsFill} position="absolute" top={6} />
           </Flex>
         )}
@@ -156,7 +156,7 @@ function ConversationItem({ user }: Props) {
               overflow="hidden"
               textOverflow="ellipsis"
             >
-              r/{userCommunities?.id}
+              t/{userCommunities?.id}
             </Text>
 
             <Box width="140%" display="flex" alignItems="center" gap={2}>

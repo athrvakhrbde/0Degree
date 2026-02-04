@@ -15,10 +15,11 @@ type SearchInputProps = {
 };
 
 const SearchInput: React.FC<SearchInputProps> = ({ user }) => {
-  const bg = useColorModeValue("gray.100", "whiteAlpha.100");
-  const iconColor = useColorModeValue("gray.300", "white");
-  const focusedInputBg = useColorModeValue("white", "#171923");
-  const searchBorder = useColorModeValue("gray.200", "#4A5568");
+  // Using dark theme colors matching main site
+  const bg = "rgba(255, 255, 255, 0.02)";
+  const iconColor = "rgba(255, 255, 255, 0.7)";
+  const focusedInputBg = "rgba(255, 255, 255, 0.03)";
+  const searchBorder = "rgba(255, 255, 255, 0.2)";
 
   return (
     <Flex flexGrow={1} maxWidth={user ? "auto" : "600px"} mr={2} align="center">
@@ -28,7 +29,7 @@ const SearchInput: React.FC<SearchInputProps> = ({ user }) => {
         </InputLeftElement>
         <Input
           type="tel"
-          placeholder="Search Reddit"
+          placeholder="Search Tribe"
           fontSize="10pt"
           bg={bg}
           _placeholder={{ colors: "gray.500" }}

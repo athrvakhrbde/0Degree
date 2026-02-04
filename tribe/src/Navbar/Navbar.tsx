@@ -15,20 +15,20 @@ import useDirectory from "../hooks/useDirectory";
 import Directory from "./Directory/Directory";
 import RightContent from "./RightContent/RightContent";
 import SearchInput from "./SearchInput";
-import { redditProfileImage } from "./store";
+import { tribeProfileImage } from "./store";
 
-interface RedditUserDocument {
+interface TribeUserDocument {
   userId?: string;
   userName: string;
   userEmail?: string;
   userImage: string;
-  redditImage: string;
+  tribeImage: string;
   timestamp: Timestamp;
 }
 
 const Navbar: React.FC = () => {
   const [user, loading, error] = useAuthState(auth);
-  const [redditUserImage, setRedditUserImage] = useState("");
+  const [tribeUserImage, setTribeUserImage] = useState("");
   const [userCreates, setUserCreate] = useState<boolean>(false);
   const { onSelectMenuItem } = useDirectory();
   // Removed colorMode and bg - using fixed dark theme
@@ -36,39 +36,41 @@ const Navbar: React.FC = () => {
   const getUserData = async () => {
     if (user) {
       try {
-        const docRef = doc(firestore, "redditUser", user?.uid);
+        const docRef = doc(firestore, "tribeUser", user?.uid);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-          console.log("User Already Created");
           setUserCreate(false);
         } else {
           setUserCreate(true);
         }
       } catch (error) {
-        console.log(error);
+        // Silently handle error - user creation will retry on next render
+        if (process.env.NODE_ENV === 'development') {
+          console.error("GetUserData Error", error);
+        }
       }
     } else return;
   };
 
   const userCreate = async (session: any) => {
-    const document: RedditUserDocument = {
+    const document: TribeUserDocument = {
       userId: user?.uid,
       userName: user?.displayName || "",
       userEmail: user?.email?.toString(),
       userImage: user?.photoURL || "",
-      redditImage: redditUserImage,
+      tribeImage: tribeUserImage,
       timestamp: serverTimestamp() as Timestamp,
     };
-    const userDocRef = doc(firestore, "redditUser", session?.uid);
+    const userDocRef = doc(firestore, "tribeUser", session?.uid);
     await setDoc(userDocRef, document);
   };
 
   useEffect(() => {
     getUserData();
 
-    setRedditUserImage(
-      redditProfileImage[Math.floor(Math.random() * redditProfileImage.length)]
+    setTribeUserImage(
+      tribeProfileImage[Math.floor(Math.random() * tribeProfileImage.length)]
     );
 
     if (userCreates) {
@@ -108,11 +110,12 @@ const Navbar: React.FC = () => {
           cursor="pointer"
           onClick={() => onSelectMenuItem(defaultMenuItem)}
         >
-          <Image src="/images/redditFace.svg" height="32px" />
+          <Image src="/images/0degree-logo.svg" height="32px" alt="0Degree Logo" />
           <Image
-            src="/images/Reddit-Word-Dark.svg"
+            src="/images/0degree-logo.svg"
             height="32px"
             display={{ base: "none", md: "unset" }}
+            alt="0Degree"
           />
         </Flex>
         <Flex align="center" gap={{ base: "16px", md: "32px" }}>

@@ -26,12 +26,12 @@ interface MessageBody {
   sendedAt: Timestamp;
 }
 
-interface RedditUserDocument {
+interface TribeUserDocument {
   userId?: string;
   userName: string;
   userEmail?: string;
   userImage: string;
-  redditImage: string;
+  tribeImage: string;
   timestamp: Timestamp;
 }
 
@@ -42,23 +42,25 @@ type Props = {
 
 function MessageInput({ conversationId, user }: Props) {
   const [messageBody, setMessageBody] = useState("");
-  const [redditUser, setRedditUser] = useState<RedditUserDocument>();
+  const [tribeUser, setTribeUser] = useState<TribeUserDocument>();
   const [lastSeenMessages, setLastSeenMessages] = useState<any[]>([]);
   const searchBg = useColorModeValue("gray.50", "whiteAlpha.50");
   const searchBorder = useColorModeValue("gray.200", "#4A5568");
 
-  const fetchRedditUser = async (userId: any) => {
+  const fetchTribeUser = async (userId: any) => {
     if (!userId) return;
 
     try {
-      const docRef = doc(firestore, "redditUser", userId);
+      const docRef = doc(firestore, "tribeUser", userId);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        setRedditUser(docSnap.data() as RedditUserDocument);
+        setTribeUser(docSnap.data() as TribeUserDocument);
       } else return;
     } catch (error: any) {
-      console.log(error.message);
+      if (process.env.NODE_ENV === 'development') {
+        console.error("FetchTribeUser Error", error);
+      }
     }
   };
 
@@ -101,7 +103,7 @@ function MessageInput({ conversationId, user }: Props) {
       user.email!.split("@")[0],
       user.email,
       messageBody,
-      redditUser?.redditImage,
+      tribeUser?.tribeImage,
     ];
 
     for (let index = 0; index < arrData.length; index++) {
@@ -164,7 +166,7 @@ function MessageInput({ conversationId, user }: Props) {
   };
 
   useEffect(() => {
-    fetchRedditUser(user?.uid);
+    fetchTribeUser(user?.uid);
   }, [user]);
 
   useEffect(() => {

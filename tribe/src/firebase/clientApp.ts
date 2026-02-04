@@ -28,7 +28,9 @@ if (isConfigValid) {
   try {
     app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
   } catch (error) {
-    console.error('Firebase initialization error:', error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Firebase initialization error:', error);
+    }
     // Create a minimal config to prevent crashes during build
     const fallbackConfig = {
       apiKey: 'demo-key',
@@ -61,7 +63,9 @@ if (isConfigValid) {
     }
   } else {
     // Client-side - should have env vars
-    console.error('Firebase configuration is missing. Please set environment variables in Vercel.');
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Firebase configuration is missing. Please set environment variables in Vercel.');
+    }
     const fallbackConfig = {
       apiKey: 'demo-key',
       authDomain: 'demo.firebaseapp.com',
