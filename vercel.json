@@ -19,6 +19,16 @@
       ]
     },
     {
+      "source": "/(.*)",
+      "destination": "/tribe/$1",
+      "has": [
+        {
+          "type": "host",
+          "value": "tribe.0degreeinc.com"
+        }
+      ]
+    },
+    {
       "source": "/join",
       "destination": "/join.html"
     },
