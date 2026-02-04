@@ -9,16 +9,6 @@
   },
   "rewrites": [
     {
-      "source": "/(.*)",
-      "destination": "/lp.html",
-      "has": [
-        {
-          "type": "host",
-          "value": "lp.0degreeinc.com"
-        }
-      ]
-    },
-    {
       "source": "/join",
       "destination": "/join.html"
     },
@@ -37,6 +27,26 @@
     {
       "source": "/lp",
       "destination": "/lp.html"
+    },
+    {
+      "source": "/",
+      "destination": "/lp.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "lp.0degreeinc.com"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/lp.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "lp.0degreeinc.com"
+        }
+      ]
     },
     {
       "source": "/",
