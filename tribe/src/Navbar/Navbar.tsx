@@ -1,4 +1,4 @@
-import { Flex, Image, useColorMode, useColorModeValue } from "@chakra-ui/react";
+import { Flex, Image } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 
@@ -105,18 +105,10 @@ const Navbar: React.FC = () => {
       >
         <Flex
           align="center"
-          width={{ base: "40px", md: "auto" }}
-          mr={{ base: 0, md: 2 }}
           cursor="pointer"
           onClick={() => onSelectMenuItem(defaultMenuItem)}
         >
-          <Image src="/images/0degree-logo.svg" height="32px" alt="0Degree Logo" />
-          <Image
-            src="/images/0degree-logo.svg"
-            height="32px"
-            display={{ base: "none", md: "unset" }}
-            alt="0Degree"
-          />
+          <Image src="/images/0degree-logo.svg" height={{ base: "28px", md: "32px" }} alt="0Degree" />
         </Flex>
         <Flex align="center" gap={{ base: "16px", md: "32px" }}>
           {user && <Directory />}

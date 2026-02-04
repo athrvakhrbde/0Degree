@@ -12,7 +12,6 @@ import {
 import { signOut, User } from "firebase/auth";
 import React from "react";
 import { CgProfile } from "react-icons/cg";
-import { Image } from "@chakra-ui/react";
 import { MdOutlineLogin } from "react-icons/md";
 import { VscAccount } from "react-icons/vsc";
 
@@ -49,61 +48,59 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
     <Menu>
       <MenuButton
         cursor="pointer"
-        padding="0px 6px"
-        borderRadius={4}
-        _hover={{ outline: "1px solid", outlineColor: "gray.200" }}
+        padding="0px 8px"
+        borderRadius={0}
+        _hover={{ opacity: 0.8 }}
+        transition="opacity 0.3s ease"
       >
         <Flex align="center">
-          <Flex align="center">
-            {user ? (
-              <>
-                <Image src="/images/0degree-logo.svg" height="24px" width="24px" mr={1} alt="0Degree" />
-                <Flex
-                  display={{ base: "none", lg: "flex" }}
-                  flexDirection="column"
-                  fontSize="8pt"
-                  alignItems="flex-start"
-                  mr={8}
-                >
-                  <Text fontWeight={700}>
-                    {user?.displayName || user?.email?.split("@")[0]}
-                  </Text>
-                  <Flex alignItems="center">
-                    <Icon as={IoSparkles} color="brand.100" mr={1} />
-                    <Text color="gray.400">1 karma</Text>
-                  </Flex>
+          {user ? (
+            <>
+              <Flex
+                display={{ base: "none", lg: "flex" }}
+                flexDirection="column"
+                fontSize={{ base: "10px", md: "12px" }}
+                alignItems="flex-start"
+                mr={3}
+              >
+                <Text fontWeight={500} color="rgba(255, 255, 255, 0.9)">
+                  {user?.displayName || user?.email?.split("@")[0]}
+                </Text>
+                <Flex alignItems="center">
+                  <Icon as={IoSparkles} color="brand.500" fontSize="12px" mr={1} />
+                  <Text fontSize="10px" color="rgba(255, 255, 255, 0.5)">1 karma</Text>
                 </Flex>
-              </>
-            ) : (
-              <Icon fontSize={24} color="gray.400" as={VscAccount} />
-            )}
-          </Flex>
-          <ChevronDownIcon />
+              </Flex>
+            </>
+          ) : (
+            <Icon fontSize={24} color="rgba(255, 255, 255, 0.5)" as={VscAccount} />
+          )}
+          <ChevronDownIcon color="rgba(255, 255, 255, 0.5)" />
         </Flex>
       </MenuButton>
-      <MenuList mt={2} bg="#1A202C" borderColor="rgba(255, 255, 255, 0.2)">
+      <MenuList mt={2} bg="rgba(0, 0, 0, 0.95)" backdropFilter="blur(10px)" border="1px solid" borderColor="rgba(255, 255, 255, 0.2)" borderRadius={0}>
         {user ? (
           <>
             <MenuDivider />
             <MenuItem
-              fontSize="10px"
-              fontWeight={700}
-              _hover={{ bg: "brand.500", color: "black" }}
+              fontSize="13px"
+              fontWeight={400}
+              _hover={{ bg: "rgba(255, 255, 255, 0.05)", color: "brand.500" }}
             >
               <Flex align="center" onClick={handelNavigatePage}>
-                <Icon fontSize={20} mr={2} as={CgProfile} />
+                <Icon fontSize={18} mr={2} as={CgProfile} />
                 Profile
               </Flex>
             </MenuItem>
             <MenuDivider />
             <MenuItem
-              fontSize="10px"
-              fontWeight={700}
-              _hover={{ bg: "blue.500", color: "white" }}
+              fontSize="13px"
+              fontWeight={400}
+              _hover={{ bg: "rgba(255, 255, 255, 0.05)", color: "brand.500" }}
               onClick={logout}
             >
               <Flex align="center">
-                <Icon fontSize={20} mr={2} as={MdOutlineLogin} />
+                <Icon fontSize={18} mr={2} as={MdOutlineLogin} />
                 Log Out
               </Flex>
             </MenuItem>
@@ -111,9 +108,9 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
         ) : (
           <>
             <MenuItem
-              fontSize="10px"
-              fontWeight={700}
-              _hover={{ bg: "blue.500", color: "white" }}
+              fontSize="13px"
+              fontWeight={400}
+              _hover={{ bg: "rgba(255, 255, 255, 0.05)", color: "brand.500" }}
               onClick={() => setAuthModalState({ open: true, view: "login" })}
             >
               <Flex align="center">

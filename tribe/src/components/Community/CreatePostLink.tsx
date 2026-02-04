@@ -1,9 +1,8 @@
-import { Flex, Icon, Input, useColorModeValue } from "@chakra-ui/react";
+import { Flex, Icon, Input } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { BsLink45Deg } from "react-icons/bs";
-import { Image } from "@chakra-ui/react";
 import { IoImageOutline } from "react-icons/io5";
 import { useSetRecoilState } from "recoil";
 
@@ -16,11 +15,6 @@ const CreatePostLink: React.FC = () => {
   const [user] = useAuthState(auth);
   const { toggleMenuOpen } = useDirectory();
   const setAuthModelState = useSetRecoilState(authModelState);
-  // Using dark theme colors matching main site
-  const bg = "rgba(255, 255, 255, 0.02)";
-  const borderColor = "rgba(255, 255, 255, 0.2)";
-  const searchBg = "rgba(255, 255, 255, 0.02)";
-  const searchBorder = "rgba(255, 255, 255, 0.2)";
 
   const onClick = () => {
     if (!user) {
