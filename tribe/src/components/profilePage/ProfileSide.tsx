@@ -106,7 +106,7 @@ function ProfileSide({}: Props) {
           />
         ) : (
           <Avatar
-            src={redditUser?.redditImage}
+            src={tribeUser?.tribeImage}
             name={user?.displayName || (user?.email?.split("@")[0] as string)}
             width="80px"
             height="80px"
