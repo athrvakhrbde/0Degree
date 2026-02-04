@@ -29,9 +29,14 @@ export default async function handler(req, res) {
             }
         );
 
+        let issues = [];
+        if (issuesResponse.ok) {
+            issues = await issuesResponse.json();
+        }
+
         // If label doesn't exist or no issues with label, fetch all issues
-        if (!issuesResponse.ok || (await issuesResponse.json()).length === 0) {
-            issuesResponse = await fetch(
+        if (!issuesResponse.ok || issues.length === 0) {
+            const allIssuesResponse = await fetch(
                 `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/issues?state=all&per_page=100`,
                 {
                     headers: {
@@ -41,15 +46,18 @@ export default async function handler(req, res) {
                     },
                 }
             );
+            if (allIssuesResponse.ok) {
+                issues = await allIssuesResponse.json();
+            }
         }
 
-        if (!issuesResponse.ok) {
-            const errorText = await issuesResponse.text();
-            console.error('GitHub API error:', errorText);
-            return res.status(500).json({ error: 'Failed to fetch emails' });
+        if (issues.length === 0) {
+            return res.status(200).json({ 
+                success: true,
+                count: 0,
+                emails: []
+            });
         }
-
-        const issues = await issuesResponse.json();
         
         // Filter and parse email signup issues
         const emails = issues
