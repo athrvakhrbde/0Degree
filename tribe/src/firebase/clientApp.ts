@@ -14,26 +14,64 @@ const firebaseConfig = {
 };
 
 // Validate Firebase config
-if (!firebaseConfig.apiKey || !firebaseConfig.authDomain || !firebaseConfig.projectId) {
-  console.error('Firebase configuration is missing. Please set environment variables in Vercel.');
-}
+const isConfigValid = 
+  firebaseConfig.apiKey && 
+  firebaseConfig.authDomain && 
+  firebaseConfig.projectId &&
+  firebaseConfig.storageBucket &&
+  firebaseConfig.messagingSenderId &&
+  firebaseConfig.appId;
 
-// Initialize Firebase
+// Initialize Firebase only if config is valid
 let app;
-try {
-  app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
-} catch (error) {
-  console.error('Firebase initialization error:', error);
-  // Create a minimal config to prevent crashes
-  const fallbackConfig = {
-    apiKey: 'demo',
-    authDomain: 'demo.firebaseapp.com',
-    projectId: 'demo',
-    storageBucket: 'demo.appspot.com',
-    messagingSenderId: '123456789',
-    appId: '1:123456789:web:demo'
-  };
-  app = initializeApp(fallbackConfig, 'fallback');
+if (isConfigValid) {
+  try {
+    app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+  } catch (error) {
+    console.error('Firebase initialization error:', error);
+    // Create a minimal config to prevent crashes during build
+    const fallbackConfig = {
+      apiKey: 'demo-key',
+      authDomain: 'demo.firebaseapp.com',
+      projectId: 'demo',
+      storageBucket: 'demo.appspot.com',
+      messagingSenderId: '123456789',
+      appId: '1:123456789:web:demo'
+    };
+    app = initializeApp(fallbackConfig, 'fallback');
+  }
+} else {
+  // During build, create a dummy app to prevent crashes
+  // This will be replaced with real config at runtime
+  if (typeof window === 'undefined') {
+    // Server-side (build time)
+    const fallbackConfig = {
+      apiKey: 'build-time-placeholder',
+      authDomain: 'placeholder.firebaseapp.com',
+      projectId: 'placeholder',
+      storageBucket: 'placeholder.appspot.com',
+      messagingSenderId: '000000000',
+      appId: '1:000000000:web:placeholder'
+    };
+    try {
+      app = !getApps().length ? initializeApp(fallbackConfig, 'build-time') : getApp('build-time');
+    } catch (e) {
+      // If already initialized, get it
+      app = getApp('build-time');
+    }
+  } else {
+    // Client-side - should have env vars
+    console.error('Firebase configuration is missing. Please set environment variables in Vercel.');
+    const fallbackConfig = {
+      apiKey: 'demo-key',
+      authDomain: 'demo.firebaseapp.com',
+      projectId: 'demo',
+      storageBucket: 'demo.appspot.com',
+      messagingSenderId: '123456789',
+      appId: '1:123456789:web:demo'
+    };
+    app = initializeApp(fallbackConfig, 'fallback');
+  }
 }
 
 const firestore = getFirestore(app);
