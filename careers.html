@@ -59,29 +59,87 @@
     <link rel="stylesheet" href="styles.css" media="all">
     <style>
         .careers-container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 0 clamp(20px, 2vw, 40px);
         }
         
         .careers-header {
-            margin-bottom: 64px;
+            margin-bottom: 48px;
         }
         
         .careers-title {
             font-size: clamp(32px, 3.5vw, 48px);
             font-weight: 500;
             color: var(--text-black);
-            margin: 0 0 16px 0;
+            margin: 0 0 8px 0;
             letter-spacing: -1.5px;
             line-height: 1.2;
         }
         
         .careers-subtitle {
-            font-size: clamp(16px, 1.4vw, 18px);
+            font-size: clamp(15px, 1.3vw, 16px);
             color: var(--text-gray);
             margin: 0;
             line-height: 1.6;
+        }
+        
+        .filters-container {
+            margin-bottom: 40px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .filters-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .filter-label {
+            font-size: clamp(13px, 1.1vw, 14px);
+            color: var(--text-gray);
+            font-weight: 400;
+        }
+        
+        .filter-button {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-gray);
+            padding: 8px 16px;
+            font-size: clamp(13px, 1.1vw, 14px);
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+        
+        .filter-button:hover {
+            border-color: rgba(255, 255, 255, 0.4);
+            color: var(--text-black);
+        }
+        
+        .filter-button.active {
+            border-color: #00ffce;
+            color: #00ffce;
+            background: rgba(0, 255, 206, 0.05);
+        }
+        
+        .filter-button.all {
+            border-color: transparent;
+        }
+        
+        .filter-button.all.active {
+            border-color: #00ffce;
+            color: #00ffce;
         }
         
         .job-list {
@@ -91,7 +149,7 @@
         }
         
         .job-item {
-            padding: 40px 0;
+            padding: 32px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             transition: opacity 0.2s ease;
         }
@@ -109,7 +167,7 @@
             justify-content: space-between;
             align-items: flex-start;
             gap: 24px;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
         
         .job-title {
@@ -139,7 +197,7 @@
         .job-meta {
             font-size: clamp(14px, 1.2vw, 15px);
             color: var(--text-gray);
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             font-weight: 400;
         }
         
@@ -158,13 +216,40 @@
             font-size: clamp(16px, 1.4vw, 18px);
         }
         
+        .jobs-count {
+            font-size: clamp(14px, 1.2vw, 15px);
+            color: var(--text-gray);
+            margin-left: auto;
+        }
+        
         @media screen and (max-width: 768px) {
             .careers-header {
-                margin-bottom: 48px;
+                margin-bottom: 32px;
+            }
+            
+            .filters-container {
+                margin-bottom: 32px;
+                padding-bottom: 20px;
+            }
+            
+            .filters-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+            
+            .filter-group {
+                width: 100%;
+                flex-wrap: wrap;
+            }
+            
+            .jobs-count {
+                margin-left: 0;
+                margin-top: 8px;
             }
             
             .job-item {
-                padding: 32px 0;
+                padding: 24px 0;
             }
             
             .job-header-row {
@@ -206,11 +291,30 @@
                                 <p class="careers-subtitle">Join us in building infrastructure for responsible first steps.</p>
                             </div>
                             
+                            <div class="filters-container">
+                                <div class="filters-row">
+                                    <div class="filter-group">
+                                        <span class="filter-label">Type:</span>
+                                        <button class="filter-button all active" data-filter="type" data-value="all">All</button>
+                                        <button class="filter-button" data-filter="type" data-value="Full-time">Full-time</button>
+                                        <button class="filter-button" data-filter="type" data-value="Part-time">Part-time</button>
+                                        <button class="filter-button" data-filter="type" data-value="Contract">Contract</button>
+                                    </div>
+                                    <div class="filter-group">
+                                        <span class="filter-label">Location:</span>
+                                        <button class="filter-button all active" data-filter="location" data-value="all">All</button>
+                                        <button class="filter-button" data-filter="location" data-value="Remote">Remote</button>
+                                        <button class="filter-button" data-filter="location" data-value="Hybrid">Hybrid</button>
+                                    </div>
+                                    <span class="jobs-count" id="jobsCount"></span>
+                                </div>
+                            </div>
+                            
                             <ul class="job-list" id="jobList">
                                 <!-- Jobs will be loaded here -->
                             </ul>
                             <div class="jobs-empty" id="jobsEmpty" style="display: none;">
-                                No open positions at the moment. Check back soon.
+                                No open positions match your filters. Try adjusting your selection.
                             </div>
                         </div>
                     </div>
@@ -221,8 +325,8 @@
 
     <script src="script.js" defer></script>
     <script>
-        // Job listings data - you can replace this with an API call or external data source
-        const jobs = [
+        // Job listings data
+        const allJobs = [
             {
                 title: "Product Designer",
                 description: "We're looking for a product designer to help shape the future of alternative education. You'll work on designing experiences that support people navigating uncertainty and building new paths.",
@@ -260,7 +364,25 @@
             }
         ];
 
-        function renderJobs() {
+        let activeFilters = {
+            type: 'all',
+            location: 'all'
+        };
+
+        function filterJobs() {
+            let filteredJobs = allJobs.filter(job => {
+                const typeMatch = activeFilters.type === 'all' || job.type === activeFilters.type;
+                const locationMatch = activeFilters.location === 'all' || 
+                    job.location.includes(activeFilters.location) || 
+                    (activeFilters.location === 'Hybrid' && job.location.includes('Hybrid'));
+                return typeMatch && locationMatch;
+            });
+
+            renderJobs(filteredJobs);
+            updateJobsCount(filteredJobs.length);
+        }
+
+        function renderJobs(jobs) {
             const jobList = document.getElementById('jobList');
             const jobsEmpty = document.getElementById('jobsEmpty');
             
@@ -271,6 +393,7 @@
             }
             
             jobsEmpty.style.display = 'none';
+            jobList.style.display = 'block';
             jobList.innerHTML = jobs.map(job => `
                 <li class="job-item">
                     <div class="job-header-row">
@@ -287,8 +410,41 @@
             `).join('');
         }
 
-        // Render jobs on page load
-        document.addEventListener('DOMContentLoaded', renderJobs);
+        function updateJobsCount(count) {
+            const jobsCount = document.getElementById('jobsCount');
+            jobsCount.textContent = `${count} ${count === 1 ? 'position' : 'positions'}`;
+        }
+
+        function updateFilterButtons() {
+            document.querySelectorAll('.filter-button').forEach(button => {
+                const filterType = button.getAttribute('data-filter');
+                const filterValue = button.getAttribute('data-value');
+                
+                if (activeFilters[filterType] === filterValue) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
+        }
+
+        // Initialize filters
+        document.addEventListener('DOMContentLoaded', function() {
+            renderJobs(allJobs);
+            updateJobsCount(allJobs.length);
+            
+            // Filter button handlers
+            document.querySelectorAll('.filter-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const filterType = this.getAttribute('data-filter');
+                    const filterValue = this.getAttribute('data-value');
+                    
+                    activeFilters[filterType] = filterValue;
+                    updateFilterButtons();
+                    filterJobs();
+                });
+            });
+        });
     </script>
 </body>
 </html>
