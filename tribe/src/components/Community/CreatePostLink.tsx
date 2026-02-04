@@ -61,7 +61,7 @@ const CreatePostLink: React.FC = () => {
       <Input
         placeholder="Create Post"
         fontSize="10pt"
-        _placeholder={{ color: "gray.500" }}
+        _placeholder={{ color: "rgba(255, 255, 255, 0.5)" }}
         _hover={{
           bg: bg,
           border: "1px solid",
@@ -84,7 +84,7 @@ const CreatePostLink: React.FC = () => {
         as={IoImageOutline}
         fontSize={24}
         mr={4}
-        color="gray.400"
+        color="rgba(255, 255, 255, 0.6)"
         cursor="pointer"
       />
       <Icon as={BsLink45Deg} fontSize={24} color="gray.400" cursor="pointer" />

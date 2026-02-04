@@ -23,8 +23,9 @@ const Recommendation: React.FC = () => {
   const [isViewAll, setIsViewAll] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
   const { communityStateValue, onJoinOrCommunity } = useCommunityData();
-  const bg = useColorModeValue("white", "#1A202C");
-  const borderColor = useColorModeValue("gray.300", "#2D3748");
+  // Using dark theme colors matching main site
+  const bg = "rgba(255, 255, 255, 0.02)";
+  const borderColor = "rgba(255, 255, 255, 0.2)";
 
   const getCommunityRecommendation = async () => {
     setLoading(true);
@@ -74,7 +75,7 @@ const Recommendation: React.FC = () => {
         align="flex-end"
         color="white"
         p="6px 10px"
-        bg="blue.500"
+        bg="brand.500"
         height="70px"
         borderRadius="4px 4px 0px 0px"
         fontWeight={600}
@@ -147,6 +148,10 @@ const Recommendation: React.FC = () => {
                         height="22px"
                         fontSize="8pt"
                         variant={isJoined ? "outline" : "solid"}
+                        bg={isJoined ? "transparent" : "brand.500"}
+                        color={isJoined ? "rgba(255, 255, 255, 0.7)" : "#000000"}
+                        borderColor={isJoined ? "rgba(255, 255, 255, 0.2)" : "brand.500"}
+                        _hover={isJoined ? { borderColor: "brand.500", color: "brand.500" } : { bg: "brand.400" }}
                       >
                         {isJoined ? "Joined" : "Join"}
                       </Button>
@@ -159,11 +164,15 @@ const Recommendation: React.FC = () => {
               <Button
                 height="30px"
                 width="100%"
+                variant="outline"
+                borderColor="rgba(255, 255, 255, 0.2)"
+                color="rgba(255, 255, 255, 0.9)"
+                _hover={{ borderColor: "brand.500", color: "brand.500" }}
                 onClick={() =>
                   isViewAll ? setIsViewAll(false) : setIsViewAll(true)
                 }
               >
-                {isViewAll ? "Collapse Items" : "View All"}
+                {isViewAll ? "Collapse Items" : "VIEW ALL"}
               </Button>
             </Box>
           </>

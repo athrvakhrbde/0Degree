@@ -27,11 +27,11 @@ const Premium: React.FC = () => {
       <Flex mb={2}>
         <Icon as={GiCheckedShield} fontSize={26} color="brand.500" mt={2} />
         <Stack spacing={1} fontSize="9pt" pl={2}>
-          <Text fontWeight={600}>0Degree Premium</Text>
-          <Text>The best Tribe experience, with exclusive features</Text>
+          <Text fontWeight={600} color="#ffffff">0Degree Premium</Text>
+          <Text color="rgba(255, 255, 255, 0.7)">The best Tribe experience, with exclusive features</Text>
         </Stack>
       </Flex>
-      <Button height="30px" bg="brand.500">
+      <Button height="30px" bg="brand.500" color="#000000" _hover={{ bg: "brand.400" }}>
         Try Now
       </Button>
     </Flex>

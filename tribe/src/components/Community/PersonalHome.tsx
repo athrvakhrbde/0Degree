@@ -50,11 +50,16 @@ const PersonalHome: React.FC = () => {
           <Text fontSize="9pt" color="rgba(255, 255, 255, 0.7)">
             Your personal Tribe feed, built for you.
           </Text>
-          <Button height="30px">Create Post</Button>
+          <Button height="30px" variant="solid" bg="brand.500" color="#000000" _hover={{ bg: "brand.400" }}>
+            Create Post
+          </Button>
           <Button
             disabled={!user}
             variant="outline"
             height="30px"
+            borderColor="rgba(255, 255, 255, 0.2)"
+            color="rgba(255, 255, 255, 0.9)"
+            _hover={{ borderColor: "brand.500", color: "brand.500" }}
             onClick={() => {
               setOpen(true);
             }}
