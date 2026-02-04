@@ -13,7 +13,6 @@ import {
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { Image } from "@chakra-ui/react";
 
 import { Community } from "../../atoms/CommunitiesAtom";
 import { firestore } from "../../firebase/clientApp";
