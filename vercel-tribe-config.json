@@ -1,0 +1,16 @@
+{
+  "name": "tribe",
+  "version": 2,
+  "builds": [
+    {
+      "src": "tribe/package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "tribe/$1"
+    }
+  ]
+}
