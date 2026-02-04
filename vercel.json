@@ -2,6 +2,9 @@
   "functions": {
     "api/submit-email.js": {
       "maxDuration": 10
+    },
+    "api/get-emails.js": {
+      "maxDuration": 10
     }
   },
   "rewrites": [
@@ -34,6 +37,10 @@
     {
       "source": "/lp",
       "destination": "/lp.html"
+    },
+    {
+      "source": "/emails",
+      "destination": "/emails.html"
     },
     {
       "source": "/",

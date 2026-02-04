@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Signups - 0°</title>
+    <link rel="stylesheet" href="styles.css" media="all">
+    <style>
+        body {
+            background: #000;
+            color: #fff;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 36px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            letter-spacing: -1px;
+        }
+        
+        .subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 40px;
+            font-size: 16px;
+        }
+        
+        .stats {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 40px;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .stat-item {
+            flex: 1;
+        }
+        
+        .stat-value {
+            font-size: 32px;
+            font-weight: 600;
+            color: #00ffce;
+            margin-bottom: 4px;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .emails-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .email-item {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s ease;
+        }
+        
+        .email-item:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        .email-item:last-child {
+            border-bottom: none;
+        }
+        
+        .email-info {
+            flex: 1;
+        }
+        
+        .email-address {
+            font-size: 16px;
+            font-weight: 500;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+        
+        .email-date {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .error {
+            text-align: center;
+            padding: 60px 20px;
+            color: #ff6b6b;
+        }
+        
+        .empty {
+            text-align: center;
+            padding: 60px 20px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .refresh-btn {
+            background: #00ffce;
+            color: #000;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-bottom: 24px;
+            transition: opacity 0.2s ease;
+        }
+        
+        .refresh-btn:hover {
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .stats {
+                flex-direction: column;
+                gap: 16px;
+            }
+            
+            .email-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Email Signups</h1>
+        <p class="subtitle">All emails collected from /join page</p>
+        
+        <button class="refresh-btn" onclick="loadEmails()">Refresh</button>
+        
+        <div id="stats" class="stats" style="display: none;">
+            <div class="stat-item">
+                <div class="stat-value" id="totalCount">0</div>
+                <div class="stat-label">Total Signups</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="todayCount">0</div>
+                <div class="stat-label">Today</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="weekCount">0</div>
+                <div class="stat-label">This Week</div>
+            </div>
+        </div>
+        
+        <div id="loading" class="loading">Loading emails...</div>
+        <div id="error" class="error" style="display: none;"></div>
+        <div id="empty" class="empty" style="display: none;">No emails found.</div>
+        
+        <ul class="emails-list" id="emailsList" style="display: none;"></ul>
+    </div>
+
+    <script>
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffMs = now - date;
+            const diffMins = Math.floor(diffMs / 60000);
+            const diffHours = Math.floor(diffMs / 3600000);
+            const diffDays = Math.floor(diffMs / 86400000);
+            
+            if (diffMins < 1) return 'Just now';
+            if (diffMins < 60) return `${diffMins} minute${diffMins > 1 ? 's' : ''} ago`;
+            if (diffHours < 24) return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
+            if (diffDays < 7) return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
+            
+            return date.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+        
+        function calculateStats(emails) {
+            const now = new Date();
+            const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
+            
+            const todayCount = emails.filter(email => {
+                const emailDate = new Date(email.createdAt);
+                return emailDate >= today;
+            }).length;
+            
+            const weekCount = emails.filter(email => {
+                const emailDate = new Date(email.createdAt);
+                return emailDate >= weekAgo;
+            }).length;
+            
+            return {
+                total: emails.length,
+                today: todayCount,
+                week: weekCount
+            };
+        }
+        
+        async function loadEmails() {
+            const loadingEl = document.getElementById('loading');
+            const errorEl = document.getElementById('error');
+            const emptyEl = document.getElementById('empty');
+            const emailsListEl = document.getElementById('emailsList');
+            const statsEl = document.getElementById('stats');
+            
+            loadingEl.style.display = 'block';
+            errorEl.style.display = 'none';
+            emptyEl.style.display = 'none';
+            emailsListEl.style.display = 'none';
+            statsEl.style.display = 'none';
+            
+            try {
+                const response = await fetch('/api/get-emails');
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to fetch emails');
+                }
+                
+                loadingEl.style.display = 'none';
+                
+                if (data.emails && data.emails.length > 0) {
+                    // Update stats
+                    const stats = calculateStats(data.emails);
+                    document.getElementById('totalCount').textContent = stats.total;
+                    document.getElementById('todayCount').textContent = stats.today;
+                    document.getElementById('weekCount').textContent = stats.week;
+                    statsEl.style.display = 'flex';
+                    
+                    // Render emails
+                    emailsListEl.innerHTML = data.emails.map(email => `
+                        <li class="email-item">
+                            <div class="email-info">
+                                <div class="email-address">${email.email}</div>
+                                <div class="email-date">${formatDate(email.createdAt)}</div>
+                            </div>
+                        </li>
+                    `).join('');
+                    
+                    emailsListEl.style.display = 'block';
+                } else {
+                    emptyEl.style.display = 'block';
+                }
+                
+            } catch (error) {
+                console.error('Error loading emails:', error);
+                loadingEl.style.display = 'none';
+                errorEl.textContent = `Error: ${error.message}`;
+                errorEl.style.display = 'block';
+            }
+        }
+        
+        // Load emails on page load
+        document.addEventListener('DOMContentLoaded', loadEmails);
+    </script>
+</body>
+</html>
