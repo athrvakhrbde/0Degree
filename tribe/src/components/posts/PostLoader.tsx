@@ -2,6 +2,7 @@ import React from "react";
 import {
   Stack,
   Box,
+  Flex,
   SkeletonText,
   Skeleton,
 } from "@chakra-ui/react";
