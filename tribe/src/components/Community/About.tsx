@@ -68,26 +68,34 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
       <Flex
         justify="space-between"
         align="center"
-        bg="blue.400"
-        color="white"
+        bg="brand.500"
+        color="#000000"
         p={3}
-        borderRadius="4px 4px 0px 0px"
+        borderRadius={0}
       >
-        <Text fontSize="10pt" fontWeight={700}>
+        <Text fontSize={{ base: "12px", sm: "13px", md: "14px" }} fontWeight={700} letterSpacing="0.3px">
           About Community
         </Text>
-        <Icon as={HiOutlineDotsHorizontal} cursor="pointer" />
+        <Icon as={HiOutlineDotsHorizontal} cursor="pointer" fontSize={{ base: "16px", sm: "18px" }} />
       </Flex>
-      <Flex direction="column" p={3} bg={bg} borderRadius="0px 0px 4px 4px">
+      <Flex direction="column" p={3} bg={bg} borderRadius={0}>
         <Stack>
-          <Flex width="100%" p={2} fontSize="10pt" fontWeight={700}>
+          <Flex width="100%" p={2} fontSize={{ base: "11px", sm: "12px", md: "13px" }} fontWeight={700} gap={4}>
             <Flex direction="column" flexGrow={1}>
-              <Text>{communityData.numberOfMembers.toLocaleString()}</Text>
-              <Text>Members</Text>
+              <Text fontSize={{ base: "16px", sm: "18px", md: "20px" }} fontWeight={800} color="#ffffff">
+                {communityData.numberOfMembers.toLocaleString()}
+              </Text>
+              <Text fontSize={{ base: "11px", sm: "12px", md: "13px" }} fontWeight={400} color="rgba(255, 255, 255, 0.7)">
+                Members
+              </Text>
             </Flex>
             <Flex direction="column" flexGrow={1}>
-              <Text>1</Text>
-              <Text>Online</Text>
+              <Text fontSize={{ base: "16px", sm: "18px", md: "20px" }} fontWeight={800} color="#ffffff">
+                1
+              </Text>
+              <Text fontSize={{ base: "11px", sm: "12px", md: "13px" }} fontWeight={400} color="rgba(255, 255, 255, 0.7)">
+                Online
+              </Text>
             </Flex>
           </Flex>
           <Divider />
@@ -96,10 +104,11 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
             align="center"
             width="100%"
             p={1}
-            fontWeight={500}
-            fontSize="10pt"
+            fontWeight={400}
+            fontSize={{ base: "11px", sm: "12px", md: "13px" }}
+            color="rgba(255, 255, 255, 0.7)"
           >
-            <Icon as={RiCakeLine} fontSize={18} mr={2} />
+            <Icon as={RiCakeLine} fontSize={{ base: "16px", sm: "18px" }} mr={2} />
             {communityData.createdAt && (
               <>
                 <Text>
@@ -119,14 +128,15 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
           {user?.uid === communityData.creatorId && (
             <>
               <Divider />
-              <Stack spacing={1} fontSize="10pt">
-                <Text fontWeight={600}>Admin</Text>
+              <Stack spacing={1} fontSize={{ base: "11px", sm: "12px", md: "13px" }}>
+                <Text fontWeight={600} color="#ffffff">Admin</Text>
                 <Flex align="center" justify="space-between">
                   <Text
-                    color="blue.500"
+                    color="brand.500"
                     cursor="pointer"
-                    _hover={{ textDecoration: "underline" }}
+                    _hover={{ textDecoration: "underline", color: "brand.400" }}
                     onClick={() => selectedFieldRef.current?.click()}
+                    transition="color 0.3s ease"
                   >
                     Change Image
                   </Text>
