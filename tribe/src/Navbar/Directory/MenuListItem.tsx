@@ -12,7 +12,7 @@ import useDirectory from "../../hooks/useDirectory";
 type MenuListItemProps = {
   displayText: string;
   link: string;
-  icon: IconType;
+  icon?: IconType;
   iconColor: string;
   imageURL?: string;
 };
@@ -38,9 +38,11 @@ const MenuListItem: React.FC<MenuListItemProps> = ({
     >
       <Flex alignItems="center">
         {imageURL ? (
-          <Image borderRadius="full" boxSize="18px" src={imageURL} mr={2} />
-        ) : (
+          <Image borderRadius="full" boxSize="18px" src={imageURL} mr={2} alt="Community" />
+        ) : icon ? (
           <Icon fontSize={20} mr={2} as={icon} color={iconColor} />
+        ) : (
+          <Image src="/images/0degree-logo.svg" height="18px" width="18px" mr={2} alt="Community" />
         )}
         {displayText}
       </Flex>

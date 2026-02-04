@@ -5,7 +5,7 @@ import { TiHome } from "react-icons/ti";
 export type DirectoryMenuItem = {
   displayText: string;
   link: string;
-  icon: IconType;
+  icon?: IconType;
   iconColor: string;
   imageURL?: string;
 };
