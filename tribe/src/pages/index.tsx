@@ -15,12 +15,14 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 import { Post, PostVote } from "../atoms/PostAtom";
 import CreatePostLink from "../components/Community/CreatePostLink";
+import EmptyState from "../components/common/EmptyState";
 import PageContent from "../components/Layout/PageContent";
 import PostItem from "../components/posts/PostItem";
 import PostLoader from "../components/posts/PostLoader";
 import { auth, firestore } from "../firebase/clientApp";
 import useCommunityData from "../hooks/useCommunityData";
 import usePosts from "../hooks/usePosts";
+import { logger } from "../utils/logger";
 
 const Home: NextPage = () => {
   const [user, loadingUser] = useAuthState(auth);
@@ -63,10 +65,8 @@ const Home: NextPage = () => {
         buildUserHomeFeed();
       }
     } catch (error) {
-      // Error handled silently - user will see empty feed
-      if (process.env.NODE_ENV === 'development') {
-        console.error("Building Home Error", error);
-      }
+      logger.error("Building Home Error", error);
+      // User will see empty feed - error handled gracefully
     }
   };
   const buildNoUserHomeFeed = async () => {
@@ -86,10 +86,8 @@ const Home: NextPage = () => {
         posts: posts as Post[],
       }));
     } catch (error) {
-      // Error handled silently - user will see empty feed
-      if (process.env.NODE_ENV === 'development') {
-        console.error("BuildNoUserHome Error", error);
-      }
+      logger.error("BuildNoUserHome Error", error);
+      // User will see empty feed - error handled gracefully
     }
     setLoading(false);
   };
@@ -122,10 +120,8 @@ const Home: NextPage = () => {
         postVotes: batches.flat() as PostVote[],
       }));
     } catch (error) {
-      // Error handled silently - votes may not be accurate
-      if (process.env.NODE_ENV === 'development') {
-        console.error("getUserPostVotes Error", error);
-      }
+      logger.error("getUserPostVotes Error", error);
+      // Votes may not be accurate - error handled gracefully
     }
   };
 
@@ -165,8 +161,26 @@ const Home: NextPage = () => {
       <PageContent>
         <>
           <CreatePostLink />
-          {loading ? (
+          {loading || loadingUser ? (
             <PostLoader />
+          ) : postStateValue.posts.length === 0 ? (
+            <EmptyState
+              title="No Posts Yet"
+              description={user ? "Be the first to create a post!" : "Join the community to see posts and create your own."}
+              actionLabel={user ? "Create Post" : "Sign Up"}
+              onAction={() => {
+                if (!user) {
+                  // Trigger auth modal
+                  window.location.href = "/";
+                } else {
+                  // Trigger create post
+                  const createPostLink = document.querySelector('[placeholder="Create Post"]');
+                  if (createPostLink) {
+                    (createPostLink as HTMLElement).click();
+                  }
+                }
+              }}
+            />
           ) : (
             <Stack>
               {postStateValue.posts.map((post) => (

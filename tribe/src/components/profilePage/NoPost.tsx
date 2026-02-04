@@ -1,26 +1,15 @@
-import { Flex, Image, Stack, Text } from "@chakra-ui/react";
 import React from "react";
+import EmptyState from "../common/EmptyState";
 
 type Props = {};
 
 function NoPost({}: Props) {
   return (
-    <Flex justify="center" pt="50px">
-      <Stack spacing={5}>
-        <Image
-          src="https://drive.google.com/uc?export=download&id=1oS2QPa8ex6ufQvTG3mZ51Gm-LSWSb2SQ"
-          height="200px"
-        />
-        <Text
-          fontSize="20pt"
-          color="gray.500"
-          fontWeight="bold"
-          textAlign="center"
-        >
-          No Post Yet!
-        </Text>
-      </Stack>
-    </Flex>
+    <EmptyState
+      title="No Posts Yet"
+      description="This user hasn't posted anything yet. Check back later!"
+      minHeight="300px"
+    />
   );
 }
 

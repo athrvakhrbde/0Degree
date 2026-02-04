@@ -1,7 +1,106 @@
-export const FIREBASE_ERRORS = {
+export const FIREBASE_ERRORS: Record<string, string> = {
   "Firebase: Error (auth/email-already-in-use).":
     "A user with that email already exists",
-
   "Firebase: Error (auth/user-not-found).": "Invalid email or password",
   "Firebase: Error (auth/wrong-password).": "Invalid email or password",
+  "Firebase: Error (auth/invalid-email).": "Invalid email address",
+  "Firebase: Error (auth/user-disabled).": "This account has been disabled",
+  "Firebase: Error (auth/too-many-requests).": "Too many failed attempts. Please try again later",
+  "Firebase: Error (auth/operation-not-allowed).": "This sign-in method is not enabled",
+  "Firebase: Error (auth/weak-password).": "Password should be at least 6 characters",
+  "Firebase: Error (auth/network-request-failed).": "Network error. Please check your connection",
+  "Firebase: Error (auth/popup-closed-by-user).": "Sign-in popup was closed",
+  "Firebase: Error (auth/cancelled-popup-request).": "Only one popup request is allowed at a time",
+  "Firebase: Error (auth/popup-blocked).": "Popup was blocked by browser",
+  "Firebase: Error (auth/requires-recent-login).": "Please log in again to complete this action",
+  "Firebase: Error (auth/invalid-credential).": "Invalid credentials. Please try again",
+  "Firebase: Error (auth/invalid-verification-code).": "Invalid verification code",
+  "Firebase: Error (auth/invalid-verification-id).": "Invalid verification ID",
+  "Firebase: Error (auth/missing-email).": "Email is required",
+  "Firebase: Error (auth/missing-password).": "Password is required",
+  "Firebase: Error (auth/quota-exceeded).": "Quota exceeded. Please try again later",
+  "Firebase: Error (auth/unavailable).": "Service temporarily unavailable",
+  "Firebase: Error (auth/unauthorized-domain).": "Unauthorized domain",
+  "Firebase: Error (auth/api-key-not-valid).": "API key not valid. Please check configuration",
+  "Firebase: Error (auth/app-not-authorized).": "App not authorized",
+  "Firebase: Error (auth/app-not-installed).": "App not installed",
+  "Firebase: Error (auth/captcha-check-failed).": "Captcha check failed",
+  "Firebase: Error (auth/code-expired).": "Code expired",
+  "Firebase: Error (auth/cordova-not-ready).": "Cordova not ready",
+  "Firebase: Error (auth/cors-unsupported).": "CORS unsupported",
+  "Firebase: Error (auth/dependent-sdk-initialized-before-auth).": "Dependent SDK initialized before auth",
+  "Firebase: Error (auth/dynamic-link-not-activated).": "Dynamic link not activated",
+  "Firebase: Error (auth/email-change-needs-verification).": "Email change needs verification",
+  "Firebase: Error (auth/emulator-config-failed).": "Emulator config failed",
+  "Firebase: Error (auth/expired-action-code).": "Expired action code",
+  "Firebase: Error (auth/internal-error).": "Internal error. Please try again",
+  "Firebase: Error (auth/invalid-action-code).": "Invalid action code",
+  "Firebase: Error (auth/invalid-api-key).": "Invalid API key",
+  "Firebase: Error (auth/invalid-app-credential).": "Invalid app credential",
+  "Firebase: Error (auth/invalid-app-id).": "Invalid app ID",
+  "Firebase: Error (auth/invalid-auth-event).": "Invalid auth event",
+  "Firebase: Error (auth/invalid-cert-hash).": "Invalid cert hash",
+  "Firebase: Error (auth/invalid-continue-uri).": "Invalid continue URI",
+  "Firebase: Error (auth/invalid-cordova-configuration).": "Invalid Cordova configuration",
+  "Firebase: Error (auth/invalid-custom-token).": "Invalid custom token",
+  "Firebase: Error (auth/invalid-dynamic-link-domain).": "Invalid dynamic link domain",
+  "Firebase: Error (auth/invalid-emulator-scheme).": "Invalid emulator scheme",
+  "Firebase: Error (auth/invalid-message-payload).": "Invalid message payload",
+  "Firebase: Error (auth/invalid-multi-factor-session).": "Invalid multi-factor session",
+  "Firebase: Error (auth/invalid-oauth-client-id).": "Invalid OAuth client ID",
+  "Firebase: Error (auth/invalid-oauth-provider).": "Invalid OAuth provider",
+  "Firebase: Error (auth/invalid-persistence-type).": "Invalid persistence type",
+  "Firebase: Error (auth/invalid-phone-number).": "Invalid phone number",
+  "Firebase: Error (auth/invalid-provider-id).": "Invalid provider ID",
+  "Firebase: Error (auth/invalid-recipient-email).": "Invalid recipient email",
+  "Firebase: Error (auth/invalid-sender).": "Invalid sender",
+  "Firebase: Error (auth/invalid-tenant-id).": "Invalid tenant ID",
+  "Firebase: Error (auth/missing-android-pkg-name).": "Missing Android package name",
+  "Firebase: Error (auth/missing-app-credential).": "Missing app credential",
+  "Firebase: Error (auth/missing-continue-uri).": "Missing continue URI",
+  "Firebase: Error (auth/missing-iframe-start).": "Missing iframe start",
+  "Firebase: Error (auth/missing-ios-bundle-id).": "Missing iOS bundle ID",
+  "Firebase: Error (auth/missing-multi-factor-info).": "Missing multi-factor info",
+  "Firebase: Error (auth/missing-multi-factor-session).": "Missing multi-factor session",
+  "Firebase: Error (auth/missing-or-invalid-nonce).": "Missing or invalid nonce",
+  "Firebase: Error (auth/missing-phone-number).": "Missing phone number",
+  "Firebase: Error (auth/missing-verification-code).": "Missing verification code",
+  "Firebase: Error (auth/missing-verification-id).": "Missing verification ID",
+  "Firebase: Error (auth/multi-factor-info-not-found).": "Multi-factor info not found",
+  "Firebase: Error (auth/multi-factor-auth-required).": "Multi-factor auth required",
+  "Firebase: Error (auth/no-auth-event).": "No auth event",
+  "Firebase: Error (auth/no-such-provider).": "No such provider",
+  "Firebase: Error (auth/null-user).": "Null user",
+  "Firebase: Error (auth/phone-number-already-exists).": "Phone number already exists",
+  "Firebase: Error (auth/project-not-found).": "Project not found",
+  "Firebase: Error (auth/rejected-credential).": "Rejected credential",
+  "Firebase: Error (auth/second-factor-already-in-use).": "Second factor already in use",
+  "Firebase: Error (auth/session-expired).": "Session expired",
+  "Firebase: Error (auth/timeout).": "Request timeout",
+  "Firebase: Error (auth/unauthorized-continue-uri).": "Unauthorized continue URI",
+  "Firebase: Error (auth/unsupported-first-factor).": "Unsupported first factor",
+  "Firebase: Error (auth/unsupported-persistence-type).": "Unsupported persistence type",
+  "Firebase: Error (auth/unsupported-tenant-operation).": "Unsupported tenant operation",
+  "Firebase: Error (auth/unverified-email).": "Unverified email",
+  "Firebase: Error (auth/user-cancelled).": "User cancelled",
+  "Firebase: Error (auth/user-mismatch).": "User mismatch",
+  "Firebase: Error (auth/user-signed-out).": "User signed out",
+  "Firebase: Error (auth/weak-password).": "Password should be at least 6 characters",
+};
+
+/**
+ * Get user-friendly error message from Firebase error
+ */
+export const getFirebaseErrorMessage = (error: any): string => {
+  if (!error) return "An unexpected error occurred";
+  
+  const errorMessage = error.message || error.toString();
+  
+  // Check if we have a custom message for this error
+  if (FIREBASE_ERRORS[errorMessage]) {
+    return FIREBASE_ERRORS[errorMessage];
+  }
+  
+  // Fallback to generic message
+  return "An error occurred. Please try again.";
 };

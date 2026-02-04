@@ -7,7 +7,8 @@ import { useSetRecoilState } from "recoil";
 
 import { authModelState } from "../../../atoms/authModalAtom";
 import { auth, firestore } from "../../../firebase/clientApp";
-import { FIREBASE_ERRORS } from "../../../firebase/errors";
+import { getFirebaseErrorMessage } from "../../../firebase/errors";
+import { validateEmail, validatePassword } from "../../../utils/validation";
 
 const SignUp: React.FC = () => {
   const setAuthModelState = useSetRecoilState(authModelState);
@@ -30,15 +31,40 @@ const SignUp: React.FC = () => {
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (error) setError("");
+    setError("");
 
+    // Validation
+    if (!signUpForm.email.trim()) {
+      setError("Email is required");
+      return;
+    }
+    if (!validateEmail(signUpForm.email)) {
+      setError("Please enter a valid email address");
+      return;
+    }
+    if (!signUpForm.password) {
+      setError("Password is required");
+      return;
+    }
+    const passwordValidation = validatePassword(signUpForm.password);
+    if (!passwordValidation.valid) {
+      setError(passwordValidation.message || "Invalid password");
+      return;
+    }
     if (signUpForm.password !== signUpForm.conformPassword) {
-      setError("Password Do Not Match");
+      setError("Passwords do not match");
       return;
     }
 
     createUserWithEmailAndPassword(signUpForm.email, signUpForm.password);
   };
+  
+  // Update error when Firebase error changes
+  React.useEffect(() => {
+    if (userError) {
+      setError(getFirebaseErrorMessage(userError));
+    }
+  }, [userError]);
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     // update state

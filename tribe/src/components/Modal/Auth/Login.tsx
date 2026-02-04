@@ -5,7 +5,8 @@ import { useSetRecoilState } from "recoil";
 
 import { authModelState } from "../../../atoms/authModalAtom";
 import { auth } from "../../../firebase/clientApp";
-import { FIREBASE_ERRORS } from "../../../firebase/errors";
+import { getFirebaseErrorMessage } from "../../../firebase/errors";
+import { validateEmail } from "../../../utils/validation";
 
 type LoginProps = {};
 
@@ -15,6 +16,7 @@ const Login: React.FC<LoginProps> = () => {
     email: "",
     password: "",
   });
+  const [formError, setFormError] = useState("");
   // Using dark theme colors matching main site
   const searchBorder = "rgba(255, 255, 255, 0.2)";
   const inputBg = "rgba(255, 255, 255, 0.02)";
@@ -26,8 +28,35 @@ const Login: React.FC<LoginProps> = () => {
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setFormError("");
+    
+    // Validation
+    if (!loginForm.email.trim()) {
+      setFormError("Email is required");
+      return;
+    }
+    if (!validateEmail(loginForm.email)) {
+      setFormError("Please enter a valid email address");
+      return;
+    }
+    if (!loginForm.password) {
+      setFormError("Password is required");
+      return;
+    }
+    if (loginForm.password.length < 6) {
+      setFormError("Password must be at least 6 characters");
+      return;
+    }
+    
     signInWithEmailAndPassword(loginForm.email, loginForm.password);
   };
+  
+  // Update form error when Firebase error changes
+  React.useEffect(() => {
+    if (error) {
+      setFormError(getFirebaseErrorMessage(error));
+    }
+  }, [error]);
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     // update state
@@ -83,9 +112,15 @@ const Login: React.FC<LoginProps> = () => {
         }}
         bg={inputBg}
       />
-      {error && (
-        <Text textAlign="center" color="red" fontSize="10pt" mb={2}>
-          {FIREBASE_ERRORS[error?.message as keyof typeof FIREBASE_ERRORS] || error?.message || "An error occurred. Please check Firebase configuration."}
+      {(formError || error) && (
+        <Text 
+          textAlign="center" 
+          color="rgba(255, 100, 100, 0.9)" 
+          fontSize={{ base: "12px", md: "13px" }} 
+          mb={2}
+          px={2}
+        >
+          {formError || getFirebaseErrorMessage(error)}
         </Text>
       )}
       <Button
