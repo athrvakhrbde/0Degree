@@ -84,8 +84,8 @@ const Navbar: React.FC = () => {
       backdropFilter="blur(10px)"
       borderBottom="1px solid"
       borderColor="rgba(255, 255, 255, 0.2)"
-      height={{ base: "56px", md: "64px" }}
-      padding={{ base: "12px 0", md: "16px 0" }}
+      height={{ base: "56px", sm: "60px", md: "64px", lg: "64px" }}
+      padding={{ base: "12px 0", sm: "14px 0", md: "16px 0" }}
       position="fixed"
       top={0}
       left={0}
@@ -99,18 +99,34 @@ const Navbar: React.FC = () => {
         maxWidth="1400px"
         width="100%"
         margin="0 auto"
-        padding="0 clamp(10px, 1vw, 15px)"
-        justify={{ md: "space-between" }}
+        padding={{ 
+          base: "0 16px", 
+          sm: "0 20px", 
+          md: "0 24px", 
+          lg: "0 clamp(10px, 1vw, 15px)" 
+        }}
+        justify={{ base: "space-between", md: "space-between" }}
         align="center"
       >
         <Flex
           align="center"
           cursor="pointer"
           onClick={() => onSelectMenuItem(defaultMenuItem)}
+          minH={{ base: "44px", md: "48px" }}
+          minW={{ base: "44px", md: "48px" }}
+          justifyContent="center"
         >
-          <Image src="/images/0degree-logo.svg" height={{ base: "28px", md: "32px" }} alt="0Degree" />
+          <Image 
+            src="/images/0degree-logo.svg" 
+            height={{ base: "26px", sm: "28px", md: "30px", lg: "32px" }} 
+            alt="0Degree" 
+          />
         </Flex>
-        <Flex align="center" gap={{ base: "16px", md: "32px" }}>
+        <Flex 
+          align="center" 
+          gap={{ base: "12px", sm: "16px", md: "24px", lg: "32px" }}
+          flexWrap="nowrap"
+        >
           {user && <Directory />}
           <SearchInput user={user} />
           <RightContent user={user} />

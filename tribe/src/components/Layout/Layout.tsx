@@ -9,7 +9,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
       <Navbar />
-      <main style={{ paddingTop: "64px", minHeight: "calc(100vh - 64px)" }}>
+      <main style={{ 
+        paddingTop: "56px", 
+        minHeight: "calc(100vh - 56px)",
+        width: "100%",
+        overflowX: "hidden"
+      }}>
         {children}
       </main>
     </>

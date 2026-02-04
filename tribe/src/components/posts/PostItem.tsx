@@ -142,7 +142,7 @@ const PostItem: React.FC<PostItemProps> = ({
       _hover={{ opacity: singlePostPage ? 1 : 0.9 }}
       cursor={singlePostPage ? "unset" : "pointer"}
       onClick={() => onSelectPost && onSelectPost(post)}
-      mb={{ base: "32px", md: "48px" }}
+      mb={{ base: "24px", sm: "28px", md: "36px", lg: "48px" }}
       transition="opacity 0.3s ease"
     >
       <Flex
@@ -151,8 +151,8 @@ const PostItem: React.FC<PostItemProps> = ({
         bg="transparent"
         p={0}
         width="auto"
-        minWidth="48px"
-        mr={{ base: "16px", md: "24px" }}
+        minWidth={{ base: "44px", sm: "48px" }}
+        mr={{ base: "12px", sm: "16px", md: "20px", lg: "24px" }}
         borderRadius={0}
       >
         <Icon
@@ -160,13 +160,18 @@ const PostItem: React.FC<PostItemProps> = ({
             userVoteValue === 1 ? IoArrowUpCircleSharp : IoArrowUpCircleOutline
           }
           color={userVoteValue === 1 ? "brand.500" : "rgba(255, 255, 255, 0.4)"}
-          fontSize={{ base: "20px", md: "24px" }}
+          fontSize={{ base: "18px", sm: "20px", md: "22px", lg: "24px" }}
           onClick={(event) => onVote(event, post, 1, post.communityId)}
           cursor="pointer"
+          minW={{ base: "44px", sm: "44px" }}
+          minH={{ base: "44px", sm: "44px" }}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
           _hover={{ color: "brand.500", transform: "scale(1.1)" }}
           transition="all 0.2s ease"
         />
-        <Text fontSize={{ base: "14px", md: "16px" }} fontWeight={500} color="rgba(255, 255, 255, 0.9)" my={1}>
+        <Text fontSize={{ base: "13px", sm: "14px", md: "15px", lg: "16px" }} fontWeight={500} color="rgba(255, 255, 255, 0.9)" my={{ base: 0.5, sm: 1 }}>
           {post.voteStatus}
         </Text>
         <Icon
@@ -176,9 +181,14 @@ const PostItem: React.FC<PostItemProps> = ({
               : IoArrowDownCircleOutline
           }
           color={userVoteValue === -1 ? "rgba(255, 255, 255, 0.6)" : "rgba(255, 255, 255, 0.4)"}
-          fontSize={{ base: "20px", md: "24px" }}
+          fontSize={{ base: "18px", sm: "20px", md: "22px", lg: "24px" }}
           onClick={(event) => onVote(event, post, -1, post.communityId)}
           cursor="pointer"
+          minW={{ base: "44px", sm: "44px" }}
+          minH={{ base: "44px", sm: "44px" }}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
           _hover={{ color: "rgba(255, 255, 255, 0.6)", transform: "scale(1.1)" }}
           transition="all 0.2s ease"
         />
@@ -190,8 +200,8 @@ const PostItem: React.FC<PostItemProps> = ({
             <Text mr={2}>{error}</Text>
           </Alert>
         )}
-        <Stack spacing={{ base: "12px", md: "16px" }} p={0}>
-          <Stack direction="row" spacing="8px" align="center" fontSize={{ base: "12px", md: "14px" }}>
+        <Stack spacing={{ base: "10px", sm: "12px", md: "14px", lg: "16px" }} p={0}>
+          <Stack direction="row" spacing={{ base: "6px", sm: "8px" }} align="center" fontSize={{ base: "11px", sm: "12px", md: "13px", lg: "14px" }} flexWrap="wrap">
             {/* check */}
             {homePage && (
               <>
@@ -199,11 +209,11 @@ const PostItem: React.FC<PostItemProps> = ({
                   <Image
                     src={post.communityImageURL}
                     borderRadius="full"
-                    boxSize={{ base: "20px", md: "24px" }}
+                    boxSize={{ base: "18px", sm: "20px", md: "22px", lg: "24px" }}
                     mr={1}
                   />
                 ) : (
-                  <Image src="/images/0degree-logo.svg" height={{ base: "20px", md: "24px" }} width={{ base: "20px", md: "24px" }} alt="Community" mr={1} />
+                  <Image src="/images/0degree-logo.svg" height={{ base: "18px", sm: "20px", md: "22px", lg: "24px" }} width={{ base: "18px", sm: "20px", md: "22px", lg: "24px" }} alt="Community" mr={1} />
                 )}
                 <Link href={`/r/${post.communityId}`}>
                   <Text
@@ -212,26 +222,27 @@ const PostItem: React.FC<PostItemProps> = ({
                     onClick={(event) => event.stopPropagation}
                     color="rgba(255, 255, 255, 0.7)"
                     transition="color 0.3s ease"
+                    fontSize="inherit"
                   >{`t/${post.communityId}`}</Text>
                 </Link>
-                <Icon as={BsDot} color="rgba(255, 255, 255, 0.3)" fontSize="8px" />
+                <Icon as={BsDot} color="rgba(255, 255, 255, 0.3)" fontSize={{ base: "6px", sm: "8px" }} />
               </>
             )}
-            <Text color="rgba(255, 255, 255, 0.5)" fontWeight={300}>
+            <Text color="rgba(255, 255, 255, 0.5)" fontWeight={300} fontSize="inherit">
               Posted by u/{decryptedData.creatorDisplayName}{" "}
               {moment(new Date(post.createdAt?.seconds * 1000)).fromNow()}
             </Text>
           </Stack>
-          <Text fontSize={{ base: "18px", md: "24px" }} fontWeight={500} lineHeight="1.3" letterSpacing="-0.5px" color="#ffffff">
+          <Text fontSize={{ base: "16px", sm: "18px", md: "20px", lg: "24px" }} fontWeight={500} lineHeight={{ base: "1.25", md: "1.3" }} letterSpacing={{ base: "-0.3px", md: "-0.5px" }} color="#ffffff">
             {decryptedData.title}
           </Text>
           {decryptedData.body && (
-            <Text fontSize={{ base: "14px", md: "16px" }} fontWeight={400} lineHeight="1.6" color="rgba(255, 255, 255, 0.7)">
+            <Text fontSize={{ base: "13px", sm: "14px", md: "15px", lg: "16px" }} fontWeight={400} lineHeight={{ base: "1.5", md: "1.6" }} color="rgba(255, 255, 255, 0.7)">
               {decryptedData.body}
             </Text>
           )}
           {post.imageURL && (
-            <Flex justify="center" align="center" p={0} mt={{ base: "16px", md: "24px" }}>
+            <Flex justify="center" align="center" p={0} mt={{ base: "12px", sm: "16px", md: "20px", lg: "24px" }}>
               {loadingImage && (
                 <Skeleton height="200px" width="100%" borderRadius={0} />
               )}
@@ -247,40 +258,43 @@ const PostItem: React.FC<PostItemProps> = ({
             </Flex>
           )}
         </Stack>
-        <Flex mt={{ base: "16px", md: "24px" }} gap={{ base: "16px", md: "24px" }} color="rgba(255, 255, 255, 0.5)" fontWeight={400}>
+        <Flex mt={{ base: "12px", sm: "16px", md: "20px", lg: "24px" }} gap={{ base: "12px", sm: "14px", md: "18px", lg: "24px" }} color="rgba(255, 255, 255, 0.5)" fontWeight={400} flexWrap="wrap">
           <Flex
             align="center"
             p={0}
+            minH={{ base: "44px", sm: "44px" }}
             _hover={{ color: "brand.500" }}
             cursor="pointer"
             transition="color 0.3s ease"
           >
-            <Icon as={BsChat} mr={1} fontSize={{ base: "16px", md: "18px" }} />
-            <Text fontSize={{ base: "13px", md: "14px" }} fontWeight={400}>
+            <Icon as={BsChat} mr={1} fontSize={{ base: "15px", sm: "16px", md: "17px", lg: "18px" }} />
+            <Text fontSize={{ base: "12px", sm: "13px", md: "13px", lg: "14px" }} fontWeight={400}>
               {post.numberOfComments}
             </Text>
           </Flex>
           <Flex
             align="center"
             p={0}
+            minH={{ base: "44px", sm: "44px" }}
             _hover={{ color: "brand.500" }}
             cursor="pointer"
             transition="color 0.3s ease"
           >
-            <Icon as={IoArrowRedoOutline} mr={1} fontSize={{ base: "16px", md: "18px" }} />
-            <Text fontSize={{ base: "13px", md: "14px" }} fontWeight={400}>
+            <Icon as={IoArrowRedoOutline} mr={1} fontSize={{ base: "15px", sm: "16px", md: "17px", lg: "18px" }} />
+            <Text fontSize={{ base: "12px", sm: "13px", md: "13px", lg: "14px" }} fontWeight={400}>
               Share
             </Text>
           </Flex>
           <Flex
             align="center"
             p={0}
+            minH={{ base: "44px", sm: "44px" }}
             _hover={{ color: "brand.500" }}
             cursor="pointer"
             transition="color 0.3s ease"
           >
-            <Icon as={IoBookmarkOutline} mr={1} fontSize={{ base: "16px", md: "18px" }} />
-            <Text fontSize={{ base: "13px", md: "14px" }} fontWeight={400}>
+            <Icon as={IoBookmarkOutline} mr={1} fontSize={{ base: "15px", sm: "16px", md: "17px", lg: "18px" }} />
+            <Text fontSize={{ base: "12px", sm: "13px", md: "13px", lg: "14px" }} fontWeight={400}>
               Save
             </Text>
           </Flex>
@@ -288,6 +302,7 @@ const PostItem: React.FC<PostItemProps> = ({
             <Flex
               align="center"
               p={0}
+              minH={{ base: "44px", sm: "44px" }}
               _hover={{ color: "rgba(255, 255, 255, 0.8)" }}
               cursor="pointer"
               onClick={handleDelete}
@@ -297,8 +312,8 @@ const PostItem: React.FC<PostItemProps> = ({
                 <Spinner size="sm" />
               ) : (
                 <>
-                  <Icon as={AiOutlineDelete} mr={1} fontSize={{ base: "16px", md: "18px" }} />
-                  <Text fontSize={{ base: "13px", md: "14px" }} fontWeight={400}>
+                  <Icon as={AiOutlineDelete} mr={1} fontSize={{ base: "15px", sm: "16px", md: "17px", lg: "18px" }} />
+                  <Text fontSize={{ base: "12px", sm: "13px", md: "13px", lg: "14px" }} fontWeight={400}>
                     Delete
                   </Text>
                 </>

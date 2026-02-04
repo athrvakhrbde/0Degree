@@ -48,12 +48,12 @@ const CreatePostLink: React.FC = () => {
       borderRadius={0}
       border="none"
       p={0}
-      mb={{ base: "24px", md: "40px" }}
-      gap="16px"
+      mb={{ base: "20px", sm: "24px", md: "32px", lg: "40px" }}
+      gap={{ base: "12px", sm: "14px", md: "16px" }}
     >
       <Input
         placeholder="Create Post"
-        fontSize={{ base: "14px", md: "16px" }}
+        fontSize={{ base: "13px", sm: "14px", md: "15px", lg: "16px" }}
         fontWeight={300}
         letterSpacing="0.2px"
         _placeholder={{ color: "rgba(255, 255, 255, 0.35)", fontWeight: 300 }}
@@ -71,25 +71,36 @@ const CreatePostLink: React.FC = () => {
         border="1px solid"
         borderColor="rgba(255, 255, 255, 0.1)"
         borderRadius={0}
-        height={{ base: "48px", md: "56px" }}
-        padding="14px 18px"
+        height={{ base: "44px", sm: "48px", md: "52px", lg: "56px" }}
+        minH={{ base: "44px", sm: "44px", md: "48px", lg: "56px" }}
+        padding={{ base: "12px 16px", sm: "13px 17px", md: "14px 18px" }}
         flex={1}
         onClick={onClick}
       />
-      <Flex gap="12px" align="center">
+      <Flex gap={{ base: "10px", sm: "12px", md: "14px" }} align="center">
         <Icon
           as={IoImageOutline}
-          fontSize={{ base: "20px", md: "24px" }}
+          fontSize={{ base: "18px", sm: "20px", md: "22px", lg: "24px" }}
           color="rgba(255, 255, 255, 0.5)"
           cursor="pointer"
+          minW={{ base: "44px", sm: "44px" }}
+          minH={{ base: "44px", sm: "44px" }}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
           _hover={{ color: "brand.500" }}
           transition="color 0.3s ease"
         />
         <Icon 
           as={BsLink45Deg} 
-          fontSize={{ base: "20px", md: "24px" }} 
+          fontSize={{ base: "18px", sm: "20px", md: "22px", lg: "24px" }} 
           color="rgba(255, 255, 255, 0.5)" 
           cursor="pointer"
+          minW={{ base: "44px", sm: "44px" }}
+          minH={{ base: "44px", sm: "44px" }}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
           _hover={{ color: "brand.500" }}
           transition="color 0.3s ease"
         />
