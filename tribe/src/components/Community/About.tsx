@@ -138,7 +138,6 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
                     />
                   ) : (
                     <Image src="/images/0degree-logo.svg" height="40px" width="40px" mr={2} alt="Community" />
-                    />
                   )}
                 </Flex>
                 {selectedFile &&

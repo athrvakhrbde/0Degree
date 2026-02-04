@@ -51,7 +51,7 @@ class ErrorBoundary extends Component<Props, State> {
               Something went wrong
             </Heading>
             <Text fontSize="lg" color="rgba(255, 255, 255, 0.7)">
-              We're sorry, but something unexpected happened. Please try refreshing the page.
+              We&apos;re sorry, but something unexpected happened. Please try refreshing the page.
             </Text>
             {process.env.NODE_ENV === 'development' && this.state.error && (
               <Box
