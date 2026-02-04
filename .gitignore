@@ -6,3 +6,8 @@ node_modules/
 .cache/
 dist/
 build/
+
+# Tribe subdirectory
+tribe/node_modules/
+tribe/.next/
+tribe/.env.local
