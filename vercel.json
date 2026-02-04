@@ -39,10 +39,6 @@
       "destination": "/lp.html"
     },
     {
-      "source": "/emails",
-      "destination": "/emails.html"
-    },
-    {
       "source": "/",
       "destination": "/index.html"
     }
