@@ -16,7 +16,6 @@ import moment from "moment";
 import Link from "next/link";
 import React, { useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Image } from "@chakra-ui/react";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { RiCakeLine } from "react-icons/ri";
 import { useSetRecoilState } from "recoil";
